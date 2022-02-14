@@ -56,7 +56,7 @@ const google = window.google;
       > 
        <Marker
           onClick={this.onMarkerClick}
-          name={'Kenyatta International Convention Centre'}
+          name={'Ford Design Institute'}
         />
         <InfoWindow
           marker={this.state.activeMarker}
