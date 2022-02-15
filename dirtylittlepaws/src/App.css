@@ -24,19 +24,21 @@
   color: white;
 }
 
-.Panel-wrapper {
-  display:flex;
-  flex-direction: row;
-  flex-wrap: column wrap;
-  padding-left: 30px;
-  border:#282c34 1px solid;
-  /* clear: both;
-  content: ""; */
+.panel_map {
+  display: flex;
+  border: purple solid 2px;
+  justify-content: center;
 }
 
-.Map-wrapper{
-  display:flex;
-  padding-left: 30px;
+.panel {
+  width: 200px;
+  border: red 2px solid;
+}
+
+.map {
+  width: 500px;
+  height: 500px;
+  border: orange 2px solid;
 }
 
 .App-link {
