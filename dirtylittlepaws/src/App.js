@@ -21,7 +21,29 @@ const instance = (
   </Panel>
 );
 
-export class MapContainer extends Component {
+const markers=[
+  {
+      id:1,
+      latitude: 42.2730776, 
+      longitude: -87.8721559,
+      shelter:'marker 1'
+
+  },
+  {
+      id: 2,
+      latitude: 41.922230,
+      longitude: -87.665672,
+      shelter: 'marker 2'
+  },
+  {
+    id: 3,
+    latitude: 41.918060,
+    longitude: -87.636990,
+    shelter: 'marker 3'
+}]
+
+ export class MapContainer extends Component {
+
   state = {
     showingInfoWindow: false, // Hides or shows the InfoWindow
     activeMarker: {}, // Shows the active marker upon click
@@ -44,40 +66,59 @@ export class MapContainer extends Component {
     }
   };
 
-  render() {
-    return (
-      <div className="panel_map">
-        <Panel header="Panel title" className="panel">
-          <p>I love C</p>
-        </Panel>
 
-        {/* Issue with Map, styling has to be local here */}
-        <div className="map">
-          <Map
-            google={this.props.google}
-            zoom={14}
-            style={mapStyles}
-            initialCenter={{
-              lat: 42.05711906051999,
-              lng: -87.67628472008052,
-            }}
-          >
+
+
+  render() {
+
+    return (
+
+     <div className="panel_map">
+       <Panel className="panel" header="Panel title">
+         <p>HELLO WORLD</p>
+        </Panel>
+      
+      
+      <div className="map">
+      <Map
+      
+        google={this.props.google}
+        zoom={14}
+        style={mapStyles}
+        initialCenter={
+          {
+            lat: 41.918060, 
+            lng: -87.636990
+          }
+        }
+        
+        
+      > 
+      {Object.values(markers).map(marker => (
             <Marker
               onClick={this.onMarkerClick}
-              name={"Ford Design Institute"}
+              position={{ lat: marker.latitude, lng: marker.longitude }}
+              key={marker.id}
+              name={marker.shelter}
             />
-            <InfoWindow
-              marker={this.state.activeMarker}
-              visible={this.state.showingInfoWindow}
-              onClose={this.onClose}
-            >
-              <div>
-                <h4>{this.state.selectedPlace.name}</h4>
-              </div>
-            </InfoWindow>
-          </Map>
-        </div>
+        ))}
+       <Marker
+          onClick={this.onMarkerClick}
+          name={'Ford Design Institute'}
+        />
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}
+          onClose={this.onClose}
+        >
+          <div>
+            <h4>{this.state.selectedPlace.name}</h4>
+          </div>
+        </InfoWindow>
+      </Map>
       </div>
+      </div>
+
     );
   }
 }
