@@ -3,6 +3,7 @@ import './App.css';
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import Handlebars from 'handlebars/dist/cjs/handlebars'
+import { Panel, PanelGroup } from 'rsuite';
 const google = window.google;
 
 
@@ -11,9 +12,15 @@ const google = window.google;
  * when the Maps library is loaded.
  */
  const mapStyles = {
-  width: '100%',
-  height: '100%'
+  width: '80%',
+  height: '80%'
 };
+
+const instance = (
+  <Panel header="Panel title">
+    <p>HELLO WORLD</p>
+  </Panel>
+);
 
  export class MapContainer extends Component {
 
@@ -42,7 +49,12 @@ const google = window.google;
 
   render() {
     return (
+     <div style = {{display:'flex-start'}}> 
+       <Panel header="Panel title">
+         <p>HELLO WORLD</p>
+        </Panel>
       <Map
+      
         google={this.props.google}
         zoom={14}
         style={mapStyles}
@@ -68,7 +80,10 @@ const google = window.google;
           </div>
         </InfoWindow>
       </Map>
-    );
+
+      </div> 
+      
+      );
   }
 }
 
