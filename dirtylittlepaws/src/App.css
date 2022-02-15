@@ -24,6 +24,21 @@
   color: white;
 }
 
+.Panel-wrapper {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: column wrap;
+  padding-left: 30px;
+  border:#282c34 1px solid;
+  /* clear: both;
+  content: ""; */
+}
+
+.Map-wrapper{
+  display:flex;
+  padding-left: 30px;
+}
+
 .App-link {
   color: #61dafb;
 }

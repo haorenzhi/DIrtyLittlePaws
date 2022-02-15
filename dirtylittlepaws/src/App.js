@@ -49,10 +49,12 @@ const instance = (
 
   render() {
     return (
-     <div style = {{display:'flex-start'}}> 
+     <div className="Panel-wrapper">
        <Panel header="Panel title">
          <p>HELLO WORLD</p>
         </Panel>
+      
+      <div className="Map-wrapper">
       <Map
       
         google={this.props.google}
@@ -80,8 +82,9 @@ const instance = (
           </div>
         </InfoWindow>
       </Map>
+      </div>
+      </div>
 
-      </div> 
       
       );
   }
