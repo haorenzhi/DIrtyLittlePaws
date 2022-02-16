@@ -26,19 +26,19 @@
 
 .panel_map {
   display: flex;
-  border: purple solid 2px;
+  /* border: purple solid 2px; */
   justify-content: center;
 }
 
 .panel {
   width: 200px;
-  border: red 2px solid;
+  /* border: red 2px solid; */
 }
 
 .map {
   width: 500px;
   height: 500px;
-  border: orange 2px solid;
+  /* border: orange 2px solid; */
 }
 
 .App-link {

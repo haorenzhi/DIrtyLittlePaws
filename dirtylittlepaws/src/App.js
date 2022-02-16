@@ -28,7 +28,7 @@ const markers=[
       latitude: 41.918060, 
       longitude: -87.636990,
       name:'marker 1',
-      amenities: 'Washing, Drying, Manicure, Pawicure, Grooming'
+      amenities: 'Washing, Drying, Pawicure, Grooming'
 
   },
   {
@@ -36,37 +36,42 @@ const markers=[
       latitude: 41.922230,
       longitude: -87.665672,
       name: 'marker 2',
-      amenities: 'Washing, Drying, Manicure, Pawicure, Grooming'
+      amenities: 'Washing, Drying'
   },
   {
     id: 3,
     latitude: 41.9103558,
     longitude: -87.6735355,
-    name: 'marker 3'
+    name: 'marker 3',
+    amenities: 'Washing, Drying, Pawicure, Grooming'
   },
   {
     id: 4,
     latitude: 41.9174825,
     longitude: -87.6597932,
-    name: 'marker 4'
+    name: 'marker 4',
+    amenities: 'Washing, Drying, Grooming'
   },
   {
     id: 5,
     latitude: 41.9149889,
     longitude: -87.6645697,
-    name: 'marker 5'
+    name: 'marker 5',
+    amenities: 'Washing, Drying, Grooming'
   },
   {
     id: 6,
     latitude: 41.9010907,
     longitude: -87.6318406,
-    name: 'marker 6'
+    name: 'marker 6',
+    amenities: 'Washing, Drying'
   },
   {
     id: 7,
     latitude: 41.9320681,
     longitude: -87.6687625,
-    name: 'marker 7'
+    name: 'marker 7',
+    amenities: 'Washing, Drying, Pawicure, Grooming'
 }]
 
 //Initializes the map and marker functionality 
@@ -100,53 +105,54 @@ const markers=[
   render() {
 
     return (
-    //Renders the panel and the map 
-     <div className="panel_map">
-       <Panel className="panel" header="Panel title">
-         <p>HELLO WORLD</p>
-        </Panel>
-      
-      
-      <div className="map">
-      
-      {/* Map API initialization */}
-      <Map
-        google={this.props.google}
-        zoom={14}
-        style={mapStyles}
-        initialCenter={
-          {
-            lat: 41.918060, 
-            lng: -87.636990
+      //Renders the panel and the map 
+       <div className="panel_map">
+         <Panel className="panel" header="Stations">
+         <h1>{this.state.selectedPlace.name}</h1>
+           <p>{this.state.selectedPlace.title}</p>
+          </Panel>
+        
+        
+        <div className="map">
+        
+        {/* Map API initialization */}
+        <Map
+          google={this.props.google}
+          zoom={14}
+          style={mapStyles}
+          initialCenter={
+            {
+              lat: 41.918060, 
+              lng: -87.636990
+            }
           }
-        }
-        >
-       {/* Populating markers from marker list, allows for multiple markers */}
-      {Object.values(markers).map(marker => (
-            <Marker
-              onClick={this.onMarkerClick}
-              position={{ lat: marker.latitude, lng: marker.longitude }}
-              key={marker.id}
-              name={marker.name}
-              title = {marker.amenities}
-            />
-        ))}
-        {/* What shows up in the window on marker click */}
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-          onClose={this.onClose}
-        >
-          <div>
-            <h4>{this.state.selectedPlace.name}</h4>
-            <h4>{this.state.selectedPlace.title}</h4>
-          </div>
-        </InfoWindow>
-      </Map>
-      </div>
-      </div>
-
-    );
+          >
+         {/* Populating markers from marker list, allows for multiple markers */}
+        {Object.values(markers).map(marker => (
+              <Marker
+                onClick={this.onMarkerClick}
+                position={{ lat: marker.latitude, lng: marker.longitude }}
+                key={marker.id}
+                name={marker.name}
+                title = {marker.amenities}
+              />
+          ))}
+          {/* What shows up in the window on marker click */}
+          <InfoWindow
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}
+            onClose={this.onClose}
+          >
+            <div>
+              <h4>{this.state.selectedPlace.name}</h4>
+              <h4>{this.state.selectedPlace.title}</h4>
+            </div>
+          </InfoWindow>
+        </Map>
+        </div>
+        </div>
+  
+      );
   }
 }
 
@@ -157,24 +163,56 @@ export default GoogleApiWrapper({
 
 //Run App (not using it rn - may need it later)
 // function App() {
+ 
+ 
 //   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
+//     //Renders the panel and the map 
+//      <div className="panel_map">
+//        <Panel className="panel" header="Panel title">
+//          <p>HELLO WORLD</p>
+//         </Panel>
+      
+      
+//       <div className="map">
+      
+//       {/* Map API initialization */}
+//       <Map
+//         google={this.props.google}
+//         zoom={14}
+//         style={mapStyles}
+//         initialCenter={
+//           {
+//             lat: 41.918060, 
+//             lng: -87.636990
+//           }
+//         }
 //         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
+//        {/* Populating markers from marker list, allows for multiple markers */}
+//       {Object.values(markers).map(marker => (
+//             <Marker
+//               onClick={this.onMarkerClick}
+//               position={{ lat: marker.latitude, lng: marker.longitude }}
+//               key={marker.id}
+//               name={marker.name}
+//               title = {marker.amenities}
+//             />
+//         ))}
+//         {/* What shows up in the window on marker click */}
+//         <InfoWindow
+//           marker={this.state.activeMarker}
+//           visible={this.state.showingInfoWindow}
+//           onClose={this.onClose}
+//         >
+//           <div>
+//             <h4>{this.state.selectedPlace.name}</h4>
+//             <h4>{this.state.selectedPlace.title}</h4>
+//           </div>
+//         </InfoWindow>
+//       </Map>
+//       </div>
+//       </div>
+
+//     );
 // }
 
 //export default App;
