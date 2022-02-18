@@ -3,6 +3,19 @@ import "./App.css";
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 import Handlebars from "handlebars/dist/cjs/handlebars";
+import { MapLayout,
+        MainLayout,
+        PanelStyles,
+        LocationName,
+        AmenityName,
+        AvailabilityTxt,
+        PriceTxt,
+        ScanButton,
+        ScanButtonTxt,
+        AmenitiesLayout,
+        BottomNav
+        } from "./styles/mapstyles";
+import scanSVG from "../src/styles/svgs/scan.svg";
 import { Panel, PanelGroup } from "rsuite";
 const google = window.google;
 
@@ -11,8 +24,9 @@ const google = window.google;
  * when the Maps library is loaded.
  */
 const mapStyles = {
-  width: "500px",
-  height: "500px",
+  width: "428px",
+  height: "934px",
+
 };
 
 const instance = (
@@ -106,14 +120,11 @@ const markers=[
 
     return (
       //Renders the panel and the map 
-       <div className="panel_map">
-         <Panel className="panel" header="Stations">
-         <h1>{this.state.selectedPlace.name}</h1>
-           <p>{this.state.selectedPlace.title}</p>
-          </Panel>
+       <MainLayout>
+         
         
         
-        <div className="map">
+        <MapLayout>
         
         {/* Map API initialization */}
         <Map
@@ -134,6 +145,8 @@ const markers=[
                 position={{ lat: marker.latitude, lng: marker.longitude }}
                 key={marker.id}
                 name={marker.name}
+                availability="• Available"
+                price="$3.30 unlock, $0.3 per min"
                 title = {marker.amenities}
               />
           ))}
@@ -149,8 +162,26 @@ const markers=[
             </div>
           </InfoWindow>
         </Map>
-        </div>
-        </div>
+        </MapLayout>
+
+        { this.state.showingInfoWindow ? 
+         <PanelStyles>
+            <AvailabilityTxt>{this.state.selectedPlace.availability}</AvailabilityTxt>
+            <LocationName>{this.state.selectedPlace.name}</LocationName>
+            <PriceTxt>{this.state.selectedPlace.price}</PriceTxt>
+
+            <AmenitiesLayout>
+                <AmenityName>{this.state.selectedPlace.title}</AmenityName>
+            </AmenitiesLayout>
+            
+            <center><ScanButton>
+              <ScanButtonTxt>Scan to unlock</ScanButtonTxt>
+            </ScanButton></center>
+          </PanelStyles>
+          : null }
+
+        <BottomNav></BottomNav>
+        </MainLayout>
   
       );
   }
