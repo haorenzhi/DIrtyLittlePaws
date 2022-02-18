@@ -194,7 +194,7 @@ const markers=[
           </PanelStyles>
           : null }
 
-        <BottomNav></BottomNav>
+        <BottomNav><br/><center><img src={scanSVG}/></center></BottomNav>
         </MainLayout>
   
       );
