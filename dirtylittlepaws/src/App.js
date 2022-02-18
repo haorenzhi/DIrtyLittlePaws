@@ -17,6 +17,7 @@ import {
   BottomNav,
 } from "./styles/mapstyles";
 import scanSVG from "../src/styles/svgs/scan.svg";
+import paws from "../src/styles/svgs/paws.png";
 import { Panel, PanelGroup } from "rsuite";
 import CurrentLocation from "./Map";
 const google = window.google;
@@ -119,7 +120,7 @@ export class MapContainer extends Component {
       //Renders the panel and the map
       <MainLayout>
         <CurrentLocation centerAroundCurrentLocation google={this.props.google}>
-          <Marker onClick={this.onMarkerClick} name={"Current Location"} />
+          <Marker icon = {paws} onClick={this.onMarkerClick} name={"Current Location"} />
           {/* <InfoWindow
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}
@@ -132,6 +133,7 @@ export class MapContainer extends Component {
           {Object.values(markers).map((marker) => (
             <Marker
               onClick={this.onMarkerClick}
+              icon = {paws}
               position={{ lat: marker.latitude, lng: marker.longitude }}
               key={marker.id}
               name={marker.name}
