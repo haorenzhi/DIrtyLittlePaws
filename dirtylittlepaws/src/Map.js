@@ -1,18 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {
-  MapLayout,
-  MainLayout,
-  PanelStyles,
-  LocationName,
-  AmenityName,
-  AvailabilityTxt,
-  PriceTxt,
-  ScanButton,
-  ScanButtonTxt,
-  AmenitiesLayout,
-  BottomNav,
-} from "./styles/mapstyles";
+import { MapLayout } from "./styles/mapstyles";
 
 const mapStyles = {
   map: {
@@ -123,12 +111,10 @@ export class CurrentLocation extends React.Component {
 
     return (
       <MapLayout>
-        <div>
-          <div style={style} ref="map">
-            Loading map...
-          </div>
-          {this.renderChildren()}
+        <div style={style} ref="map">
+          Loading map...
         </div>
+        {this.renderChildren()}
       </MapLayout>
     );
   }

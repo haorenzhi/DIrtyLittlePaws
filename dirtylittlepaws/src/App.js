@@ -120,7 +120,7 @@ export class MapContainer extends Component {
       <MainLayout>
         <CurrentLocation centerAroundCurrentLocation google={this.props.google}>
           <Marker onClick={this.onMarkerClick} name={"Current Location"} />
-          <InfoWindow
+          {/* <InfoWindow
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}
             onClose={this.onClose}
@@ -128,7 +128,7 @@ export class MapContainer extends Component {
             <div>
               <h4>{this.state.selectedPlace.name}</h4>
             </div>
-          </InfoWindow>
+          </InfoWindow> */}
           {Object.values(markers).map((marker) => (
             <Marker
               onClick={this.onMarkerClick}
@@ -150,25 +150,6 @@ export class MapContainer extends Component {
               <h4>{this.state.selectedPlace.title}</h4>
             </div>
           </InfoWindow>
-          {this.state.showingInfoWindow ? (
-            <PanelStyles>
-              <AvailabilityTxt>
-                {this.state.selectedPlace.availability}
-              </AvailabilityTxt>
-              <LocationName>{this.state.selectedPlace.name}</LocationName>
-              <PriceTxt>{this.state.selectedPlace.price}</PriceTxt>
-
-              <AmenitiesLayout>
-                <AmenityName>{this.state.selectedPlace.title}</AmenityName>
-              </AmenitiesLayout>
-
-              <center>
-                <ScanButton>
-                  <ScanButtonTxt>Scan to unlock</ScanButtonTxt>
-                </ScanButton>
-              </center>
-            </PanelStyles>
-          ) : null}
           <BottomNav>
             <br />
             <center>
@@ -176,6 +157,25 @@ export class MapContainer extends Component {
             </center>
           </BottomNav>
         </CurrentLocation>
+        {this.state.showingInfoWindow ? (
+          <PanelStyles>
+            <AvailabilityTxt>
+              {this.state.selectedPlace.availability}
+            </AvailabilityTxt>
+            <LocationName>{this.state.selectedPlace.name}</LocationName>
+            <PriceTxt>{this.state.selectedPlace.price}</PriceTxt>
+
+            <AmenitiesLayout>
+              <AmenityName>{this.state.selectedPlace.title}</AmenityName>
+            </AmenitiesLayout>
+
+            <center>
+              <ScanButton>
+                <ScanButtonTxt>Scan to unlock</ScanButtonTxt>
+              </ScanButton>
+            </center>
+          </PanelStyles>
+        ) : null}
         {/* Populating markers from marker list, allows for multiple markers */}
         {/* What shows up in the window on marker click */}
       </MainLayout>
