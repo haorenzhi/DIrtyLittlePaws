@@ -23,7 +23,8 @@ export const MapLayout = styled.div`
 
 export const BottomNav = styled.div`
         flex-direction: column;
-        text-align: left;
+        align-items: center;
+        justify-content: center;
         margin-top: 785px;
         background: #fff;
         width: 428px;
