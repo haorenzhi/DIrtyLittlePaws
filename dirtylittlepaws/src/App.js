@@ -16,8 +16,11 @@ import {
   AmenitiesLayout,
   BottomNav,
 } from "./styles/mapstyles";
+import close from "../src/styles/svgs/close.svg";
 import scanSVG from "../src/styles/svgs/scan.svg";
+import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
 import paws from "../src/styles/svgs/paws.png";
+import Activepaws from "../src/styles/svgs/ActivePaws.png";
 import { Panel, PanelGroup } from "rsuite";
 import CurrentLocation from "./Map";
 const google = window.google;
@@ -44,7 +47,7 @@ const markers = [
     latitude: 41.91806,
     longitude: -87.63699,
     name: "marker 1",
-    amenities: "Washing, Drying, Pawicure, Grooming",
+    amenities: "Washing Drying Pawicure Grooming",
   },
   {
     id: 2,
@@ -96,6 +99,7 @@ export class MapContainer extends Component {
     showingInfoWindow: false, // Hides or shows the InfoWindow
     activeMarker: {}, // Shows the active marker upon click
     selectedPlace: {}, // Shows the InfoWindow to the selected place upon a marker
+    icon:paws
   };
 
   onMarkerClick = (props, marker, e) =>
@@ -120,7 +124,7 @@ export class MapContainer extends Component {
       //Renders the panel and the map
       <MainLayout>
         <CurrentLocation centerAroundCurrentLocation google={this.props.google}>
-          <Marker icon = {paws} onClick={this.onMarkerClick} name={"Current Location"} />
+          <Marker icon = {CurrentLocationIcon} onClick={this.onMarkerClick} name={"Current Location"} />
           {/* <InfoWindow
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}
@@ -133,7 +137,7 @@ export class MapContainer extends Component {
           {Object.values(markers).map((marker) => (
             <Marker
               onClick={this.onMarkerClick}
-              icon = {paws}
+              icon = {this.state.activeMarker === marker ? Activepaws : paws}
               position={{ lat: marker.latitude, lng: marker.longitude }}
               key={marker.id}
               name={marker.name}
@@ -149,7 +153,6 @@ export class MapContainer extends Component {
           >
             <div>
               <h4>{this.state.selectedPlace.name}</h4>
-              <h4>{this.state.selectedPlace.title}</h4>
             </div>
           </InfoWindow>
           <BottomNav>
@@ -160,7 +163,12 @@ export class MapContainer extends Component {
           </BottomNav>
         </CurrentLocation>
         {this.state.showingInfoWindow ? (
-          <PanelStyles>
+          <PanelStyles
+          marker={this.state.activeMarker}
+
+          visible={this.state.showingInfoWindow}
+          onClose={this.onClose}>
+            <img src={close} onClick = {() => this.setState({ showingInfoWindow: false, activeMarker: null,})} /> 
             <AvailabilityTxt>
               {this.state.selectedPlace.availability}
             </AvailabilityTxt>
