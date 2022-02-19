@@ -16,13 +16,12 @@ export const MapLayout = styled.div`
   position: fixed;
   flex-direction: column;
   z-index: -1;
-  margin-left: 0px;
+  margin-bottom: 141px;
   align-items: center;
   justify-content: center;
 `;
 
 export const BottomNav = styled.div`
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-top: 785px;
@@ -33,7 +32,49 @@ export const BottomNav = styled.div`
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px 10px 0px 0px;
   z-index: -1;
-`;
+  display: grid;
+  grid-template-columns: 28% 44% 28%;
+  grid-template-areas:
+      'account scan help';
+`
+
+export const AccountIcon = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+        grid-area: account;
+        align-self: center;
+        justify-self: center;
+`
+
+export const ScanButtonBottomNav = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  justify-self: center;
+  grid-area: scan;
+`
+
+export const ScanBottomNavTxt = styled.div`
+  font-family: Karla;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
+  color: #5C3EF5;
+`
+
+export const HelpIcon = styled.div`
+    display: flex;
+        align-items: center;
+        justify-content: center;
+        grid-area: help;
+        align-self: center;
+        justify-self: center;
+`
 
 export const PanelStyles = styled.div`
   flex-direction: column;

@@ -17,7 +17,6 @@ import {
   BottomNav,
 } from "./styles/mapstyles";
 import close from "../src/styles/svgs/close.svg";
-import scanSVG from "../src/styles/svgs/scan.svg";
 import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
 import paws from "../src/styles/svgs/paws.png";
 import Activepaws from "../src/styles/svgs/ActivePaws.png";
@@ -156,10 +155,6 @@ export class MapContainer extends Component {
             </div>
           </InfoWindow>
           <BottomNav>
-            <br />
-            <center>
-              <img src={scanSVG} />
-            </center>
           </BottomNav>
         </CurrentLocation>
         {this.state.showingInfoWindow ? (

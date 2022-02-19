@@ -1,6 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { MapLayout } from "./styles/mapstyles";
+import { MapLayout, BottomNav, ScanBottomNavTxt, ScanButtonBottomNav, AccountIcon, HelpIcon } from "./styles/mapstyles";
+import scanSVG from "../src/styles/svgs/scan.svg"
+import accSVG from "../src/styles/svgs/account.svg"
+import helpSVG from "../src/styles/svgs/help.svg"
+
+
 
 const mapStyles = {
   map: {
@@ -110,12 +115,22 @@ export class CurrentLocation extends React.Component {
     const style = Object.assign({}, mapStyles.map);
 
     return (
+      <>
       <MapLayout>
         <div style={style} ref="map">
           Loading map...
         </div>
         {this.renderChildren()}
       </MapLayout>
+      <BottomNav>
+        <AccountIcon><img src={accSVG} /></AccountIcon>
+        <ScanButtonBottomNav>
+          <img src={scanSVG} />
+          <ScanBottomNavTxt>SCAN</ScanBottomNavTxt>
+        </ScanButtonBottomNav>
+        <HelpIcon><img src={helpSVG} /></HelpIcon>
+      </BottomNav>
+      </>
     );
   }
 }
