@@ -90,6 +90,48 @@ const markers = [
     name: "2750 N Ashland Ave",
     amenities: "Washing, Drying, Pawicure, Grooming",
   },
+  {
+    id: 8,
+    latitude: 42.048100,
+    longitude: -87.678291,
+    name: "1715 Chicago Ave",
+    amenities: "Washing, Drying, Pawicure, Grooming",
+  },
+  {
+    id: 9,
+    latitude: 42.056860,
+    longitude: -87.676700,
+    name: "2133 Sheridan Rd",
+    amenities: "Washing, Drying, Pawicure, Grooming",
+  },
+  {
+    id: 10,
+    latitude: 42.051811,
+    longitude: -87.685303,
+    name: "1890 Maple Ave",
+    amenities: "Washing, Drying, Pawicure, Grooming",
+  },
+  {
+    id: 11,
+    latitude: 42.053240,
+    longitude: -87.687890,
+    name: "1930 Ridge Ave",
+    amenities: "Washing, Drying, Pawicure, Grooming",
+  },
+  {
+    id: 12,
+    latitude: 42.0524352,
+    longitude: -87.6830755,
+    name: "811 Emerson St",
+    amenities: "Washing, Drying, Pawicure, Grooming",
+  },
+  {
+    id: 13,
+    latitude: 42.04703140258789,
+    longitude: -87.681884765625,
+    name: "1500 Sherman Ave",
+    amenities: "Washing, Drying, Pawicure, Grooming",
+  },
 ];
 
 //Initializes the map and marker functionality
