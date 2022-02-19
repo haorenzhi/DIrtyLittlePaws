@@ -15,7 +15,7 @@ export const MapLayout = styled.div`
   display: flex;
   position: fixed;
   flex-direction: column;
-  z-index: -1;
+  z-index: -10;
   margin-bottom: 141px;
   align-items: center;
   justify-content: center;
@@ -78,6 +78,7 @@ export const HelpIcon = styled.div`
 
 export const PanelStyles = styled.div`
   flex-direction: column;
+  position: fixed;
   text-align: left;
   margin-top: 500px;
   background: #fff;
@@ -86,7 +87,7 @@ export const PanelStyles = styled.div`
   background: #fff;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px 10px 0px 0px;
-  z-index: -1;
+  z-index: 1;
 `;
 
 export const AvailabilityTxt = styled.p`
