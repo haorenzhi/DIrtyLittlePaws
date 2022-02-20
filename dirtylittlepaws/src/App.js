@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 import Handlebars from "handlebars/dist/cjs/handlebars";
 import {
@@ -22,6 +22,8 @@ import paws from "../src/styles/svgs/paws.png";
 import Activepaws from "../src/styles/svgs/ActivePaws.png";
 import { Panel, PanelGroup } from "rsuite";
 import CurrentLocation from "./Map";
+import { useData } from './utilities/firebase.js';
+
 const google = window.google;
 
 /**
@@ -38,6 +40,9 @@ const instance = (
     <p>HELLO WORLD</p>
   </Panel>
 );
+
+
+
 
 //Array of positions for dog station locations with amenties and names
 const markers = [
@@ -134,14 +139,42 @@ const markers = [
   },
 ];
 
+function MyFireBaseHook()
+{
+  return function WrappedComponent()
+    {
+      const [locations, loading, error] = useData('/Locations/'); 
+      if (error) return <h1>{error}</h1>;
+      if (loading) return <h1>Loading Locations...</h1>;
+      console.log(locations)
+      return <Component Location = {locations}/>;
+    };
+}
+
 //Initializes the map and marker functionality
 export class MapContainer extends Component {
+  
+  NewComponent = MyFireBaseHook();
+  
   state = {
     showingInfoWindow: false, // Hides or shows the InfoWindow
     activeMarker: {}, // Shows the active marker upon click
     selectedPlace: {}, // Shows the InfoWindow to the selected place upon a marker
-    icon:paws
+    icon:paws,
+    locations:{}
   };
+
+  GetData = () => {
+    return function WrappedComponent()
+    {
+      const [locations, loading, error] = useData('/Locations/'); 
+      if (error) return <h1>{error}</h1>;
+      if (loading) return <h1>Loading Locations...</h1>;
+
+      return locations;
+    };
+    
+  }
 
   onMarkerClick = (props, marker, e) =>
     this.setState({
@@ -159,11 +192,17 @@ export class MapContainer extends Component {
     }
   };
 
-  //Renders the app
+
+
+
   render() {
     return (
-      //Renders the panel and the map
-      <MainLayout>
+      //Renders the panel and the map <MyFireBaseHook/>
+
+      <div id="outline">
+      
+      <MainLayout id="main">
+        
         <CurrentLocation centerAroundCurrentLocation google={this.props.google}>
           <Marker icon = {CurrentLocationIcon} onClick={this.onMarkerClick} name={"Current Location"} />
           {/* <InfoWindow
@@ -225,7 +264,9 @@ export class MapContainer extends Component {
         ) : null}
         {/* Populating markers from marker list, allows for multiple markers */}
         {/* What shows up in the window on marker click */}
+        
       </MainLayout>
+      </div>
     );
   }
 }
