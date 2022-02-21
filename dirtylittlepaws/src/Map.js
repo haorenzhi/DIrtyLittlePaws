@@ -26,7 +26,46 @@ export class CurrentLocation extends React.Component {
         lat: lat,
         lng: lng,
       },
+      zoomLevel:14
     };
+  }
+
+  FavoritePosition(){
+
+    const map = this.map;
+    const current = this.state.currentLocation;
+    const google = this.props.google;
+    const maps = google.maps;
+
+    const pos = {
+      lat: 41.879463,
+      lng: -87.628461,
+    };
+
+    let center = new maps.LatLng(pos.lat, pos.lng);
+    map.panTo(center);
+
+    //this.props.google.maps.setCenter(pos);
+
+  }
+
+  ChangeZoom(){
+
+    const map = this.map;
+    const current = this.state.currentLocation;
+    const google = this.props.google;
+    const maps = google.maps;
+
+    
+   
+    this.setState({
+      zoomLevel: 13,
+    });
+
+    this.loadMap();
+
+    //this.props.google.maps.setCenter(pos);
+
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -86,7 +125,7 @@ export class CurrentLocation extends React.Component {
         {},
         {
           center: center,
-          zoom: zoom,
+          zoom: this.state.zoomLevel,
         }
       );
 
@@ -115,7 +154,28 @@ export class CurrentLocation extends React.Component {
     const style = Object.assign({}, mapStyles.map);
 
     return (
+      
       <>
+      <button
+        type="button"
+        className="btn"
+        onClick={() =>
+        this.ChangeZoom()
+      }
+      > 
+       { window.innerWidth > 600 ? "Find more locations?" : "More"}
+      </button>
+
+      <button
+        type="button"
+        className="btn"
+        onClick={() =>
+        this.FavoritePosition()
+      }
+      > 
+       { window.innerWidth > 600 ? "Check home location" : "Home"}
+      </button>
+      
       <MapLayout>
         <div style={style} ref="map">
           Loading map...

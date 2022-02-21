@@ -24,6 +24,7 @@ import { Panel, PanelGroup } from "rsuite";
 import CurrentLocation from "./Map";
 import { useData } from './utilities/firebase.js';
 
+
 import { initializeApp } from 'firebase/app';
 import { useState, useEffect } from 'react';
 import { getDatabase, onValue, ref, set, on } from 'firebase/database';
@@ -139,10 +140,10 @@ export class MapContainer extends Component {
   
   }
 
-  
+
 
   render() {
-    console.log(this.state.LocationList);
+   
     return (
       //Renders the panel and the map <MyFireBaseHook/>
       
@@ -150,9 +151,9 @@ export class MapContainer extends Component {
 
       <div id="outline">
       <center> <h1> Spot </h1> </center>
-
+      
       <MainLayout id="main">
-        
+     
         <CurrentLocation centerAroundCurrentLocation google={this.props.google}>
           <Marker icon = {CurrentLocationIcon} onClick={this.onMarkerClick} name={"Current Location"} />
           {/* <InfoWindow
