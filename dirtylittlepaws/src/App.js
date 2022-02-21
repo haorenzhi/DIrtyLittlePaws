@@ -24,7 +24,24 @@ import { Panel, PanelGroup } from "rsuite";
 import CurrentLocation from "./Map";
 import { useData } from './utilities/firebase.js';
 
+import { initializeApp } from 'firebase/app';
+import { useState, useEffect } from 'react';
+import { getDatabase, onValue, ref, set, on } from 'firebase/database';
 const google = window.google;
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBAAAaqRWLP7A4BwEmCVC2OWoKXw8j79W4",
+  authDomain: "dirtylittlepaws-487d9.firebaseapp.com",
+  databaseURL: "https://dirtylittlepaws-487d9-default-rtdb.firebaseio.com",
+  projectId: "dirtylittlepaws-487d9",
+  storageBucket: "dirtylittlepaws-487d9.appspot.com",
+  messagingSenderId: "781498327165",
+  appId: "1:781498327165:web:9da20c4afa727b8e5e5114"
+};
+
+const firebase = initializeApp(firebaseConfig);
+const database = getDatabase(firebase);
+
 
 /**
  * Defines an instance of the Locator+ solution, to be instantiated
@@ -43,138 +60,48 @@ const instance = (
 
 
 
-
-//Array of positions for dog station locations with amenties and names
-const markers = [
-  {
-    id: 1,
-    latitude: 41.91806,
-    longitude: -87.63699,
-    name: "1960 N Lincoln Park W",
-    amenities: "Washing, Drying, Pawicure, Grooming",
-  },
-  {
-    id: 2,
-    latitude: 41.92223,
-    longitude: -87.665672,
-    name: "2228 N Clybourn Ave",
-    amenities: "Washing, Drying",
-  },
-  {
-    id: 3,
-    latitude: 41.9103558,
-    longitude: -87.6735355,
-    name: "1825 W North Ave",
-    amenities: "Washing, Drying, Pawicure, Grooming",
-  },
-  {
-    id: 4,
-    latitude: 41.9174825,
-    longitude: -87.6597932,
-    name: "2000 N Clybourn Ave",
-    amenities: "Washing, Drying, Grooming",
-  },
-  {
-    id: 5,
-    latitude: 41.9149889,
-    longitude: -87.6645697,
-    name: "1765 N Elston Ave",
-    amenities: "Washing, Drying, Grooming",
-  },
-  {
-    id: 6,
-    latitude: 41.9010907,
-    longitude: -87.6318406,
-    name: "Near North Side",
-    amenities: "Washing, Drying",
-  },
-  {
-    id: 7,
-    latitude: 41.9320681,
-    longitude: -87.6687625,
-    name: "2750 N Ashland Ave",
-    amenities: "Washing, Drying, Pawicure, Grooming",
-  },
-  {
-    id: 8,
-    latitude: 42.048100,
-    longitude: -87.678291,
-    name: "1715 Chicago Ave",
-    amenities: "Washing, Drying, Pawicure, Grooming",
-  },
-  {
-    id: 9,
-    latitude: 42.056860,
-    longitude: -87.676700,
-    name: "2133 Sheridan Rd",
-    amenities: "Washing, Drying, Pawicure, Grooming",
-  },
-  {
-    id: 10,
-    latitude: 42.051811,
-    longitude: -87.685303,
-    name: "1890 Maple Ave",
-    amenities: "Washing, Drying, Pawicure, Grooming",
-  },
-  {
-    id: 11,
-    latitude: 42.053240,
-    longitude: -87.687890,
-    name: "1930 Ridge Ave",
-    amenities: "Washing, Drying, Pawicure, Grooming",
-  },
-  {
-    id: 12,
-    latitude: 42.0524352,
-    longitude: -87.6830755,
-    name: "811 Emerson St",
-    amenities: "Washing, Drying, Pawicure, Grooming",
-  },
-  {
-    id: 13,
-    latitude: 42.04703140258789,
-    longitude: -87.681884765625,
-    name: "1500 Sherman Ave",
-    amenities: "Washing, Drying, Pawicure, Grooming",
-  },
-];
-
-function MyFireBaseHook()
-{
-  return function WrappedComponent()
-    {
-      const [locations, loading, error] = useData('/Locations/'); 
-      if (error) return <h1>{error}</h1>;
-      if (loading) return <h1>Loading Locations...</h1>;
-      console.log(locations)
-      return <Component Location = {locations}/>;
-    };
-}
+// function MyFireBaseHook()
+// {
+//   return function WrappedComponent()
+//     {
+//       const [locations, loading, error] = useData('/Locations/'); 
+//       if (error) return <h1>{error}</h1>;
+//       if (loading) return <h1>Loading Locations...</h1>;
+//       console.log(locations)
+//       return <Component Location = {locations}/>;
+//     };
+// }
 
 //Initializes the map and marker functionality
 export class MapContainer extends Component {
-  
-  NewComponent = MyFireBaseHook();
-  
-  state = {
-    showingInfoWindow: false, // Hides or shows the InfoWindow
-    activeMarker: {}, // Shows the active marker upon click
-    selectedPlace: {}, // Shows the InfoWindow to the selected place upon a marker
-    icon:paws,
-    locations:{}
-  };
 
-  GetData = () => {
-    return function WrappedComponent()
-    {
-      const [locations, loading, error] = useData('/Locations/'); 
-      if (error) return <h1>{error}</h1>;
-      if (loading) return <h1>Loading Locations...</h1>;
-
-      return locations;
-    };
+  constructor(props)
+  {
+    super(props);
     
+    this.state = {
+      showingInfoWindow: false, // Hides or shows the InfoWindow
+      activeMarker: {}, // Shows the active marker upon click
+      selectedPlace: {}, // Shows the InfoWindow to the selected place upon a marker
+      icon:paws,
+      LocationList :[]
+    };
   }
+  
+
+ 
+
+  // GetData = () => {
+  //   return function WrappedComponent()
+  //   {
+  //     const [locations, loading, error] = useData('/Locations/'); 
+  //     if (error) return <h1>{error}</h1>;
+  //     if (loading) return <h1>Loading Locations...</h1>;
+
+  //     return locations;
+  //   };
+    
+  // }
 
   onMarkerClick = (props, marker, e) =>
     this.setState({
@@ -193,14 +120,37 @@ export class MapContainer extends Component {
   };
 
 
+  componentDidMount()
+  {
+    
+    const reference = ref(database, '/Locations/');
 
+    onValue(reference, snapshot => {
+      let locations = [];
+      snapshot.forEach(snap => {
+      
+    // snap.val() is the dictionary with all your keys/values from the 'students-list' path
+      locations.push(snap.val());
+     
+    });
+   
+    this.setState({LocationList:locations});
+    });
+  
+  }
+
+  
 
   render() {
+    console.log(this.state.LocationList);
     return (
       //Renders the panel and the map <MyFireBaseHook/>
+      
+      
 
       <div id="outline">
-      
+      <center> <h1> Spot </h1> </center>
+
       <MainLayout id="main">
         
         <CurrentLocation centerAroundCurrentLocation google={this.props.google}>
@@ -214,7 +164,7 @@ export class MapContainer extends Component {
               <h4>{this.state.selectedPlace.name}</h4>
             </div>
           </InfoWindow> */}
-          {Object.values(markers).map((marker) => (
+          {Object.values(this.state.LocationList).map((marker) => (
             <Marker
               onClick={this.onMarkerClick}
               icon = {this.state.activeMarker === marker ? Activepaws : paws}

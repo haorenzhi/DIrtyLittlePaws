@@ -47,13 +47,17 @@
 
 #outline 
 {
-  background-color: #b000c0;
+  width: 100%; height: 80px;
+  border-style: solid;
+  border-color: white;
+  margin: 0 auto;
+  background-color: #5C3EFF;
 }
 
 #main    {
   background-color: #FFFFFF;
   width: center;
-  margin: 50px auto;
+  margin: 5% auto;
    /*border: 1px solid rgb(180, 8, 157); width, style, colour */
   } 
 
