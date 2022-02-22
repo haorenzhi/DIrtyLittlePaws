@@ -1,11 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { MapLayout, BottomNav, ScanBottomNavTxt, ScanButtonBottomNav, AccountIcon, HelpIcon } from "./styles/mapstyles";
-import scanSVG from "../src/styles/svgs/scan.svg"
-import accSVG from "../src/styles/svgs/account.svg"
-import helpSVG from "../src/styles/svgs/help.svg"
-
-
+import {
+  MapLayout,
+  BottomNav,
+  ScanBottomNavTxt,
+  ScanButtonBottomNav,
+  AccountIcon,
+  HelpIcon,
+} from "./styles/mapstyles";
+import scanSVG from "../src/styles/svgs/scan.svg";
+import accSVG from "../src/styles/svgs/account.svg";
+import helpSVG from "../src/styles/svgs/help.svg";
 
 const mapStyles = {
   map: {
@@ -26,12 +31,11 @@ export class CurrentLocation extends React.Component {
         lat: lat,
         lng: lng,
       },
-      zoomLevel:14
+      zoomLevel: 14,
     };
   }
 
-  FavoritePosition(){
-
+  FavoritePosition() {
     const map = this.map;
     const current = this.state.currentLocation;
     const google = this.props.google;
@@ -46,20 +50,21 @@ export class CurrentLocation extends React.Component {
     map.panTo(center);
 
     //this.props.google.maps.setCenter(pos);
-
   }
 
-  ChangeZoom(){
-
+  ChangeZoom() {
     const map = this.map;
     const current = this.state.currentLocation;
     const google = this.props.google;
     const maps = google.maps;
 
+    this.setState({
+      zoomLevel: 13,
+    });
+
     this.loadMap();
 
     //this.props.google.maps.setCenter(pos);
-
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -148,42 +153,25 @@ export class CurrentLocation extends React.Component {
     const style = Object.assign({}, mapStyles.map);
 
     return (
-      
       <>
-      <button
-        type="button"
-        className="btn"
-        onClick={() =>
-        this.ChangeZoom()
-      }
-      > 
-       { window.innerWidth > 600 ? "Current Location" : "Current"}
-      </button>
+        <button type="button" className="btn" onClick={() => this.ChangeZoom()}>
+          {window.innerWidth > 600 ? "Find more locations?" : "More"}
+        </button>
 
-      <button
-        type="button"
-        className="btn"
-        onClick={() =>
-        this.FavoritePosition()
-      }
-      > 
-       { window.innerWidth > 600 ? "Check home location" : "Home"}
-      </button>
-      
-      <MapLayout>
-        <div style={style} ref="map">
-          Loading map...
-        </div>
-        {this.renderChildren()}
-      </MapLayout>
-      <BottomNav>
-        <AccountIcon><img src={accSVG} /></AccountIcon>
-        <ScanButtonBottomNav>
-          <img src={scanSVG} />
-          <ScanBottomNavTxt>SCAN</ScanBottomNavTxt>
-        </ScanButtonBottomNav>
-        <HelpIcon><img src={helpSVG} /></HelpIcon>
-      </BottomNav>
+        <button
+          type="button"
+          className="btn"
+          onClick={() => this.FavoritePosition()}
+        >
+          {window.innerWidth > 600 ? "Check home location" : "Home"}
+        </button>
+
+        <MapLayout>
+          <div style={style} ref="map">
+            Loading map...
+          </div>
+          {this.renderChildren()}
+        </MapLayout>
       </>
     );
   }
@@ -192,7 +180,7 @@ export class CurrentLocation extends React.Component {
 CurrentLocation.defaultProps = {
   zoom: 14,
   initialCenter: {
-    lat: 41.91807726393084, 
+    lat: 41.91807726393084,
     lng: -87.65872153719155,
   },
   centerAroundCurrentLocation: false,

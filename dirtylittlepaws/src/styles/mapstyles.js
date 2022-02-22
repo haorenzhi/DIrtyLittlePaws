@@ -9,23 +9,26 @@ export const MainLayout = styled.div`
   flex-direction: column;
   background: #fff;
   z-index: 0;
+  // border: solid blue 10px;
 `;
 
 export const MapLayout = styled.div`
   display: flex;
   position: fixed;
+  height: 100vh;
+  width: 428px;
   flex-direction: column;
   z-index: -10;
-  margin-bottom: 141px;
+  // margin-bottom: 141px;
   align-items: center;
   justify-content: center;
 `;
 
 export const BottomNav = styled.div`
+  position: fixed;
+  bottom: 0;
   align-items: center;
   justify-content: center;
-  margin-top: 785px;
-  background: #fff;
   width: 428px;
   height: 141px;
   background: #fff;
@@ -34,18 +37,17 @@ export const BottomNav = styled.div`
   z-index: -1;
   display: grid;
   grid-template-columns: 28% 44% 28%;
-  grid-template-areas:
-      'account scan help';
-`
+  grid-template-areas: "account scan help";
+`;
 
 export const AccountIcon = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-        grid-area: account;
-        align-self: center;
-        justify-self: center;
-`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: account;
+  align-self: center;
+  justify-self: center;
+`;
 
 export const ScanButtonBottomNav = styled.div`
   display: flex;
@@ -55,7 +57,7 @@ export const ScanButtonBottomNav = styled.div`
   align-self: center;
   justify-self: center;
   grid-area: scan;
-`
+`;
 
 export const ScanBottomNavTxt = styled.div`
   font-family: Karla;
@@ -64,21 +66,22 @@ export const ScanBottomNavTxt = styled.div`
   font-size: 20px;
   line-height: 20px;
   text-align: center;
-  color: #5C3EF5;
-`
+  color: #5c3ef5;
+`;
 
 export const HelpIcon = styled.div`
-    display: flex;
-        align-items: center;
-        justify-content: center;
-        grid-area: help;
-        align-self: center;
-        justify-self: center;
-`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: help;
+  align-self: center;
+  justify-self: center;
+`;
 
 export const PanelStyles = styled.div`
   flex-direction: column;
   position: fixed;
+  bottom: 0;
   text-align: left;
   margin-top: 500px;
   background: #fff;
@@ -160,4 +163,14 @@ export const ScanButtonTxt = styled.p`
   padding-top: 16px;
   text-align: center;
   color: #ffffff;
+`;
+
+export const TopBanner = styled.div`
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 428px;
+  height: 80px;
+  background: #ffffff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 `;
