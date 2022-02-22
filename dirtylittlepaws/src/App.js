@@ -27,7 +27,7 @@ import paws from "../src/styles/svgs/paws.png";
 import Activepaws from "../src/styles/svgs/ActivePaws.png";
 import { Panel, PanelGroup } from "rsuite";
 import CurrentLocation from "./Map";
-import { useData } from "./utilities/firebase.js";
+import { useData, signInWithG, signOutOfG, useUserState} from "./utilities/firebase.js";
 
 import { initializeApp } from "firebase/app";
 import { useState, useEffect } from "react";
@@ -67,6 +67,31 @@ const instance = (
     <p>HELLO WORLD</p>
   </Panel>
 );
+
+// let user = null;
+
+const SignInButton = () => {
+  console.log("worked");
+  return (
+  <button className="btn"
+    onClick={() => signInWithG()}>
+    Sign In
+  </button>
+  );
+};
+
+const SignOutButton = (cuser) => {
+  return (<>
+    <p className="email">
+      {window.innerWidth > 800 ? cuser : null}
+      <button className="btn" id="out" style={{ width: 120, margin: 20 }}
+        onClick={() => signOutOfG()}>
+        Sign Out
+      </button>
+    </p>
+  </>
+  )
+};
 
 // function MyFireBaseHook()
 // {
@@ -125,6 +150,8 @@ export class MapContainer extends Component {
   componentDidMount() {
     const reference = ref(database, "/Locations/");
 
+    // user = useUserState();
+
     onValue(reference, (snapshot) => {
       let locations = [];
       snapshot.forEach((snap) => {
@@ -145,6 +172,9 @@ export class MapContainer extends Component {
           <TopBanner>
             <img src={topLogo} width="96px" />
           </TopBanner>
+          {/* {user ? <SignOutButton cuser={user.email} />
+              : <SignInButton />} */}
+          <SignInButton/>
           <CurrentLocation
             centerAroundCurrentLocation
             google={this.props.google}
