@@ -56,12 +56,6 @@ export class CurrentLocation extends React.Component {
     const google = this.props.google;
     const maps = google.maps;
 
-    
-   
-    this.setState({
-      zoomLevel: 13,
-    });
-
     this.loadMap();
 
     //this.props.google.maps.setCenter(pos);
@@ -163,7 +157,7 @@ export class CurrentLocation extends React.Component {
         this.ChangeZoom()
       }
       > 
-       { window.innerWidth > 600 ? "Find more locations?" : "More"}
+       { window.innerWidth > 600 ? "Current Location" : "Current"}
       </button>
 
       <button
