@@ -27,10 +27,8 @@ import paws from "../src/styles/svgs/paws.png";
 import Activepaws from "../src/styles/svgs/ActivePaws.png";
 import { Panel, PanelGroup } from "rsuite";
 import CurrentLocation from "./Map";
-import { useData, signInWithG, signOutOfG, useUserState} from "./utilities/firebase.js";
+import { database, signInwithG, auth } from "./utilities/firebase.js";
 
-import { initializeApp } from "firebase/app";
-import { useState, useEffect } from "react";
 import { getDatabase, onValue, ref, set, on } from "firebase/database";
 
 import scanSVG from "../src/styles/svgs/scan.svg";
@@ -38,60 +36,52 @@ import accSVG from "../src/styles/svgs/account.svg";
 import helpSVG from "../src/styles/svgs/help.svg";
 import topLogo from "../src/styles/svgs/SpotLogos.png";
 
+
 const google = window.google;
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBAAAaqRWLP7A4BwEmCVC2OWoKXw8j79W4",
-  authDomain: "dirtylittlepaws-487d9.firebaseapp.com",
-  databaseURL: "https://dirtylittlepaws-487d9-default-rtdb.firebaseio.com",
-  projectId: "dirtylittlepaws-487d9",
-  storageBucket: "dirtylittlepaws-487d9.appspot.com",
-  messagingSenderId: "781498327165",
-  appId: "1:781498327165:web:9da20c4afa727b8e5e5114",
-};
-
-const firebase = initializeApp(firebaseConfig);
-const database = getDatabase(firebase);
 
 /**
  * Defines an instance of the Locator+ solution, to be instantiated
  * when the Maps library is loaded.
  */
-const mapStyles = {
-  width: "428px",
-  height: "934px",
-};
+// const mapStyles = {
+//   width: "428px",
+//   height: "934px",
+// };
 
-const instance = (
-  <Panel header="Panel title">
-    <p>HELLO WORLD</p>
-  </Panel>
-);
+// const instance = (
+//   <Panel header="Panel title">
+//     <p>HELLO WORLD</p>
+//   </Panel>
+// );
 
 // let user = null;
 
 const SignInButton = () => {
-  console.log("worked");
   return (
-  <button className="btn"
-    onClick={() => signInWithG()}>
-    Sign In
-  </button>
+    <button className="btn"
+      onClick={() => {
+        signInwithG();
+      }
+      }>
+      Sign In
+    </button>
   );
 };
 
-const SignOutButton = (cuser) => {
-  return (<>
-    <p className="email">
-      {window.innerWidth > 800 ? cuser : null}
-      <button className="btn" id="out" style={{ width: 120, margin: 20 }}
-        onClick={() => signOutOfG()}>
-        Sign Out
-      </button>
-    </p>
-  </>
-  )
-};
+
+// const SignOutButton = (cuser) => {
+//   return (<>
+//     <p className="email">
+//       {window.innerWidth > 800 ? cuser : null}
+//       <button className="btn" id="out" style={{ width: 120, margin: 20 }}
+//         onClick={() => auth.signOut()}>
+//         Sign Out
+//       </button>
+//     </p>
+//   </>
+//   )
+// };
 
 // function MyFireBaseHook()
 // {
@@ -109,15 +99,16 @@ const SignOutButton = (cuser) => {
 export class MapContainer extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       showingInfoWindow: false, // Hides or shows the InfoWindow
       activeMarker: {}, // Shows the active marker upon click
       selectedPlace: {}, // Shows the InfoWindow to the selected place upon a marker
       icon: paws,
-      LocationList: [],
+      locationList: [],
+      currentUser: null
     };
   }
+  unsubscribeFromAuth = signInwithG();
 
   // GetData = () => {
   //   return function WrappedComponent()
@@ -147,10 +138,12 @@ export class MapContainer extends Component {
     }
   };
 
+  onSignIn = () => {
+    this.setState({ user: true });
+  };
+
   componentDidMount() {
     const reference = ref(database, "/Locations/");
-
-    // user = useUserState();
 
     onValue(reference, (snapshot) => {
       let locations = [];
@@ -159,10 +152,17 @@ export class MapContainer extends Component {
         locations.push(snap.val());
       });
 
-      this.setState({ LocationList: locations });
+      this.setState({ locationList: locations });
+    });
+
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+      this.setState({ currentUser: user })
     });
   }
 
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
+  }
   render() {
     return (
       //Renders the panel and the map <MyFireBaseHook/>
@@ -172,14 +172,24 @@ export class MapContainer extends Component {
           <TopBanner>
             <img src={topLogo} width="96px" />
           </TopBanner>
-          {/* {user ? <SignOutButton cuser={user.email} />
-              : <SignInButton />} */}
-          <SignInButton/>
+          {/* <SignInButton/> */}
+          <div id='user-info'>
+            {this.state.currentUser ? (<div>
+              <div>
+                <img src={this.state.currentUser.photoURL} />
+              </div>
+              <div>Name: {this.state.currentUser.displayName}</div>
+              <div>Email: {this.state.currentUser.email}</div>
+
+              <button onClick={() => auth.signOut()}>Sign Out</button>
+            </div>
+            ) : <SignInButton />}
+          </div>
           <CurrentLocation
             centerAroundCurrentLocation
             google={this.props.google}
           >
-            <Marker
+            <Marker key={"current"}
               icon={CurrentLocationIcon}
               onClick={this.onMarkerClick}
               name={"Current Location"}
@@ -193,7 +203,7 @@ export class MapContainer extends Component {
               <h4>{this.state.selectedPlace.name}</h4>
             </div>
           </InfoWindow> */}
-            {Object.values(this.state.LocationList).map((marker) => (
+            {Object.values(this.state.locationList).map((marker) =>
               <Marker
                 onClick={this.onMarkerClick}
                 icon={this.state.activeMarker === marker ? Activepaws : paws}
@@ -204,7 +214,7 @@ export class MapContainer extends Component {
                 price="$3.30 unlock, $0.3 per min"
                 title={marker.amenities}
               />
-            ))}
+            )}
             <InfoWindow
               marker={this.state.activeMarker}
               visible={this.state.showingInfoWindow}

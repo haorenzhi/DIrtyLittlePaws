@@ -1,8 +1,7 @@
-import { initializeApp } from 'firebase/app';
-import { useState, useEffect } from 'react';
-import { getDatabase, onValue, ref, set } from 'firebase/database';
-import { getAuth, GoogleAuthProvider, onIdTokenChanged, signInWithPopup, signOut } from 'firebase/auth';
-
+// firebase.utils.js
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import { getDatabase } from 'firebase/database';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBAAAaqRWLP7A4BwEmCVC2OWoKXw8j79W4",
@@ -13,47 +12,15 @@ const firebaseConfig = {
     messagingSenderId: "781498327165",
     appId: "1:781498327165:web:9da20c4afa727b8e5e5114"
   };
-
-const firebase = initializeApp(firebaseConfig);
-const database = getDatabase(firebase);
-
-export const useData = (path, transform) => {
-    const [data, setData] = useState();
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState();
   
-    useEffect(() => {
-      const dbRef = database.ref(path);
-      const devMode = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
-      if (devMode) { console.log(`loading ${path}`); }
-      return dbRef.on('value', (snapshot) => {
-        const val = snapshot.val();
-        if (devMode) { console.log(val); }
-        setData(transform ? transform(val) : val);
-        setLoading(false);
-        setError(null);
-      }, (error) => {
-        setData(null);
-        setLoading(false);
-        setError(error);
-      });
-    }, [path, transform]);
+const myFirebase = firebase.initializeApp(firebaseConfig);
 
-    return [data, loading, error];
-  };
+export const auth = firebase.auth(); 
+export const database = getDatabase(myFirebase);
 
-  export const useUserState = () => {
-    const [user, setUser] = useState();
-  
-    useEffect(() => {
-      onIdTokenChanged(getAuth(firebase), setUser);
-    }, []);
-      
-    return user;
-  };
-  
-  export const signInWithG = () => {
-    signInWithPopup(getAuth(firebase), new GoogleAuthProvider());
-  };
+const provider = new firebase.auth.GoogleAuthProvider();
+//select from google accounts every time you refresh page and sign in
+// provider.setCustomParameters({ prompt: 'select_account' });
+export const signInwithG = () => auth.signInWithPopup(provider);
 
-  export const signOutOfG = () => signOut(getAuth(firebase));
+export default firebase;
