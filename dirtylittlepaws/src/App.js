@@ -85,8 +85,7 @@ export class MapContainer extends Component {
       activeMarker: {}, // Shows the active marker upon click
       selectedPlace: {}, // Shows the InfoWindow to the selected place upon a marker
       icon:paws,
-      LocationList :[],
-      availability:[]
+      LocationList :[]
     };
   }
   
@@ -141,26 +140,6 @@ export class MapContainer extends Component {
   
   }
 
-  componentDidUpdate(prevProps, prevState)
-  {
-    if(prevState.activeMarker.availability !== this.state.activeMarker.availability)
-    {
-      this.reserve(this.state.activeMarker)
-    }
-
-  }
-
-   reserve = async (marker) => {
-      try {
-        await set(ref(database, `/Locations/${marker.id}/avaliable`), false);
-      } catch (error) {
-        alert(error);
-      }
-  };
-  
-
-
-
   render() {
    
     return (
@@ -171,15 +150,6 @@ export class MapContainer extends Component {
       <div id="outline">
       <center> <h1> Spot </h1> </center>
 
-      <button
-        type="button"
-        className="btn"
-        onClick={() =>
-        this.setState({availability: false})
-      }
-      > 
-       { window.innerWidth > 600 ? "Reserve Location" : "Reserve"}
-      </button>
 
       <MainLayout id="main">
      
@@ -201,7 +171,7 @@ export class MapContainer extends Component {
               position={{ lat: marker.latitude, lng: marker.longitude }}
               key={marker.id}
               name={marker.name}
-              availability={marker.availability}
+              availability=".Available"
               price="$3.30 unlock, $0.3 per min"
               title={marker.amenities}
             />
