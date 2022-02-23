@@ -215,7 +215,7 @@ export class MapContainer extends Component {
               </div>
               ) : <SignInButton />}
             </div>
-            <CurrentLocation
+            
               centerAroundCurrentLocation
               google={this.props.google}
             >
