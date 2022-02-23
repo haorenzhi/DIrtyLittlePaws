@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import React, { Component, PropTypes } from "react";
+import ReactDOM from "react-dom";
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 import Handlebars from "handlebars/dist/cjs/handlebars";
 import {
@@ -36,7 +37,7 @@ import accSVG from "../src/styles/svgs/account.svg";
 import helpSVG from "../src/styles/svgs/help.svg";
 import topLogo from "../src/styles/svgs/SpotLogos.png";
 
-
+import Profile from "./Profile.js"
 const google = window.google;
 
 
@@ -94,6 +95,27 @@ const SignInButton = () => {
 //       return <Component Location = {locations}/>;
 //     };
 // }
+export const ProfileButton = () => (
+  <>
+    {/* <button
+      type="button"
+      className="btn" 
+      img = {accSVG}
+      onClick={() =>
+        ReactDOM.render(<Profile />, document.getElementById("root"))
+      }
+    > */}
+      <input type="image" src={accSVG} name="saveForm" className="btTxt submit" onClick={() =>
+        ReactDOM.render(<Profile />, document.getElementById("root"))
+      } >
+
+      </input>
+
+      {/* { window.innerWidth > 600 ? "Add food" : "add"} */}
+
+    {/*  </button> */}
+  </>
+);
 
 //Initializes the map and marker functionality
 export class MapContainer extends Component {
@@ -227,7 +249,8 @@ export class MapContainer extends Component {
           </CurrentLocation>
           <BottomNav>
             <AccountIcon>
-              <img src={accSVG} />
+              <ProfileButton />
+              {/* <img src={accSVG} /> */}
             </AccountIcon>
             <ScanButtonBottomNav>
               <img src={scanSVG} />
