@@ -63,7 +63,7 @@ const SignInButton = () => {
         signInwithG();
       }
       }>
-      
+
       Sign In
     </button>
   );
@@ -106,13 +106,13 @@ export const ProfileButton = () => (
         ReactDOM.render(<Profile />, document.getElementById("root"))
       }
     > */}
-      <input type="image" alt={"accSVG"} src={accSVG} name="saveForm" className="btTxt submit" onClick={() =>
-        ReactDOM.render(<Profile />, document.getElementById("root"))
-      } >
+    <input type="image" alt={"accSVG"} src={accSVG} name="saveForm" className="btTxt submit" onClick={() =>
+      ReactDOM.render(<Profile />, document.getElementById("root"))
+    } >
 
-      </input>
+    </input>
 
-      {/* { window.innerWidth > 600 ? "Add food" : "add"} */}
+    {/* { window.innerWidth > 600 ? "Add food" : "add"} */}
 
     {/*  </button> */}
   </>
@@ -190,36 +190,37 @@ export class MapContainer extends Component {
     return (
       //Renders the panel and the map <MyFireBaseHook/>
       <div>
-        {!this.state.currentUser ? <SignInButton />: 
-        <div id="outline">
-          <MainLayout>
-            <TopBanner>
-              <img src={topLogo} alt={"topLogo"} width="96px" />
-            </TopBanner>
-            {/* <SignInButton/> */}
+        {!this.state.currentUser ? <SignInButton /> :
+          <div id="outline">
+            <MainLayout>
+              <TopBanner>
+                <img src={topLogo} alt={"topLogo"} width="96px" />
+              </TopBanner>
+              {/* <SignInButton/> */}
 
-            <div id='user-info'>
-              {this.state.currentUser ? (<div>
-                <div>
+              <div id='user-info'>
+                {this.state.currentUser ? (
+                  <div>
+                    {/* <div>
                   <img src={this.state.currentUser.photoURL} alt={"photoURL"} />
                 </div>
                 <div>Name: {this.state.currentUser.displayName}</div>
-                <div>Email: {this.state.currentUser.email}</div>
+                <div>Email: {this.state.currentUser.email}</div> */}
 
-                <button className="btn" onClick={() => auth.signOut()}>Sign Out</button>
+                    <button className="btn" onClick={() => auth.signOut()}>Sign Out</button>
+                  </div>
+                ) : <SignInButton />}
               </div>
-              ) : <SignInButton />}
-            </div>
-            <CurrentLocation
-              centerAroundCurrentLocation
-              google={this.props.google}
-            >
-              <Marker key={"current"}
-                icon={CurrentLocationIcon}
-                onClick={this.onMarkerClick}
-                name={"Current Location"}
-              />
-              {/* <InfoWindow
+              <CurrentLocation
+                centerAroundCurrentLocation
+                google={this.props.google}
+              >
+                <Marker key={"current"}
+                  icon={CurrentLocationIcon}
+                  onClick={this.onMarkerClick}
+                  name={"Current Location"}
+                />
+                {/* <InfoWindow
               marker={this.state.activeMarker}
               visible={this.state.showingInfoWindow}
               onClose={this.onClose}
@@ -228,78 +229,78 @@ export class MapContainer extends Component {
                 <h4>{this.state.selectedPlace.name}</h4>
               </div>
             </InfoWindow> */}
-              {Object.values(this.state.locationList).map((marker) =>
-                <Marker
-                  onClick={this.onMarkerClick}
-                  icon={this.state.activeMarker === marker ? Activepaws : paws}
-                  position={{ lat: marker.latitude, lng: marker.longitude }}
-                  key={marker.id}
-                  name={marker.name}
-                  availability="• Available"
-                  price="$3.30 unlock, $0.3 per min"
-                  title={marker.amenities}
-                />
-              )}
-              <InfoWindow
-                marker={this.state.activeMarker}
-                visible={this.state.showingInfoWindow}
-                onClose={this.onClose}
-              >
-                <div>
-                  <h4>{this.state.selectedPlace.name}</h4>
-                </div>
-              </InfoWindow>
-            </CurrentLocation>
-            <BottomNav>
-              <AccountIcon>
-                <ProfileButton />
-                {/* <img src={accSVG} /> */}
-              </AccountIcon>
-              <ScanButtonBottomNav>
-                <img src={scanSVG} alt={"scanSVG"} />
-                <ScanBottomNavTxt>SCAN</ScanBottomNavTxt>
-              </ScanButtonBottomNav>
-              <HelpIcon>
-                <img src={helpSVG} alt={"helpSVG"} />
-              </HelpIcon>
-            </BottomNav>
-            {this.state.showingInfoWindow ? (
-              <PanelStyles
-                marker={this.state.activeMarker}
-                visible={this.state.showingInfoWindow}
-                onClose={this.onClose}
-              >
-                <img
-                  src={close}
-                  alt={"close"} 
-                  onClick={() =>
-                    this.setState({
-                      showingInfoWindow: false,
-                      activeMarker: null,
-                    })
-                  }
-                />
-                <AvailabilityTxt>
-                  {this.state.selectedPlace.availability}
-                </AvailabilityTxt>
-                <LocationName>{this.state.selectedPlace.name}</LocationName>
-                <PriceTxt>{this.state.selectedPlace.price}</PriceTxt>
+                {Object.values(this.state.locationList).map((marker) =>
+                  <Marker
+                    onClick={this.onMarkerClick}
+                    icon={this.state.activeMarker === marker ? Activepaws : paws}
+                    position={{ lat: marker.latitude, lng: marker.longitude }}
+                    key={marker.id}
+                    name={marker.name}
+                    availability="• Available"
+                    price="$3.30 unlock, $0.3 per min"
+                    title={marker.amenities}
+                  />
+                )}
+                <InfoWindow
+                  marker={this.state.activeMarker}
+                  visible={this.state.showingInfoWindow}
+                  onClose={this.onClose}
+                >
+                  <div>
+                    <h4>{this.state.selectedPlace.name}</h4>
+                  </div>
+                </InfoWindow>
+              </CurrentLocation>
+              <BottomNav>
+                <AccountIcon>
+                  <ProfileButton />
+                  {/* <img src={accSVG} /> */}
+                </AccountIcon>
+                <ScanButtonBottomNav>
+                  <img src={scanSVG} alt={"scanSVG"} />
+                  <ScanBottomNavTxt>SCAN</ScanBottomNavTxt>
+                </ScanButtonBottomNav>
+                <HelpIcon>
+                  <img src={helpSVG} alt={"helpSVG"} />
+                </HelpIcon>
+              </BottomNav>
+              {this.state.showingInfoWindow ? (
+                <PanelStyles
+                  marker={this.state.activeMarker}
+                  visible={this.state.showingInfoWindow}
+                  onClose={this.onClose}
+                >
+                  <img
+                    src={close}
+                    alt={"close"}
+                    onClick={() =>
+                      this.setState({
+                        showingInfoWindow: false,
+                        activeMarker: null,
+                      })
+                    }
+                  />
+                  <AvailabilityTxt>
+                    {this.state.selectedPlace.availability}
+                  </AvailabilityTxt>
+                  <LocationName>{this.state.selectedPlace.name}</LocationName>
+                  <PriceTxt>{this.state.selectedPlace.price}</PriceTxt>
 
-                <AmenitiesLayout>
-                  <AmenityName>{this.state.selectedPlace.title}</AmenityName>
-                </AmenitiesLayout>
+                  <AmenitiesLayout>
+                    <AmenityName>{this.state.selectedPlace.title}</AmenityName>
+                  </AmenitiesLayout>
 
-                <center>
-                  <ScanButton>
-                    <ScanButtonTxt>Scan to unlock</ScanButtonTxt>
-                  </ScanButton>
-                </center>
-              </PanelStyles>
-            ) : null}
-            {/* Populating markers from marker list, allows for multiple markers */}
-            {/* What shows up in the window on marker click */}
-          </MainLayout>
-        </div>
+                  <center>
+                    <ScanButton>
+                      <ScanButtonTxt>Scan to unlock</ScanButtonTxt>
+                    </ScanButton>
+                  </center>
+                </PanelStyles>
+              ) : null}
+              {/* Populating markers from marker list, allows for multiple markers */}
+              {/* What shows up in the window on marker click */}
+            </MainLayout>
+          </div>
         }
       </div>
     );
