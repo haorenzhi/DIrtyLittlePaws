@@ -4,7 +4,6 @@ import React, { Component, PropTypes } from "react";
 import ReactDOM from "react-dom";
 
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
-import Handlebars from "handlebars/dist/cjs/handlebars";
 import {
   MapLayout,
   MainLayout,
@@ -27,7 +26,6 @@ import close from "../src/styles/svgs/close.svg";
 import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
 import paws from "../src/styles/svgs/paws.png";
 import Activepaws from "../src/styles/svgs/ActivePaws.png";
-import { Panel, PanelGroup } from "rsuite";
 import CurrentLocation from "./Map";
 import { database, signInwithG, auth } from "./utilities/firebase.js";
 
