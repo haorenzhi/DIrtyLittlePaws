@@ -1,5 +1,4 @@
-import ReactDOM from "react-dom";
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
 
 export class Profile extends Component{
     constructor(props){
@@ -18,8 +17,8 @@ export class Profile extends Component{
                 <div id="accountDetail">
                 </div>
                 <div id="profpic">
-                    <img class="profpic" width="40px" height="40px" border-radius="50%" src="https://picsum.photos/600/430?id=412"></img>
-                    <img class="profpic"  width="40px" height="40px" border-radius="50%" src="https://picsum.photos/600/430?id=412"></img>
+                    <img class="profpic" alt={"pic1"} width="40px" height="40px" border-radius="50%" src="https://picsum.photos/600/430?id=412"></img>
+                    <img class="profpic" alt={"pic2"} width="40px" height="40px" border-radius="50%" src="https://picsum.photos/600/430?id=412"></img>
                 </div>
                 
                 <div class="details">
