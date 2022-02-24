@@ -201,11 +201,11 @@ export class MapContainer extends Component {
               <div id='user-info'>
                 {this.state.currentUser ? (
                   <div>
-                    {/* <div>
+                    <div>
                   <img src={this.state.currentUser.photoURL} alt={"photoURL"} />
                 </div>
                 <div>Name: {this.state.currentUser.displayName}</div>
-                <div>Email: {this.state.currentUser.email}</div> */}
+                <div>Email: {this.state.currentUser.email}</div>
 
                     <button className="btn" onClick={() => auth.signOut()}>Sign Out</button>
                   </div>
