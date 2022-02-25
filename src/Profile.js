@@ -5,62 +5,67 @@ import { MainLayout } from "./styles/mapstyles";
 import backSVG from "../src/styles/svgs/Vector.svg";
 import { pushToFirebase } from "./utilities/firebase";
 import { useState } from "react";
-// const renderUserProfile = (user) => {
-//   return (
-//     <div>
-//       <div>
-//         <img src={user.photoURL} alt={"photoURL"} />
-//       </div>
-//       <div>Name: {user.displayName}</div>
-//       <div>Email: {user.email}</div>
-//     </div>
-//   );
-// };
-
-
+import { onValue, ref, get } from "firebase/database";
+import { database } from "./utilities/firebase";
 
 export const Profile = ({ user }) => {
   
-  //   constructor(props) {
-  //     super(props);
-  //     this.state = {};
-  //   }
 
-  //   (
-  //     <div>
-  // <div>
-  //   <img
-  //     src={this.state.currentUser.photoURL}
-  //     alt={"photoURL"}
-  //   />
-  // </div>
-  //       <div>Name: {this.state.currentUser.displayName}</div>
-  //       <div>Email: {this.state.currentUser.email}</div>
+  const [userDogname, setuserDogname] = useState("");
+  const [userAddress, setuserAddress] = useState("");
+  const [userPayment, setuserPayment] = useState("");
 
-  //       <button className="btn" onClick={() => auth.signOut()}>
-  //         Sign Out
-  //       </button>
-  //     </div>
-  //   )
+  get(ref(database, `users/${user.uid}/info/`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      setuserDogname(data.dogname)
+      setuserAddress(data.address)
+      setuserPayment(data.payment)
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+
   const [address, setAddress] = useState("");
   const [dogname, setDogname] = useState("");
   const [payment, setPayment] = useState("");
-  const update = ({ address,dogname, payment, user}) => {
-    // setAddress(address)
-    // setDogname(dogname)
-    console.log(`Update ${dogname}`)
+
+  const update = ({ address, dogname, payment, user}) => {
     const infox = {
       name: user.displayName,
       email: user.email,
       img: user.photoURL,
-      address: address,
-      dogname: dogname,
-      payment: payment,
+      dogname: dogname === "" ? userDogname : dogname,
+      address: address === "" ? userAddress : address,
+      payment: payment === "" ? userPayment : payment,
     };
-    // console.log(`Update ${address}`)
-    // const id = Math.round(Math.random() * 100000);
     const newInfo = { ...infox };
     pushToFirebase(newInfo, user);
+    setDogname("");
+    setAddress("");
+    setPayment("");
+    onValue(ref(database, `users/${user.uid}/info/dogname`), (snapshot) => {
+      const data = snapshot.val();
+      setuserDogname(data)
+    }, {
+      onlyOnce: true
+    })
+
+    onValue(ref(database, `users/${user.uid}/info/address`), (snapshot) => {
+      const data = snapshot.val();
+      setuserAddress(data)
+    }, {
+      onlyOnce: true
+    })
+
+    onValue(ref(database, `users/${user.uid}/info/payment`), (snapshot) => {
+      const data = snapshot.val();
+      setuserPayment(data)
+    }, {
+      onlyOnce: true
+    })
   };
 
   return (
@@ -99,13 +104,13 @@ export const Profile = ({ user }) => {
           </div>
             <p>Name: {user.displayName}</p>
             <p>Email: {user.email}</p>
-            <p>Dog's Name: {dogname} </p>
+            <p>Dog's Name: {userDogname} </p>
                 <input value={dogname} onChange = {(e) => setDogname(e.target.value)} placeholder="Enter your dog's name"/>
                 <button onClick = {()=>update({address, dogname, payment, user})} >submit</button>
-            <p>Address: {address}</p>
+            <p>Address: {userAddress}</p>
                 <input value={address} onChange = {(e) => setAddress(e.target.value)} placeholder="Enter your address"/>
                 <button onClick = {()=>update({address, dogname, payment, user})} >submit</button>
-            <p> Payment: {payment}</p>
+            <p> Payment: {userPayment}</p>
                <input value={payment} onChange = {(e) => setPayment(e.target.value)} placeholder="Enter your payment method"/>
                <button onClick = {()=>update({address, dogname, payment, user})} >submit</button>
 
