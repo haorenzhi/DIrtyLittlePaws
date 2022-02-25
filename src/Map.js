@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {
+  HomeIcon,
   MapLayout,
 } from "./styles/mapstyles";
 import locationSVG from "../src/styles/svgs/CenterLocation.svg";
@@ -146,10 +147,11 @@ export class CurrentLocation extends React.Component {
 
     return (
       <>
+      <HomeIcon>
+        
         <img src = {locationSVG} type="button" onClick={() => this.ChangeZoom()}/>
-
         <img src = {homeSVG} type="button" onClick={() => this.FavoritePosition()}/>
-
+      </HomeIcon>
         <MapLayout>
           <div style={style} ref="map">
             Loading map...

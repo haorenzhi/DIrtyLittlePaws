@@ -70,7 +70,7 @@ const SignInButton = () => {
       >
         Sign In With Google
       </button>
-      <p className="login"> New User? Sign Up with Google</p>
+      {/* <p className="login"> New User? Sign Up with Google</p> */}
     </MainLayout>
   );
 };

@@ -37,7 +37,7 @@ setPersistence(auth, browserLocalPersistence)
 export const pushToFirebase = async (info, user) => {
   if (info) {
     try {
-      await set(ref(database, `users/${user.uid}info/${info.id}/`), info);
+      await set(ref(database, `users/${user.uid}/info/`), info);
     } catch (error) {
       alert(error);
     }

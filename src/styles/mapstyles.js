@@ -12,6 +12,7 @@ export const MainLayout = styled.div`
   // border: solid blue 10px;
 `;
 
+
 export const MapLayout = styled.div`
   display: flex;
   position: fixed;
@@ -173,4 +174,14 @@ export const TopBanner = styled.div`
   height: 80px;
   background: #ffffff;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+`;
+
+export const HomeIcon = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  align-self: right;
+  justify-content: right;
+  justify-self: right;
+
 `;

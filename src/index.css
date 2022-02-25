@@ -89,8 +89,9 @@ code {
 }
 
 .details{
+  padding-top:10%;
   display: flex;
-  border: 2px solid gray;
+  /* border: 2px solid gray; */
   width: 100%;
 }
 
