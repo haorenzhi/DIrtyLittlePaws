@@ -74,6 +74,11 @@ code {
   font-family: inherit;
 }
 
+.profpic{
+  display: flex;
+  margin-top: 15%;
+  margin-bottom: 3%;
+}
 
 #profpic{
   display: flex;
