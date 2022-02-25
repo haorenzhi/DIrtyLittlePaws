@@ -1,14 +1,14 @@
 // firebase.utils.js
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import { getDatabase } from 'firebase/database';
+import { getDatabase, set, ref } from 'firebase/database';
 import { initializeApp } from "firebase/app";
 import {
   browserLocalPersistence,
   getAuth, 
   GoogleAuthProvider, 
   setPersistence,
-  signInWithPopup
+  signInWithPopup,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -33,4 +33,15 @@ export const database = getDatabase(myFirebase);
 // export const signInwithG = () => auth.signInWithPopup(provider);
 export const signInwithG = () => signInWithPopup(auth, new GoogleAuthProvider());
 setPersistence(auth, browserLocalPersistence)
+
+export const pushToFirebase = async (info, user) => {
+  if (info) {
+    try {
+      await set(ref(database, `users/${user.uid}info/${info.id}/`), info);
+    } catch (error) {
+      alert(error);
+    }
+  }
+};
+
 export default firebase;

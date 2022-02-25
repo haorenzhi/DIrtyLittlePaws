@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 import MapContainer from "./App";
 import { MainLayout,PanelStyles} from "./styles/mapstyles";
 import backSVG from "../src/styles/svgs/Vector.svg";
-
+import { pushToFirebase } from "./utilities/firebase";
+import { useState } from "react";
 // const renderUserProfile = (user) => {
 //   return (
 //     <div>
@@ -16,7 +17,22 @@ import backSVG from "../src/styles/svgs/Vector.svg";
 //   );
 // };
 
+const update = (address, user) => {
+    // setAddress(address)
+    const infox = {
+      name: user.displayName,
+      email: user.email,
+      img: user.photoURL,
+      address: address,
+    };
+    console.log(`Update ${address}`)
+    const id = Math.round(Math.random() * 100000);
+    const newInfo = { id, ...infox };
+    pushToFirebase(newInfo, user);
+  };
+
 export const Profile = ({ user }) => {
+
   //   constructor(props) {
   //     super(props);
   //     this.state = {};
@@ -38,7 +54,7 @@ export const Profile = ({ user }) => {
   //       </button>
   //     </div>
   //   )
-  console.log(user.displayName);
+  const [address, setAddress] = useState("!!!");
 
   return (
     <MainLayout>
@@ -77,10 +93,10 @@ export const Profile = ({ user }) => {
             <p>Name: {user.displayName}</p>
             <p>Dog's Name: </p>
             <p>Email: {user.email}</p>
-            <p>Address: </p>
-
-            <input placeholder="Enter your address"></input>
-            <button id="submitAddress"> submit </button>
+            <p>Address: {address}</p>
+                <input value={address} onChange = {(e) => setAddress(e.target.value)} placeholder="Enter your address"/>
+            {/* {update(address, user)} */}
+            <button id="submitAddress" onClick={update(address, user)}> submit </button>
             <p> Payment: </p>
           </div>
           
