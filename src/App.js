@@ -178,7 +178,6 @@ export class MapContainer extends Component {
 
   componentDidMount() {
     const reference = ref(database, "/Locations/");
-    this._isMounted = true;
     this.streetViewControl = false;
 
     onValue(reference, (snapshot) => {
@@ -198,7 +197,6 @@ export class MapContainer extends Component {
 
   componentWillUnmount() {
     this.unsubscribeFromAuth();
-    this._isMounted = false;
   }
   render() {
     return (

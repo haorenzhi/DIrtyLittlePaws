@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import MapContainer from "./App";
-import { MainLayout} from "./styles/mapstyles";
+import { MainLayout } from "./styles/mapstyles";
 import backSVG from "../src/styles/svgs/Vector.svg";
 import { pushToFirebase } from "./utilities/firebase";
-import { useState} from "react";
+import { useState } from "react";
 // const renderUserProfile = (user) => {
 //   return (
 //     <div>
@@ -45,9 +45,10 @@ export const Profile = ({ user }) => {
   const [address, setAddress] = useState("");
   const [dogname, setDogname] = useState("");
   const [payment, setPayment] = useState("");
-
-  const update = ({address,dogname, payment, user}) => {
+  const update = ({ address,dogname, payment, user}) => {
     // setAddress(address)
+    // setDogname(dogname)
+    console.log(`Update ${dogname}`)
     const infox = {
       name: user.displayName,
       email: user.email,
@@ -57,8 +58,8 @@ export const Profile = ({ user }) => {
       payment: payment,
     };
     // console.log(`Update ${address}`)
-    const id = Math.round(Math.random() * 100000);
-    const newInfo = { id, ...infox };
+    // const id = Math.round(Math.random() * 100000);
+    const newInfo = { ...infox };
     pushToFirebase(newInfo, user);
   };
 
@@ -100,15 +101,14 @@ export const Profile = ({ user }) => {
             <p>Email: {user.email}</p>
             <p>Dog's Name: {dogname} </p>
                 <input value={dogname} onChange = {(e) => setDogname(e.target.value)} placeholder="Enter your dog's name"/>
-                <input type="submit" value={"submit"} onClick = {()=>update({address,dogname, payment, user})} /> 
+                <button onClick = {()=>update({address, dogname, payment, user})} >submit</button>
             <p>Address: {address}</p>
                 <input value={address} onChange = {(e) => setAddress(e.target.value)} placeholder="Enter your address"/>
-
-                <input type="submit" value={"submit"} onClick = {()=>update({address,dogname, payment, user})} />
+                <button onClick = {()=>update({address, dogname, payment, user})} >submit</button>
             <p> Payment: {payment}</p>
                <input value={payment} onChange = {(e) => setPayment(e.target.value)} placeholder="Enter your payment method"/>
+               <button onClick = {()=>update({address, dogname, payment, user})} >submit</button>
 
-                <input type="submit" value={"submit"} onClick = {()=>update({address,dogname, payment, user})} />
           </div>
           
           {/* <div id="ic">
