@@ -14,7 +14,7 @@ code {
 
 .btn {
   display: inline-block;
-  background: rgb(148, 25, 132);
+  background: #662D91;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -48,15 +48,42 @@ code {
   color: #fff
 }
 
+.loginbtn {
+  font-weight: bold;
+  display: inline-block;
+  background: #662D91;
+  color: #fff;
+  border: none;
+  padding: 15px 60px;
+  margin: 5px;
+  border-radius: 25px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.loginbtn:hover{
+  font-size: 17px;
+  color: #fff;
+}
+
+.login {
+  color: #662D91;
+  cursor: pointer;
+  font-family: inherit;
+}
+
 .profpic{
   display: flex;
-  margin: 50px;
-  border-radius: 50%;
-
+  margin-top: 15%;
+  margin-bottom: 3%;
 }
+
 #pp{
   /* border: 1px solid gray; */
 }
+
 #profpic{
   display: flex;
 }

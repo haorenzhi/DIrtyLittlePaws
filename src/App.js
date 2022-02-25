@@ -25,15 +25,13 @@ import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
 import paws from "../src/styles/svgs/paws.png";
 import Activepaws from "../src/styles/svgs/ActivePaws.png";
 import CurrentLocation from "./Map";
+
 import { database, signInwithG, auth } from "./utilities/firebase.js";
-
 import { onValue, ref } from "firebase/database";
-
 import scanSVG from "../src/styles/svgs/scan.svg";
 import accSVG from "../src/styles/svgs/account.svg";
 import helpSVG from "../src/styles/svgs/help.svg";
 import topLogo from "../src/styles/svgs/SpotLogos.png";
-
 import Profile from "./Profile.js"
 
 
@@ -58,14 +56,19 @@ const SignInButton = () => {
   // {document.getElementById("user-info").innerHTML = ""};
 
   return (
-    <button className="btn"
-      onClick={() => {
-        signInwithG();
-      }
-      }>
 
-      Sign In
-    </button>
+    <MainLayout>
+      <img className = "profpic" style = {{ width: 200 }} src={topLogo} alt={"topLogo"} />
+      <button className="loginbtn"
+        onClick={() => {
+          signInwithG();
+        }
+        }>
+      Sign In With Google
+      </button>
+      <p className = "login"> New User? Sign Up with Google</p>
+    </MainLayout>
+    
   );
 };
 
@@ -199,9 +202,7 @@ export class MapContainer extends Component {
                 <img src={topLogo} alt={"topLogo"} width="96px" />
               </TopBanner>
               {/* <SignInButton/> */}
-
               <div id='user-info'>
-                {this.state.currentUser ? (
                   <div>
                     <div>
                   <img src={this.state.currentUser.photoURL} alt={"photoURL"} />
@@ -211,7 +212,7 @@ export class MapContainer extends Component {
 
                     <button className="btn" onClick={() => auth.signOut()}>Sign Out</button>
                   </div>
-                ) : <SignInButton />}
+                
               </div>
               <CurrentLocation
                 centerAroundCurrentLocation
