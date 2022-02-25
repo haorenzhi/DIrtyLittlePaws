@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import MapContainer from "./App";
-import { MainLayout,PanelStyles} from "./styles/mapstyles";
+import { MainLayout} from "./styles/mapstyles";
 import backSVG from "../src/styles/svgs/Vector.svg";
 import { pushToFirebase } from "./utilities/firebase";
-import { useState, useEffect} from "react";
+import { useState} from "react";
 // const renderUserProfile = (user) => {
 //   return (
 //     <div>

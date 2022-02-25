@@ -149,8 +149,8 @@ export class CurrentLocation extends React.Component {
       <>
       <HomeIcon>
         
-        <img src = {locationSVG} type="button" onClick={() => this.ChangeZoom()}/>
-        <img src = {homeSVG} type="button" onClick={() => this.FavoritePosition()}/>
+        <img src = {locationSVG} type="button" alt={"locationSVG"} onClick={() => this.ChangeZoom()}/>
+        <img src = {homeSVG} type="button" alt={"locationSVG"} onClick={() => this.FavoritePosition()}/>
       </HomeIcon>
         <MapLayout>
           <div style={style} ref="map">
