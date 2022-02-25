@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import MapContainer from "./App"
+import { MainLayout } from "./styles/mapstyles";
 
 export class Profile extends Component{
     constructor(props){
@@ -14,7 +15,7 @@ export class Profile extends Component{
 
     render(){
         return(
-
+<MainLayout>
             <div id="pp">
                 <div onClick = {() => ReactDOM.render(<MapContainer />, document.getElementById("root"))}>Back</div>
                 <div id="accountDetail">
@@ -38,6 +39,7 @@ export class Profile extends Component{
                     </div>
                 </div>
             </div>
+            </MainLayout>
         )
     }
 }

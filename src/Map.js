@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import {
   MapLayout,
 } from "./styles/mapstyles";
+import locationSVG from "../src/styles/svgs/CenterLocation.svg";
+import homeSVG from "../src/styles/svgs/home.svg";
 
 const mapStyles = {
   map: {
@@ -15,9 +17,7 @@ const mapStyles = {
 export class CurrentLocation extends React.Component {
   constructor(props) {
     super(props);
-
     const { lat, lng } = this.props.initialCenter;
-
     this.state = {
       currentLocation: {
         lat: lat,
@@ -146,17 +146,9 @@ export class CurrentLocation extends React.Component {
 
     return (
       <>
-        <button type="button" className="btn" onClick={() => this.ChangeZoom()}>
-          {window.innerWidth > 600 ? "Find more locations?" : "More"}
-        </button>
+        <img src = {locationSVG} type="button" onClick={() => this.ChangeZoom()}/>
 
-        <button
-          type="button"
-          className="btn"
-          onClick={() => this.FavoritePosition()}
-        >
-          {window.innerWidth > 600 ? "Check home location" : "Home"}
-        </button>
+        <img src = {homeSVG} type="button" onClick={() => this.FavoritePosition()}/>
 
         <MapLayout>
           <div style={style} ref="map">

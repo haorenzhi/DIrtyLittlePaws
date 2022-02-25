@@ -131,6 +131,8 @@ export class MapContainer extends Component {
       selectedPlace: {}, // Shows the InfoWindow to the selected place upon a marker
       icon: paws,
       locationList: [],
+      streetViewControl: false,
+      disableDefaultUI: true,
       currentUser: null
     };
     this._isMounted = false;
@@ -171,6 +173,7 @@ export class MapContainer extends Component {
   componentDidMount() {
     const reference = ref(database, "/Locations/");
     this._isMounted = true;
+    this.streetViewControl = false;
 
     onValue(reference, (snapshot) => {
       let locations = [];
