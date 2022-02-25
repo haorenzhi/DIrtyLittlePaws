@@ -130,8 +130,8 @@ export class MapContainer extends Component {
       locationList: [],
       currentUser: null
     };
+    this._isMounted = false;
   }
-  unsubscribeFromAuth = signInwithG();
 
   // GetData = () => {
   //   return function WrappedComponent()
@@ -167,6 +167,7 @@ export class MapContainer extends Component {
 
   componentDidMount() {
     const reference = ref(database, "/Locations/");
+    this._isMounted = true;
 
     onValue(reference, (snapshot) => {
       let locations = [];
@@ -185,6 +186,7 @@ export class MapContainer extends Component {
 
   componentWillUnmount() {
     this.unsubscribeFromAuth();
+    this._isMounted = false;
   }
   render() {
     return (
