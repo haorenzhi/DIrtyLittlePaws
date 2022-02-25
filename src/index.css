@@ -74,22 +74,13 @@ code {
   font-family: inherit;
 }
 
-.profpic{
-  display: flex;
-  margin-top: 15%;
-  margin-bottom: 3%;
-}
-
-#pp{
-  /* border: 1px solid gray; */
-}
 
 #profpic{
   display: flex;
+  margin-top: 10%;
 }
 
 .details{
-  padding-top:10%;
   display: flex;
   /* border: 2px solid gray; */
   width: 100%;
