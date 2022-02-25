@@ -32,8 +32,7 @@ import scanSVG from "../src/styles/svgs/scan.svg";
 import accSVG from "../src/styles/svgs/account.svg";
 import helpSVG from "../src/styles/svgs/help.svg";
 import topLogo from "../src/styles/svgs/SpotLogos.png";
-import Profile from "./Profile.js"
-
+import Profile from "./Profile.js";
 
 /**
  * Defines an instance of the Locator+ solution, to be instantiated
@@ -56,24 +55,25 @@ const SignInButton = () => {
   // {document.getElementById("user-info").innerHTML = ""};
 
   return (
-
     <MainLayout>
-      <img className = "profpic" style = {{ width: 200 }} src={topLogo} alt={"topLogo"} />
-      <button className="loginbtn"
+      <img
+        className="profpic"
+        style={{ width: 200 }}
+        src={topLogo}
+        alt={"topLogo"}
+      />
+      <button
+        className="loginbtn"
         onClick={() => {
           signInwithG();
-        }
-        }>
-      Sign In With Google
+        }}
+      >
+        Sign In With Google
       </button>
-      <p className = "login"> New User? Sign Up with Google</p>
+      <p className="login"> New User? Sign Up with Google</p>
     </MainLayout>
-    
   );
 };
-
-
-
 
 // const SignOutButton = (cuser) => {
 //   return (<>
@@ -99,7 +99,7 @@ const SignInButton = () => {
 //       return <Component Location = {locations}/>;
 //     };
 // }
-export const ProfileButton = () => (
+export const ProfileButton = ({ user }) => (
   <>
     {/* <button
       type="button"
@@ -109,14 +109,20 @@ export const ProfileButton = () => (
         ReactDOM.render(<Profile />, document.getElementById("root"))
       }
     > */}
-    <input type="image" alt={"accSVG"} src={accSVG} name="saveForm" className="btTxt submit" onClick={() =>
-      ReactDOM.render(<Profile />, document.getElementById("root"))
-    } >
-
-    </input>
-
+    <input
+      type="image"
+      alt={"accSVG"}
+      src={accSVG}
+      name="saveForm"
+      className="btTxt submit"
+      onClick={() =>
+        ReactDOM.render(
+          <Profile user={user} />,
+          document.getElementById("root")
+        )
+      }
+    ></input>
     {/* { window.innerWidth > 600 ? "Add food" : "add"} */}
-
     {/*  </button> */}
   </>
 );
@@ -133,7 +139,7 @@ export class MapContainer extends Component {
       locationList: [],
       streetViewControl: false,
       disableDefaultUI: true,
-      currentUser: null
+      currentUser: null,
     };
     this._isMounted = false;
   }
@@ -185,8 +191,8 @@ export class MapContainer extends Component {
       this.setState({ locationList: locations });
     });
 
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({ currentUser: user })
+    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
+      this.setState({ currentUser: user });
     });
   }
 
@@ -198,30 +204,37 @@ export class MapContainer extends Component {
     return (
       //Renders the panel and the map <MyFireBaseHook/>
       <div>
-        {!this.state.currentUser ? <SignInButton /> :
+        {!this.state.currentUser ? (
+          <SignInButton />
+        ) : (
           <div id="outline">
             <MainLayout>
               <TopBanner>
                 <img src={topLogo} alt={"topLogo"} width="96px" />
               </TopBanner>
               {/* <SignInButton/> */}
-              <div id='user-info'>
+              <div id="user-info">
+                <div>
                   <div>
-                    <div>
-                  <img src={this.state.currentUser.photoURL} alt={"photoURL"} />
-                </div>
-                <div>Name: {this.state.currentUser.displayName}</div>
-                <div>Email: {this.state.currentUser.email}</div>
-
-                    <button className="btn" onClick={() => auth.signOut()}>Sign Out</button>
+                    <img
+                      src={this.state.currentUser.photoURL}
+                      alt={"photoURL"}
+                    />
                   </div>
-                
+                  <div>Name: {this.state.currentUser.displayName}</div>
+                  <div>Email: {this.state.currentUser.email}</div>
+
+                  <button className="btn" onClick={() => auth.signOut()}>
+                    Sign Out
+                  </button>
+                </div>
               </div>
               <CurrentLocation
                 centerAroundCurrentLocation
                 google={this.props.google}
               >
-                <Marker key={"current"}
+                <Marker
+                  key={"current"}
                   icon={CurrentLocationIcon}
                   onClick={this.onMarkerClick}
                   name={"Current Location"}
@@ -235,10 +248,12 @@ export class MapContainer extends Component {
                 <h4>{this.state.selectedPlace.name}</h4>
               </div>
             </InfoWindow> */}
-                {Object.values(this.state.locationList).map((marker) =>
+                {Object.values(this.state.locationList).map((marker) => (
                   <Marker
                     onClick={this.onMarkerClick}
-                    icon={this.state.activeMarker === marker ? Activepaws : paws}
+                    icon={
+                      this.state.activeMarker === marker ? Activepaws : paws
+                    }
                     position={{ lat: marker.latitude, lng: marker.longitude }}
                     key={marker.id}
                     name={marker.name}
@@ -246,7 +261,7 @@ export class MapContainer extends Component {
                     price="$3.30 unlock, $0.3 per min"
                     title={marker.amenities}
                   />
-                )}
+                ))}
                 <InfoWindow
                   marker={this.state.activeMarker}
                   visible={this.state.showingInfoWindow}
@@ -259,7 +274,7 @@ export class MapContainer extends Component {
               </CurrentLocation>
               <BottomNav>
                 <AccountIcon>
-                  <ProfileButton />
+                  <ProfileButton user={this.state.currentUser} />
                   {/* <img src={accSVG} /> */}
                 </AccountIcon>
                 <ScanButtonBottomNav>
@@ -307,7 +322,7 @@ export class MapContainer extends Component {
               {/* What shows up in the window on marker click */}
             </MainLayout>
           </div>
-        }
+        )}
       </div>
     );
   }
