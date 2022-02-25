@@ -91,7 +91,7 @@ code {
 .details{
   display: flex;
   border: 2px solid gray;
-  width: 60%;
+  width: 100%;
 }
 
 #ic{

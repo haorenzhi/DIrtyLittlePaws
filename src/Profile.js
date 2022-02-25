@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import MapContainer from "./App";
-import { MainLayout } from "./styles/mapstyles";
+import { MainLayout,PanelStyles} from "./styles/mapstyles";
+import backSVG from "../src/styles/svgs/Vector.svg";
 
 // const renderUserProfile = (user) => {
 //   return (
@@ -41,34 +42,54 @@ export const Profile = ({ user }) => {
 
   return (
     <MainLayout>
+    {/* <PanelStyles> */}
       <div id="pp">
-        <div
+        {/* <button
           onClick={() =>
             ReactDOM.render(<MapContainer />, document.getElementById("root"))
           }
         >
           Back
-        </div>
+        </button> */}
+
+
         <div id="accountDetail"></div>
-        <div id="profpic">
-          <div>
-            <img src={user.photoURL} alt={"photoURL"} />
-          </div>
-        </div>
+
 
         <div className="details">
+
           <div id="left">
+          <input
+            type="image"
+            alt={"backSVG"}
+            src={backSVG}
+            name="saveForm"
+            className="btTxt submit"
+            onClick={() =>
+              ReactDOM.render(<MapContainer />, document.getElementById("root"))
+            }
+          ></input>
+            <div id="profpic">
+            <div>
+              <img src={user.photoURL} alt={"photoURL"} />
+            </div>
+          </div>
             <p>Name: {user.displayName}</p>
+            <p>Dog's Name: </p>
             <p>Email: {user.email}</p>
             <p>Address: </p>
+
+            <input placeholder="Enter your address"></input>
+            <button id="submitAddress"> submit </button>
+            <p> Payment: </p>
           </div>
-          <input placeholder="Enter your address"></input>
-          <button id="submitAddress"></button>
-          <div id="ic">
+          
+          {/* <div id="ic">
             <i className="fa-solid fa-caret-right"></i>
-          </div>
+          </div> */}
         </div>
       </div>
+    {/* </PanelStyles> */}
     </MainLayout>
   );
 };

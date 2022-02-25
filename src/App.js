@@ -215,14 +215,14 @@ export class MapContainer extends Component {
               {/* <SignInButton/> */}
               <div id="user-info">
                 <div>
-                  <div>
+                  {/* <div>
                     <img
                       src={this.state.currentUser.photoURL}
                       alt={"photoURL"}
                     />
-                  </div>
-                  <div>Name: {this.state.currentUser.displayName}</div>
-                  <div>Email: {this.state.currentUser.email}</div>
+                  </div> */}
+                  {/* <div>Name: {this.state.currentUser.displayName}</div>
+                  <div>Email: {this.state.currentUser.email}</div> */}
 
                   <button className="btn" onClick={() => auth.signOut()}>
                     Sign Out
