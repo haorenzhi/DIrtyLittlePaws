@@ -1,6 +1,7 @@
 {
   "projects": {
-    "DIrtyLittlePaws": "dirtylittlepaws-487d9"
+    "DIrtyLittlePaws": "dirtylittlepaws-487d9",
+    "default": "dirtylittlepaws-487d9"
   },
   "targets": {}
 }
