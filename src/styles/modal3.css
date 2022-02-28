@@ -1,0 +1,49 @@
+#accinfo{
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0%;
+    margin-left: 35%;
+    font-family: 'Comfortaa', cursive;
+    width: 450px;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(35, 53, 35, 0.637);
+  }
+
+  #accinfoC{
+    margin-top: 60%;
+    width: 450px;
+    height: 30%;
+    border-radius: 22px;
+    background-color: rgb(255, 255, 255);
+    
+  }
+  #detailName{
+    padding-top: 20px;
+   
+  }
+  #accinfoC p, input{
+    margin-left: 15%;
+  }
+
+  #accinfoC input{
+    border-radius: 10px;
+    width: 50%;
+    height: 30px;
+  }
+
+
+  #savebtn{
+      margin-top: 10%;
+      border-radius: 20px;
+      width: 50%;
+
+  }
+  #cancelbtn{
+    margin-top: 5%;
+    border-radius: 20px;
+    width: 50%;
+
+}

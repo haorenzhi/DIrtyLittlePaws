@@ -1,0 +1,99 @@
+{
+  "Home" : [ null, {
+    "latitude" : 1,
+    "longitude" : 1
+  } ],
+  "Locations" : [  {
+    "amenities" : "Washing, Drying, Pawicure, Grooming",
+    "avaliable" : true,
+    "id" : 1,
+    "latitude" : 41.91806,
+    "longitude" : -87.63699,
+    "name" : "1960 N Lincoln Park W"
+  }, {
+    "amenities" : "Washing, Drying",
+    "avaliable" : true,
+    "id" : 2,
+    "latitude" : 41.92223,
+    "longitude" : -87.665672,
+    "name" : "2228 N Clybourn Ave"
+  }, {
+    "amenities" : "Washing, Drying, Pawicure, Grooming",
+    "avaliable" : true,
+    "id" : 3,
+    "latitude" : 41.9103558,
+    "longitude" : -87.6735355,
+    "name" : "1825 W North Ave"
+  }, {
+    "amenities" : "Washing, Drying, Grooming",
+    "avaliable" : true,
+    "id" : 4,
+    "latitude" : 41.91806,
+    "longitude" : -87.63699,
+    "name" : "2000 N Clybourn Ave"
+  }, {
+    "amenities" : "Washing, Drying, Grooming",
+    "avaliable" : true,
+    "id" : 5,
+    "latitude" : 41.9149889,
+    "longitude" : -87.6645697,
+    "name" : "1765 N Elston Ave"
+  }, {
+    "amenities" : "Washing, Drying",
+    "avaliable" : true,
+    "id" : 6,
+    "latitude" : 41.9010907,
+    "longitude" : -87.6318406,
+    "name" : "Near North Side"
+  }, {
+    "amenities" : "Washing, Drying, Pawicure, Grooming",
+    "avaliable" : true,
+    "id" : 7,
+    "latitude" : 41.9320681,
+    "longitude" : -87.6687625,
+    "name" : "2750 N Ashland Ave"
+  }, {
+    "amenities" : "Washing, Drying, Pawicure, Grooming",
+    "avaliable" : true,
+    "id" : 8,
+    "latitude" : 42.0481,
+    "longitude" : -87.678291,
+    "name" : "1715 Chicago Ave"
+  }, {
+    "amenities" : "Washing, Drying, Pawicure, Grooming",
+    "avaliable" : true,
+    "id" : 9,
+    "latitude" : 42.05686,
+    "longitude" : -87.6767,
+    "name" : "2133 Sheridan Rd"
+  }, {
+    "amenities" : "Washing, Drying, Pawicure, Grooming",
+    "avaliable" : true,
+    "id" : 10,
+    "latitude" : 42.051811,
+    "longitude" : -87.685303,
+    "name" : "1890 Maple Ave"
+  }, {
+    "amenities" : "Washing, Drying, Pawicure, Grooming",
+    "avaliable" : true,
+    "id" : 11,
+    "latitude" : 42.05324,
+    "longitude" : -87.68789,
+    "name" : "1930 Ridge Ave"
+  }, {
+    "amenities" : "Washing, Drying, Pawicure, Grooming",
+    "avaliable" : true,
+    "id" : 12,
+    "latitude" : 42.0524352,
+    "longitude" : -87.6830755,
+    "name" : "811 Emerson St"
+  }, {
+    "amenities" : "Washing, Drying, Pawicure, Grooming",
+    "avaliable" : true,
+    "id" : 13,
+    "latitude" : 42.04703140258789,
+    "longitude" : -87.681884765625,
+    "name" : "1500 Sherman Ave"
+  } ],
+  "title" : "All Locations"
+}

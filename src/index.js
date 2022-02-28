@@ -1,11 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './styles/modal.css';
+import './styles/modal2.css';
+import './styles/modal3.css';
+
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-    <App />,
+  <React.Fragment>
+    <App />
+  </React.Fragment>,
   document.getElementById('root')
 );
 
