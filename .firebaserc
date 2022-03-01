@@ -1,7 +1,16 @@
 {
   "projects": {
     "DIrtyLittlePaws": "dirtylittlepaws-487d9",
-    "default": "dirtylittlepaws-487d9"
+    "default": "dirtylittlepaws-487d9",
+    "product": "dirtylittlepaws-487d9"
   },
-  "targets": {}
+  "targets": {
+    "dirtylittlepaws-487d9": {
+      "hosting": {
+        "develop": [
+          "dirtylittlepawsdevelop"
+        ]
+      }
+    }
+  }
 }
