@@ -17,7 +17,6 @@ import paww from "../src/styles/svgs/paww.png";
 import close from "../src/styles/svgs/close.svg";
 import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
 import paws from "../src/styles/svgs/paws.png";
-import Activepaws from "../src/styles/svgs/ActivePaws.png";
  // const ldata = require('./data/stations.json');
 import topLogo from "../src/styles/svgs/SpotLogos.png";
 import mapStyles from "./styles/mapStyles.js";
@@ -48,7 +47,7 @@ withGoogleMap requires -
 
 const SignInButton = () => (
   <div id="signinpage">
-    <img src={topLogo} id="logot"/>
+    <img src={topLogo} id="logot" alt="logo"/>
     <button id="signin" className="btn"
       onClick={() => signInWithG()}>
       Sign In
@@ -117,7 +116,7 @@ export default function App() {
     };  
     useEffect(() => {
       navigator.geolocation.getCurrentPosition(success);
-    }, [user])
+    }, [])
 
     return (
       <GoogleMap
@@ -177,7 +176,7 @@ export default function App() {
 
         {selectedStation && (
           <div id="myModal" className="modal">   
-            <img id="clo" src={close} onClick={() => {
+            <img id="clo" alt="closebtn" src={close} onClick={() => {
                   setSelectedStation(null);
                 }}/>
             <div className="modal-content">
@@ -204,7 +203,6 @@ export default function App() {
   }
 
   const MapWrapped = withScriptjs(withGoogleMap(Map));
-  const muid = user? user.uid: "";
   return (
 
     <div id="mainlayout">
@@ -212,10 +210,10 @@ export default function App() {
         <div style={{ width: "100%", height: "100%" }}>
             <div id="topbanner">
                 <div id="profile">
-                  <img id="profilepic" src={user.photoURL}/>
+                  <img id="profilepic" alt="profile" src={user.photoURL}/>
                   <p>{user.displayName}</p>
                 </div>
-                <img src={paww} id="logo"/>
+                <img src={paww} alt="paw" id="logo"/>
                 <SignOutButton/>
             </div>
 
@@ -256,7 +254,7 @@ export default function App() {
             <div id="bottomnav">
               <FontAwesomeIcon className="botIcons" icon={faUser} 
                   onClick={() => {
-                    {document.getElementById("ppage").style.display = "block"}
+                    document.getElementById("ppage").style.display = "block"
                   }}
               />
               <FontAwesomeIcon className="botIcons" icon={faQrcode} />

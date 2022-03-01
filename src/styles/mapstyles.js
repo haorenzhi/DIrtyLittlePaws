@@ -1,4 +1,4 @@
-export default [
+const arr =  [
   {
       "featureType": "all",
       "elementType": "geometry",
@@ -135,3 +135,5 @@ export default [
       ]
   }
 ];
+
+export default arr;
