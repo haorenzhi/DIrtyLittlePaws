@@ -19,7 +19,7 @@ import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
 import paws from "../src/styles/svgs/paws.png";
  // const ldata = require('./data/stations.json');
 import topLogo from "../src/styles/svgs/SpotLogos.png";
-import mapStyles from "./styles/mapStyles.js";
+import mapStyles from "./styles/mapstyles.js";
 import {
   LocationName,
   AvailabilityTxt,
