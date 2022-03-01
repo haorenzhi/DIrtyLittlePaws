@@ -53,13 +53,13 @@ const ProfilePage = user => {
     return (
         <div>
             <div id="accheader">
-                <img src={leftArrow} className="back" 
+                <img alt={""} src={leftArrow} className="back" 
                     onClick={()=> document.getElementById("ppage").style.display = "none"}/>
                 <p>Account details</p>
             </div>
             <div id="accphoto">
                 <p>Profile Photo</p>
-                <img src={user.userphoto} alt="userphoto"></img>
+                <img alt={""} src={user.userphoto} alt="userphoto"></img>
             </div>
             <div id="accdetails">
 
@@ -69,7 +69,7 @@ const ProfilePage = user => {
                         <p id="acName">{user.username}</p>
                     </div>
                     
-                    <img src={rightArrow} className="carats"/>
+                    <img alt={""} src={rightArrow} className="carats"/>
                 </div>
                 <div className="accinfo" >
                     <div className="eachDetail">
@@ -77,7 +77,7 @@ const ProfilePage = user => {
                         <p id="acEmail">{user.useremail}</p>
                     </div>
                     
-                    <img src={rightArrow} className="carats"/>
+                    <img alt={""} src={rightArrow} className="carats"/>
 
                 </div>
                 <div className="accinfo" onClick={ () => handleClick(3)}>
@@ -86,7 +86,7 @@ const ProfilePage = user => {
                         <p id="acPet">{user.userinfo.petname}</p>
                     </div>
 
-                    <img src={rightArrow} className="carats"/>
+                    <img alt={""} src={rightArrow} className="carats"/>
 
                 </div>
                 <div className="accinfo" onClick={ () => handleClick(4)}>
@@ -95,7 +95,7 @@ const ProfilePage = user => {
                         <p id="acHome">{user.userinfo.address}</p>
                     </div>
 
-                    <img src={rightArrow} className="carats"/>
+                    <img alt={""} src={rightArrow} className="carats"/>
 
                 </div>
                 <div className="accinfo" onClick={ () => handleClick(5)}>
@@ -104,7 +104,7 @@ const ProfilePage = user => {
                         <p id="acPay"> {user.userinfo.payment}</p>
                     </div>
 
-                    <img src={rightArrow} className="carats"/>
+                    <img alt={""} src={rightArrow} className="carats"/>
 
                 </div>
             </div>

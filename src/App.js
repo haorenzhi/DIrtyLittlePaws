@@ -46,7 +46,7 @@ withGoogleMap requires -
 
 const SignInButton = () => (
   <div id="signinpage">
-    <img src={topLogo} id="logot" alt="logo"/>
+    <img alt={""} src={topLogo} id="logot" alt="logo"/>
     <button id="signin" className="btn"
       onClick={() => signInWithG()}>
       Sign In
@@ -70,7 +70,7 @@ function amenityMapped(amenities){
   let amList = amenities.split(",");
   return amList.map((amenity, key) => (   
     <div id="eachA" key={key}>
-      <img src={account} className="ficon"/>
+      <img alt={""} src={account} className="ficon"/>
       <div>
       <AmenityName>{amenity}</AmenityName>
       </div>
@@ -192,7 +192,7 @@ export default function App() {
 
         {selectedStation && (
           <div id="myModal" className="modal">   
-            <img id="clo" alt="closebtn" src={close} onClick={() => {
+            <img alt={""} id="clo" alt="closebtn" src={close} onClick={() => {
                   setSelectedStation(null);
                 }}/>
             <div className="modal-content">
@@ -227,10 +227,10 @@ export default function App() {
         <div style={{ width: "100%", height: "100%" }}>
             <div id="topbanner">
                 <div id="profile">
-                  <img id="profilepic" alt="profile" src={user.photoURL}/>
+                  <img alt={""} id="profilepic" alt="profile" src={user.photoURL}/>
                   <p>{user.displayName}</p>
                 </div>
-                <img src={paww} alt="paw" id="logo"/>
+                <img alt={""} src={paww} alt="paw" id="logo"/>
                 <SignOutButton/>
             </div>
 
@@ -295,13 +295,13 @@ export default function App() {
             </div>
 
             <div id="bottomnav">
-              <img className="botIcons" src={account} 
+              <img alt={""} className="botIcons" src={account} 
                   onClick={() => {
                     document.getElementById("ppage").style.display = "block"
                   }}
               />
-              <img className="botIcons" src={scan} />
-              <img className="botIcons" src={help} />
+              <img alt={""} className="botIcons" src={scan} />
+              <img alt={""} className="botIcons" src={help} />
             </div>
  
       
