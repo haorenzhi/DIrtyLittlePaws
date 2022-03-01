@@ -1,5 +1,4 @@
 
-import { defaultClassPrefix } from "rsuite/esm/utils";
 import leftArrow from "../styles/svgs/close.svg";
 import rightArrow from "../styles/svgs/close.svg";
 
