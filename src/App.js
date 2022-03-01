@@ -9,10 +9,9 @@ import {
 } from "react-google-maps";
 
 import { useData, useUserState, signInWithG, signOutOfG, pushToFirebase } from "./utilities/firebase.js";
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faUser, faQrcode, faQuestionCircle } from '@fortawesome/fontawesome-free-solid'
-
+import help from "../src/styles/svgs/help.svg";
+import account from "../src/styles/svgs/account.svg";
+import scan from "../src/styles/svgs/scan.svg";
 import paww from "../src/styles/svgs/paww.png";
 import close from "../src/styles/svgs/close.svg";
 import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
@@ -71,10 +70,11 @@ function amenityMapped(amenities){
   let amList = amenities.split(",");
   return amList.map((amenity, key) => (   
     <div id="eachA" key={key}>
-      <FontAwesomeIcon icon={faCheck} className="ficon"/>
+      <img src={account} className="ficon"/>
       <div>
-        <AmenityName>{amenity}</AmenityName>
+      <AmenityName>{amenity}</AmenityName>
       </div>
+      
     </div> 
   ))
 }
@@ -295,13 +295,13 @@ export default function App() {
             </div>
 
             <div id="bottomnav">
-              <FontAwesomeIcon className="botIcons" icon={faUser} 
+              <img className="botIcons" src={account} 
                   onClick={() => {
                     document.getElementById("ppage").style.display = "block"
                   }}
               />
-              <FontAwesomeIcon className="botIcons" icon={faQrcode} />
-              <FontAwesomeIcon className="botIcons" icon={faQuestionCircle} />
+              <img className="botIcons" src={scan} />
+              <img className="botIcons" src={help} />
             </div>
  
       
