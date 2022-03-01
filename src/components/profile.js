@@ -59,7 +59,7 @@ const ProfilePage = user => {
             </div>
             <div id="accphoto">
                 <p>Profile Photo</p>
-                <img alt={""} src={user.userphoto} alt="userphoto"></img>
+                <img src={user.userphoto} alt="userphoto"></img>
             </div>
             <div id="accdetails">
 

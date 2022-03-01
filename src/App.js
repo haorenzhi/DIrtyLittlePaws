@@ -46,7 +46,7 @@ withGoogleMap requires -
 
 const SignInButton = () => (
   <div id="signinpage">
-    <img alt={""} src={topLogo} id="logot" alt="logo"/>
+    <img src={topLogo} id="logot" alt="logo"/>
     <button id="signin" className="btn"
       onClick={() => signInWithG()}>
       Sign In
@@ -192,7 +192,7 @@ export default function App() {
 
         {selectedStation && (
           <div id="myModal" className="modal">   
-            <img alt={""} id="clo" alt="closebtn" src={close} onClick={() => {
+            <img id="clo" alt="closebtn" src={close} onClick={() => {
                   setSelectedStation(null);
                 }}/>
             <div className="modal-content">
@@ -227,10 +227,10 @@ export default function App() {
         <div style={{ width: "100%", height: "100%" }}>
             <div id="topbanner">
                 <div id="profile">
-                  <img alt={""} id="profilepic" alt="profile" src={user.photoURL}/>
+                  <img id="profilepic" alt="profile" src={user.photoURL}/>
                   <p>{user.displayName}</p>
                 </div>
-                <img alt={""} src={paww} alt="paw" id="logo"/>
+                <img src={paww} alt="paw" id="logo"/>
                 <SignOutButton/>
             </div>
 
