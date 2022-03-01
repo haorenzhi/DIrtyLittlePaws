@@ -15,11 +15,16 @@
   #accinfoC{
     margin-top: 60%;
     width: 450px;
-    height: 30%;
+    height: 35%;
     border-radius: 22px;
     background-color: rgb(255, 255, 255);
     
   }
+
+  #accinfoC input {
+    margin-bottom: 4px;
+  }
+  
   #detailName{
     padding-top: 20px;
    

@@ -19,7 +19,7 @@ import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
 import paws from "../src/styles/svgs/paws.png";
  // const ldata = require('./data/stations.json');
 import topLogo from "../src/styles/svgs/SpotLogos.png";
-import mapStyles from "./styles/mapstyles.js";
+import mapStyles from "./styles/mapStyles.js";
 import {
   LocationName,
   AvailabilityTxt,
@@ -77,6 +77,22 @@ function amenityMapped(amenities){
       </div>
     </div> 
   ))
+}
+
+function checkPaymentInfo(val, cvv, date){
+  console.log(val);
+  console.log(cvv);
+  console.log(date);
+  if(val && cvv && date){
+ 
+    if((val.toString().length === 16) && (cvv.toString().length === 3)){
+      console.log("all valid");
+      return 1;
+    }
+   
+    return 0;
+  }
+  return 0;
 }
 
 function checkUser (mdata, user){
@@ -190,7 +206,8 @@ export default function App() {
               </AmenitiesLayout>
 
               <center>
-                <button id="scanTo" className="btn">Scan to unlock</button>
+                <button id="scanTo" className="btn" onClick={() => document.getElementById("accinfo").style.display = "block"
+}>Scan to unlock</button>
               </center>
                     
             </div>
@@ -232,18 +249,42 @@ export default function App() {
             <div id="accinfo">
               <div id="accinfoC">
                 <p id="detailName"></p>
-                <input type="text" id="inputid" 
+                {/* <label htmlFor="inputid">CCN</label> */}
+                <input type="number" placeholder="Credit Card Number" id="inputid" 
                   onChange={(e) => document.getElementById("inputid").value = e.target.value}/>
+                {/* <label htmlFor="cvvid">CVV</label> */}
+
+                  <input type="number" placeholder="CVV" id="cvvid" 
+                  onChange={(e) => document.getElementById("cvvid").value = e.target.value}/>
+                  {/* <label htmlFor="dateid">Expiry Date</label> */}
+
+                  <input type="date" placeholder="date" id="dateid" 
+                  onChange={(e) => document.getElementById("dateid").value = e.target.value}/>
                 
                 <center><button id="savebtn" className="btn"
                   onClick={() => { 
-                    console.log("INPUT IS: " + document.getElementById("inputid").value);
-                    console.log("SHORTENED: " + document.getElementById("savebtn").getAttribute("data-shortened"));
-                    console.log("USER ID: " + user.uid)
-                    
-                    pushToFirebase(document.getElementById("savebtn").getAttribute("data-shortened"),user.uid, document.getElementById("inputid").value);
-     
-                    document.getElementById("accinfo").style.display = "none";}
+
+                   
+                    let val = checkPaymentInfo(
+                      document.getElementById("inputid").value,
+                      document.getElementById("cvvid").value,
+                      document.getElementById("dateid").value);
+
+                    if(val === 1){
+                      console.log("INPUT IS: " + document.getElementById("inputid").value);
+                      console.log("SHORTENED: " + document.getElementById("savebtn").getAttribute("data-shortened"));
+                      console.log("USER ID: " + user.uid)
+                      
+                      pushToFirebase(document.getElementById("savebtn").getAttribute("data-shortened"),user.uid, document.getElementById("inputid").value);
+      
+                      document.getElementById("accinfo").style.display = "none";
+                  }
+                  else{
+                    document.getElementById("inputid").value = "Invalid payment";
+                    document.getElementById("cvvid").value = "Invalid cvv";
+                    document.getElementById("dateid").value = "Invalid date";
+                  }
+                  }
                   
                   }>Save</button> </center>
                   <center><button className="btn"  id="cancelbtn" onClick={() =>document.getElementById("accinfo").style.display = "none"}
