@@ -1,5 +1,6 @@
-import { faArrowLeft, faCaretRight } from "@fortawesome/fontawesome-free-solid";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import leftArrow from "../styles/svgs/close.svg";
+import rightArrow from "../styles/svgs/close.svg";
 
 function handleClick(box){
     document.getElementById("accinfo").style.display = "block";
@@ -52,7 +53,7 @@ const ProfilePage = user => {
     return (
         <div>
             <div id="accheader">
-                <FontAwesomeIcon icon={faArrowLeft} className="back" 
+                <img src={leftArrow} className="back" 
                     onClick={()=> document.getElementById("ppage").style.display = "none"}/>
                 <p>Account details</p>
             </div>
@@ -68,7 +69,7 @@ const ProfilePage = user => {
                         <p id="acName">{user.username}</p>
                     </div>
                     
-                    <FontAwesomeIcon icon={faCaretRight} className="carats"/>
+                    <img src={rightArrow} className="carats"/>
                 </div>
                 <div className="accinfo" >
                     <div className="eachDetail">
@@ -76,7 +77,7 @@ const ProfilePage = user => {
                         <p id="acEmail">{user.useremail}</p>
                     </div>
                     
-                    <FontAwesomeIcon icon={faCaretRight} className="carats"/>
+                    <img src={rightArrow} className="carats"/>
 
                 </div>
                 <div className="accinfo" onClick={ () => handleClick(3)}>
@@ -85,7 +86,7 @@ const ProfilePage = user => {
                         <p id="acPet">{user.userinfo.petname}</p>
                     </div>
 
-                    <FontAwesomeIcon icon={faCaretRight} className="carats" />
+                    <img src={rightArrow} className="carats"/>
 
                 </div>
                 <div className="accinfo" onClick={ () => handleClick(4)}>
@@ -94,7 +95,7 @@ const ProfilePage = user => {
                         <p id="acHome">{user.userinfo.address}</p>
                     </div>
 
-                    <FontAwesomeIcon icon={faCaretRight} className="carats"/>
+                    <img src={rightArrow} className="carats"/>
 
                 </div>
                 <div className="accinfo" onClick={ () => handleClick(5)}>
@@ -103,7 +104,7 @@ const ProfilePage = user => {
                         <p id="acPay"> {user.userinfo.payment}</p>
                     </div>
 
-                    <FontAwesomeIcon icon={faCaretRight} className="carats" />
+                    <img src={rightArrow} className="carats"/>
 
                 </div>
             </div>
