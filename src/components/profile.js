@@ -19,14 +19,17 @@ function handleClick(box){
         case 3:
             label = "Pet Name";
             shortened = "petname";
+            document.getElementById("accinfo").setAttribute("Location", "petname");
             break;
         case 4:
             label = "Home Address";
             shortened = "address";
+            document.getElementById("accinfo").setAttribute("Location", "address");
             break;
         case 5:
             label = "Payment";
             shortened = "payment";
+            document.getElementById("accinfo").setAttribute("Location", "payment");
             break;
         default:
             console.log("Default for Account details");

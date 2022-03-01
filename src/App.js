@@ -19,7 +19,7 @@ import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
 import paws from "../src/styles/svgs/paws.png";
  // const ldata = require('./data/stations.json');
 import topLogo from "../src/styles/svgs/SpotLogos.png";
-import mapStyles from "./styles/mapStyles.js";
+import mapStyles from "./styles/mapstyles.js";
 import {
   LocationName,
   AvailabilityTxt,
@@ -244,12 +244,15 @@ export default function App() {
             <div id="ppage">
               
               {ProfilePage({"username": user.displayName, "useremail": user.email, "userphoto": user.photoURL, "userid": user.uid, "userinfo": checkUser(mdata.users, user)})}
+
             </div>
             {/* mdata.users[user.uid].info */}
             <div id="accinfo">
               <div id="accinfoC">
                 <p id="detailName"></p>
+                
                 {/* <label htmlFor="inputid">CCN</label> */}
+               
                 <input type="number" placeholder="Credit Card Number" id="inputid" 
                   onChange={(e) => document.getElementById("inputid").value = e.target.value}/>
                 {/* <label htmlFor="cvvid">CVV</label> */}
@@ -260,7 +263,6 @@ export default function App() {
 
                   <input type="date" placeholder="date" id="dateid" 
                   onChange={(e) => document.getElementById("dateid").value = e.target.value}/>
-                
                 <center><button id="savebtn" className="btn"
                   onClick={() => { 
 
