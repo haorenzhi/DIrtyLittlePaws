@@ -16,10 +16,13 @@
     width: 100vw;
     height: 50vh;
     border-radius: 10px;
+    align-items: center;
   }
+
 }
 
 @media screen and (min-width: 600px) {
+
   .modal {
     display: block;
     position: fixed;
@@ -31,15 +34,66 @@
     border-radius: 10px 10px 0px 0px;
   }
 
-  /* Modal Content */
+ 
+  /* Modal Content */ 
   .modal-content {
     background-color: #ffffff;
     margin: auto;
     width: 28vw;
     height: 50vh;
     border-radius: 10px;
+    
   }
+
 }
+
+#timertext{
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 50px;
+  color: #1f2326;
+  line-height: 1px;
+  padding-top: 40%;
+  z-index: 1;
+  text-align: center;
+}
+
+#thankyou{
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 50px;
+  color: #1f2326;
+  line-height: 1px;
+  padding-top: 30%;
+  z-index: 1;
+  text-align: center;
+}
+
+#finishcost{
+
+  font-style: normal;
+  /* font-weight: bold; */
+  font-size: 25px;
+  color: #1f2326;
+  line-height: 1px;
+  padding-top: 15%;
+  z-index: 1;
+  text-align: center;
+}
+
+#completeclick{
+  margin-top: 20%;
+  margin-left: 35%;
+  text-align: center;
+}
+
+#timerclick{
+  margin-left: 40%;
+  text-align: center;
+}
+
 
 .modal p {
   font-family: 'Comfortaa', cursive;
@@ -49,12 +103,15 @@
   height: 10%;
 }
 
+
 .ficon {
   color: blueviolet;
-  margin-top: 15px;
 }
 #eachA {
   display: flex;
+}
+#amenity {
+  color: #ffffff;
 }
 
 #scanTo {
@@ -62,4 +119,5 @@
   border-radius: 25px;
   padding: 5px;
   width: 45%;
+  background-color: #662D91;
 }

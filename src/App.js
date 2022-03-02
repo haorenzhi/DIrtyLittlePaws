@@ -9,16 +9,16 @@ import {
 } from "react-google-maps";
 
 import { useData, useUserState, signInWithG, signOutOfG, pushToFirebase } from "./utilities/firebase.js";
-import help from "../src/styles/svgs/help.svg";
+// import help from "../src/styles/svgs/help.svg";
 import account from "../src/styles/svgs/account.svg";
-import scan from "../src/styles/svgs/scan.svg";
-import paww from "../src/styles/svgs/paww.png";
+// import scan from "../src/styles/svgs/scan.svg";
+// import paww from "../src/styles/svgs/paww.png";
 import close from "../src/styles/svgs/close.svg";
 import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
 import paws from "../src/styles/svgs/paws.png";
 // const ldata = require('./data/stations.json');
-import topLogo from "../src/styles/svgs/SpotLogos.png";
-import mapStyles from "./styles/mapstyles.js";
+import topLogo from "../src/styles/svgs/SpotLogo.svg";
+// import mapStyles from "./styles/mapstyles.js";
 import {
   LocationName,
   AvailabilityTxt,
@@ -28,6 +28,7 @@ import {
 } from "./styles/prev.js";
 
 import ProfilePage from "./components/profile.js";
+
 
 /* HELP COMMENT
 withGoogleMap initializes the map component while withScriptjs loads the Google Map JavaScript API v3.
@@ -42,11 +43,11 @@ withGoogleMap requires -
 
 #the methods basically load libraries that higher order functions that make the map work
 */
-var TimerStarted = false;
+// var TimerStarted = false;
 
 const SignInButton = () => (
   <div id="signinpage">
-    <img src={topLogo} id="logot" alt="logo" />
+    <img src={topLogo} id="logot" alt="logo"/>
     <button id="signin" className="btn"
       onClick={() => signInWithG()}>
       Sign In
@@ -60,7 +61,7 @@ const SignInButton = () => (
 );
 
 export const SignOutButton = () => (
-  <button id="signout" className="btn"
+  <button id="signin" className="btn"
     onClick={() => signOutOfG()}>
     Sign Out
   </button>
@@ -71,10 +72,7 @@ function amenityMapped(amenities) {
   return amList.map((amenity, key) => (
     <div id="eachA" key={key}>
       <img alt={""} src={account} className="ficon" />
-      <div>
         <AmenityName>{amenity}</AmenityName>
-      </div>
-
     </div>
   ))
 }
@@ -107,6 +105,8 @@ function checkUser(mdata, user) {
 
 }
 
+
+
 export default function App() {
 
 
@@ -123,6 +123,16 @@ export default function App() {
     const [selectedStation, setSelectedStation] = useState(null);
 
     const [currentPosition, setCurrentPosition] = useState({});
+    const [timerstate, setTimerstate] = useState(false);
+    const [complete, setComplete] = useState(false);
+    const [allsec, setAllsec] = useState(0);
+    var [totaltime, setTotaltime] = useState("");
+    var timerstart;
+
+    
+      
+    
+
     const success = position => {
       const currentPosition = {
         lat: (position.coords.latitude),
@@ -134,135 +144,281 @@ export default function App() {
       navigator.geolocation.getCurrentPosition(success);
     }, [])
 
+    useEffect(() => {updateTimer(timerstate)}, [timerstate]);
+
+    // diplay all locations if timer not started
+    // display only selected location if timer started
+    const displayLocation = (timerstate, complete) => {
+      if((!timerstate) && (!complete)){
+        return(
+          <div>
+                {mdata.Locations.map(station => (
+              <Marker
+                key={station.id}
+                position={{
+                  lat: station.latitude,
+                  lng: station.longitude
+                }}
+                onClick={() => {
+                  setSelectedStation(station);
+                }}
+                icon={{
+                  url: paws,
+                  scaledSize: new window.google.maps.Size(25, 25)
+                }}
+              />
+            ))}
+
+        {
+              <Marker
+                position={{
+                  lat: Number(currentPosition.lat),
+                  lng: Number(currentPosition.lng)
+                }}
+                icon={{
+                  url: CurrentLocationIcon,
+                  scaledSize: new window.google.maps.Size(25, 25)
+                }}
+              />
+            }
+
+          {selectedStation && (
+            <div>
+              <InfoWindow
+                onCloseClick={() => {
+                  setSelectedStation(null);
+                }}
+                position={{
+                  lat: selectedStation.latitude,
+                  lng: selectedStation.longitude
+                }}
+              >
+                <div>
+                  <h2>{selectedStation.name}</h2>
+                </div>
+              </InfoWindow>
+
+            </div>
+          )}
+
+          </div>
+        )
+
+      }
+      else if (timerstate && (!complete)){
+        return(
+        <div>
+          {
+              <Marker
+                key={selectedStation.id}
+                position={{
+                  lat: selectedStation.latitude,
+                  lng: selectedStation.longitude
+                }}
+                icon={{
+                  url: paws,
+                  scaledSize: new window.google.maps.Size(25, 25)
+                }}
+              />
+            }
+        </div>
+        )
+      }
+      else if ( (!timerstate) && (complete)){
+        return(
+          <div>
+          {
+              <Marker
+                key={selectedStation.id}
+                position={{
+                  lat: selectedStation.latitude,
+                  lng: selectedStation.longitude
+                }}
+                icon={{
+                  url: paws,
+                  scaledSize: new window.google.maps.Size(25, 25)
+                }}
+              />
+            }
+        </div>
+        )
+      }
+    }
+      
+  
+
+    
+    // update timer and the panel
+    const updateTimer = (timerstate) => {
+      let myVar;
+      function changeTimer(){
+        if (!myVar){
+          myVar = setInterval(loopTimer,1000)
+        }
+      }
+
+      function loopTimer() {
+        const d = new Date();
+        console.log("in loop timer");
+        // document.getElementById("demo").innerHTML  = d}
+        if (document.getElementById("timertext")){
+          var diffAllSec =  Math.floor((d.getTime()-timerstart)/1000);
+          var sec = diffAllSec % 60;
+          var minute =  Math.floor(diffAllSec/60);
+          var hour = Math.floor(diffAllSec/3600);
+          setAllsec(diffAllSec);
+          
+          
+          var str = hour.toString().concat(":",minute.toString(),":",sec.toString())
+          setTotaltime(str);
+          // console.log(document.getElementById("demo"));
+          document.getElementById("timertext").innerHTML = str;
+        }
+        else{
+          console.log("timer stopped in loop Timer");
+          clearInterval(myVar);
+          myVar = null;
+          // setComplete(true);
+          // console.log("complete in loop timer",complete);
+          setTimerstate(false);
+        }
+        
+      }
+      
+      function stopTimer(){
+        clearInterval(myVar);
+        myVar = null;
+      }
+
+      
+      // if timer not true: haven't started counting
+      if(selectedStation && (!timerstate) && (!complete)){
+        console.log("timerstate when selected station / timer false / complete false: ",timerstate);
+        console.log("complete when selected station / timer false / complete false: ",complete);
+        return (
+        <div id="myModal" className="modal">
+             
+           
+
+
+          <div className="modal-content">
+          <img id="clo" alt="closebtn" src={close} onClick={() => { 
+            setSelectedStation(null)}} />
+            
+            <AvailabilityTxt>{selectedStation.avaliable ? "Available" : "Not Available"}</AvailabilityTxt>
+            <LocationName>{selectedStation.name}</LocationName>
+            <PriceTxt>$3.30 unlock, $0.3 per min</PriceTxt>
+            <AmenitiesLayout>
+              {selectedStation.amenities ?
+                amenityMapped(selectedStation.amenities) : ""}
+            </AmenitiesLayout>
+            
+
+
+            <center>
+              <button id="scanTo" className="btn" onClick={() => {
+                if (document.getElementById("acPay").innerHTML === " ") {
+                  document.getElementById("accinfo").style.display = "block"
+                  document.getElementById("accinfoC").setAttribute("loc", "payment");
+                  document.getElementById("savebtn").setAttribute("data-shortened", "payment");
+                  // console.log(document.getElementById("acPay").innerHTML)
+                  document.getElementById("customInput").innerHTML = `                
+                  <input type="number" placeholder="Credit Card Number" id="cardinput" 
+                  onChange="{(e) => document.getElementById("cardinput").value = e.target.value}"/>
+      
+                  <input type="number" placeholder="CVV" id="cvvid" 
+                  onChange="{(e) => document.getElementById("cvvid").value = e.target.value}"/>
+      
+                  <input type="date" placeholder="date" id="dateid" 
+                  onChange="{(e) => document.getElementById("dateid").value = e.target.value}"/>
+                  `;
+
+                }
+                else{
+                  timerstart= new Date().getTime();                  
+                  console.log("startTime"+timerstart);
+                  // alert("Start Timer!")
+                  // TimerStarted = true;
+                  setTimerstate(true);
+                  changeTimer();
+
+              }
+            }}>Scan to Unlock 
+            </button>
+          </center>
+          </div>
+          </div>
+        )}
+
+
+      // if timer started and not complete
+      else if (selectedStation && timerstate && (!complete)){
+        return (
+          <div id="myModal" className="modal">
+            {/* <img id="clo" alt="closebtn" src={close} onClick={() => {
+             setSelectedStation(null);
+           }} /> */}
+            <div className="modal-content">
+                <p id="timertext"></p> 
+
+                <button id="timerclick" className="btn" onClick={() => {
+                        // document.getElementById("timerpage").style.display = "block"
+                  var stopTime = new Date().getTime();
+                  console.log("stopTime "+stopTime);
+                  // TimerStarted = false;
+                  setTimerstate(false);
+                  stopTimer();
+                  setComplete(true);
+                  // alert("Complete");
+                } }>Complete</button>
+
+            </div>
+          </div>
+          )
+
+      }
+      // if complete
+      else if (selectedStation && complete){
+        return(
+          <div id="myModal" className="modal">
+
+            <div className="modal-content">
+              <div id="thankyou"> Thank you! </div>
+              {/* {setComplete(false)} */}
+              {console.log(allsec)}
+              <div id="finishcost"> Total Time: {totaltime} </div>
+              <div id="finishcost"> Total Cost: ${(allsec/60).toFixed(2)*0.5} </div>
+              {console.log("complete in thankyou",complete)}
+
+              <button id="completeclick" className="btn" onClick={() => {
+                        // document.getElementById("timerpage").style.display = "block"
+                  setTimerstate(false);
+                  setComplete(false);
+                  // alert("thank you");
+                } }> Finish Session </button>
+
+            </div>
+          </div>
+        )
+
+      }
+    }
+
     return (
+      <div id="withmap">
+      {/* {(!TimerStarted)?  */}
+
       <GoogleMap
         defaultZoom={13}
         defaultCenter={{ lat: 42.0565, lng: -87.6753 }}
       >
-        {mdata.Locations.map(station => (
-          <Marker
-            key={station.id}
-            position={{
-              lat: station.latitude,
-              lng: station.longitude
-            }}
-            onClick={() => {
-              setSelectedStation(station);
-            }}
-            icon={{
-              url: paws,
-              scaledSize: new window.google.maps.Size(25, 25)
-            }}
-          />
-        ))}
 
-
-        {
-          <Marker
-            position={{
-              lat: Number(currentPosition.lat),
-              lng: Number(currentPosition.lng)
-            }}
-            icon={{
-              url: CurrentLocationIcon,
-              scaledSize: new window.google.maps.Size(25, 25)
-            }}
-          />
-        }
-
-        {selectedStation && (
-          <div>
-            <InfoWindow
-              onCloseClick={() => {
-                setSelectedStation(null);
-              }}
-              position={{
-                lat: selectedStation.latitude,
-                lng: selectedStation.longitude
-              }}
-            >
-              <div>
-                <h2>{selectedStation.name}</h2>
-              </div>
-            </InfoWindow>
-
-          </div>
-        )}
-
-        {selectedStation && (
-          <div id="myModal" className="modal">
-            <div className="modal-content">
-            <img src={close} onClick={() => {
-              setSelectedStation(null);
-            }} />
-              <AvailabilityTxt>{selectedStation.avaliable ? "Available" : "Not Available"}</AvailabilityTxt>
-              <LocationName>{selectedStation.name}</LocationName>
-              <PriceTxt>$3.30 unlock, $0.3 per min</PriceTxt>
-              <AmenitiesLayout>
-                {selectedStation.amenities ?
-                  amenityMapped(selectedStation.amenities) : ""}
-              </AmenitiesLayout>
-              {/* <div id="timer">
-                {TimerStarted? <p>{document.getElementById("timer").innerHTML = new Date().getTime()}</p> : <p> nothing</p>}
-              </div> */}
-              
-
-              <center>
-                <button id="scanTo" className="btn" onClick={() => {
-                  if (document.getElementById("acPay").innerHTML === " ") {
-                    document.getElementById("accinfo").style.display = "block"
-                    document.getElementById("accinfoC").setAttribute("loc", "payment");
-                    document.getElementById("savebtn").setAttribute("data-shortened", "payment");
-                    // console.log(document.getElementById("acPay").innerHTML)
-                    document.getElementById("customInput").innerHTML = `                
-                    <input type="number" placeholder="Credit Card Number" id="cardinput" 
-                    onChange="{(e) => document.getElementById("cardinput").value = e.target.value}"/>
-        
-                    <input type="number" placeholder="CVV" id="cvvid" 
-                    onChange="{(e) => document.getElementById("cvvid").value = e.target.value}"/>
-        
-                    <input type="date" placeholder="date" id="dateid" 
-                    onChange="{(e) => document.getElementById("dateid").value = e.target.value}"/>
-                    `;
-
-                  }
-                  else {
-
-                      if (!TimerStarted){
-                        var startTime = new Date().getTime();
-                        console.log("startTime"+startTime);
-                        alert("Start Timer!")
-                        TimerStarted = true;
-                        // return (<button> complete</button>);
-                        // setScanbutton("Finish");
-
-                        document.getElementById("scanTo").innerHTML = "Complete";
-                      }
-                      
-
-                      else{
-                        var stopTime = new Date().getTime();
-                        console.log("stopTime "+stopTime);
-                        TimerStarted = false;
-                        alert("Complete");
-                        document.getElementById("scanTo").innerHTML = "Scan to Unlock";
-                      }
-
-                    
-                    // console.log(typeof(document.getElementById("acPay").innerHTML))
-                    // console.log(document.getElementById("acPay").innerHTML)
-                    
-                  }
-                }}>Scan to Unlock 
-                </button>
-              </center>
-
-            </div>
-
-          </div>
-        )}
-
-      </GoogleMap>
+        {displayLocation(timerstate,complete)}
+        {updateTimer(timerstate)}
+  
+      </GoogleMap> 
+    </div>
+      
     );
   }
 
@@ -368,7 +524,7 @@ export default function App() {
 
           <div id="bottomnav">
             <button id="savebtn" className="btnLogin">
-                Scan to Unlock
+                Scan
             </button>
           </div>
 
