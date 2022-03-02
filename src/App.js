@@ -42,7 +42,7 @@ withGoogleMap requires -
 
 #the methods basically load libraries that higher order functions that make the map work
 */
-
+var TimerStarted = false;
 
 const SignInButton = () => (
   <div id="signinpage">
@@ -225,11 +225,19 @@ export default function App() {
 
                   }
                   else {
+                  
+                    var startTime = new Date().getTime();
+                    console.log(startTime);
                     alert("Start Timer!")
+                    TimerStarted = true;
+                    
+
+                    
                     // console.log(typeof(document.getElementById("acPay").innerHTML))
                     // console.log(document.getElementById("acPay").innerHTML)
+                    
                   }
-                }}>Scan to unlock</button>
+                }}>{TimerStarted? console.log("Complete"):console.log("Scan to unlock")}</button>
               </center>
 
             </div>
