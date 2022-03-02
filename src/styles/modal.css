@@ -68,7 +68,19 @@
   font-size: 50px;
   color: #1f2326;
   line-height: 1px;
-  padding-top: 40%;
+  padding-top: 30%;
+  z-index: 1;
+  text-align: center;
+}
+
+#finishcost{
+
+  font-style: normal;
+  /* font-weight: bold; */
+  font-size: 25px;
+  color: #1f2326;
+  line-height: 1px;
+  padding-top: 15%;
   z-index: 1;
   text-align: center;
 }

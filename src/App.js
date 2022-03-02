@@ -125,7 +125,10 @@ export default function App() {
     const [currentPosition, setCurrentPosition] = useState({});
     const [timerstate, setTimerstate] = useState(false);
     const [complete, setComplete] = useState(false);
-    var timerstart = 0;
+    const [allsec, setAllsec] = useState(0);
+    var [totaltime, setTotaltime] = useState("");
+    var timerstart;
+
     
       
     
@@ -263,9 +266,11 @@ export default function App() {
           var sec = diffAllSec % 60;
           var minute =  Math.floor(diffAllSec/60);
           var hour = Math.floor(diffAllSec/3600);
+          setAllsec(diffAllSec);
+          
           
           var str = hour.toString().concat(":",minute.toString(),":",sec.toString())
-          
+          setTotaltime(str);
           // console.log(document.getElementById("demo"));
           document.getElementById("timertext").innerHTML = str;
         }
@@ -380,7 +385,9 @@ export default function App() {
             <div className="modal-content">
               <div id="thankyou"> Thank you! </div>
               {/* {setComplete(false)} */}
-
+              {console.log(allsec)}
+              <div id="finishcost"> Total Time: {totaltime} </div>
+              <div id="finishcost"> Total Cost: ${(allsec/60).toFixed(2)*0.5} </div>
               {console.log("complete in thankyou",complete)}
 
               <button id="completeclick" className="btn" onClick={() => {
