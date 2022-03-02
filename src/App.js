@@ -191,11 +191,10 @@ export default function App() {
 
         {selectedStation && (
           <div id="myModal" className="modal">
-            <img id="clo" alt="closebtn" src={close} onClick={() => {
+            <div className="modal-content">
+            <img src={close} onClick={() => {
               setSelectedStation(null);
             }} />
-            <div className="modal-content">
-
               <AvailabilityTxt>{selectedStation.avaliable ? "Available" : "Not Available"}</AvailabilityTxt>
               <LocationName>{selectedStation.name}</LocationName>
               <PriceTxt>$3.30 unlock, $0.3 per min</PriceTxt>
