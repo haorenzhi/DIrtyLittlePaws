@@ -14,7 +14,7 @@ code {
 
 .btn {
   display: inline-block;
-  background: #662D91;
+  background: rgb(81, 17, 165);
   color: rgb(255, 255, 255);
   border: none;
   padding: 5px;
@@ -39,7 +39,7 @@ code {
 
 .btnLogin {
   display: inline-block;
-  background: rgb(81, 17, 165);
+  background: #5111A5;
   color: rgb(255, 255, 255);
   border: none;
   padding: 5px;
@@ -138,7 +138,7 @@ code {
   width: 60%;
   text-decoration: none;
   background: none;
-  color:rgb(102, 45, 145) ;
+  color:#5111A5;
 }
 
 #logot{

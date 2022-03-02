@@ -5,6 +5,7 @@
     z-index: 1;
     left: 0;
     top: 45vh;
+    bottom: 10vh;
     height: 50%;
     border-radius: 10px 10px 0px 0px;
   }
@@ -30,6 +31,7 @@
     margin-left: 36%;
     left: 0;
     top: 45vh;
+    bottom: 10vh;
     height: 50%;
     border-radius: 10px 10px 0px 0px;
   }
@@ -119,5 +121,5 @@
   border-radius: 25px;
   padding: 5px;
   width: 45%;
-  background-color: #662D91;
+  background-color: #5111A5;
 }
