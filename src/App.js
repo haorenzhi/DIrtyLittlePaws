@@ -209,12 +209,25 @@ export default function App() {
                 <button id="scanTo" className="btn" onClick={() => {
                   if (document.getElementById("acPay").innerHTML === " ") {
                     document.getElementById("accinfo").style.display = "block"
-                    console.log(document.getElementById("acPay").innerHTML)
+                    document.getElementById("accinfoC").setAttribute("loc", "payment");
+                    document.getElementById("savebtn").setAttribute("data-shortened", "payment");
+                    // console.log(document.getElementById("acPay").innerHTML)
+                    document.getElementById("customInput").innerHTML = `                
+                    <input type="number" placeholder="Credit Card Number" id="cardinput" 
+                    onChange="{(e) => document.getElementById("cardinput").value = e.target.value}"/>
+        
+                    <input type="number" placeholder="CVV" id="cvvid" 
+                    onChange="{(e) => document.getElementById("cvvid").value = e.target.value}"/>
+        
+                    <input type="date" placeholder="date" id="dateid" 
+                    onChange="{(e) => document.getElementById("dateid").value = e.target.value}"/>
+                    `;
+
                   }
                   else {
                     alert("Start Timer!")
-                    console.log(typeof(document.getElementById("acPay").innerHTML))
-                    console.log(document.getElementById("acPay").innerHTML)
+                    // console.log(typeof(document.getElementById("acPay").innerHTML))
+                    // console.log(document.getElementById("acPay").innerHTML)
                   }
                 }}>Scan to unlock</button>
               </center>
