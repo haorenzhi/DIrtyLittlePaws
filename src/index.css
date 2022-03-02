@@ -37,12 +37,14 @@ code {
 }
 
 .btnLogin {
+  display: inline-block;
   background: rgb(81, 17, 165);
   color: rgb(255, 255, 255);
   border: none;
   padding: 5px;
+  margin: 5px;
   height: 40px;
-  border-radius: 5px;
+  border-radius: 25px;
   cursor: pointer;
   text-decoration: none;
   font-size: 15px;

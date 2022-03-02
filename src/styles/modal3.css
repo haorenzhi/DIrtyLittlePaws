@@ -66,9 +66,10 @@ input {
 }
 
 #savebtn {
-  margin-top: 10%;
-  border-radius: 20px;
-  width: 50%;
+  margin-top: 6%;
+  border-radius: 25px;
+  width: 200px;
+  height: 50px
 }
 #cancelbtn {
   margin-top: 5%;

@@ -368,7 +368,7 @@ export default function App() {
           </div>
 
           <div id="bottomnav">
-            <button id="savebtn" className="btn">
+            <button id="savebtn" className="btnLogin">
                 Scan to Unlock
             </button>
           </div>
