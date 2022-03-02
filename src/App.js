@@ -448,7 +448,7 @@ export default function App() {
       {user
         ? <div style={{ width: "100%", height: "100%" }}>
             <div id="topbanner">
-              <img src={topLogo} alt="topLogo" id="logo" />
+              <img src={topLogo} alt="topLogo" id="logo"  data-cy="profile"/> 
               <img
                 alt={""}
                 className="botIcons"
@@ -470,7 +470,7 @@ export default function App() {
               }
             />
 
-            <div id="ppage">
+            <div id="ppage" data-cy="course">
               {ProfilePage({
                 username: user.displayName,
                 useremail: user.email,
