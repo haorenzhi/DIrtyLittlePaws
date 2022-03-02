@@ -9,7 +9,7 @@
   
     it ('show name in profile page without clicking', () => {
       cy.visit ('/');
-      cy.get('[data-cy=course]').should('contain', 'Ruiqi Pan');
+      cy.get('[data-cy=course]').should('contain', 'Name');
     });
 
     it('show email address in profile page after clicking', () => {
