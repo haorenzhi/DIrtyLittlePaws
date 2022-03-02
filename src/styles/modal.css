@@ -96,10 +96,12 @@
 
 .ficon {
   color: blueviolet;
-  margin-top: 15px;
 }
 #eachA {
   display: flex;
+}
+#amenity {
+  color: #ffffff;
 }
 
 #scanTo {
@@ -107,4 +109,5 @@
   border-radius: 25px;
   padding: 5px;
   width: 45%;
+  background-color: #662D91;
 }

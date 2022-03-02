@@ -1,5 +1,5 @@
 
-import leftArrow from "../styles/svgs/close.svg";
+import leftArrow from "../styles/svgs/back.svg";
 import rightArrow from "../styles/svgs/close.svg";
 import { SignOutButton } from "../App";
 

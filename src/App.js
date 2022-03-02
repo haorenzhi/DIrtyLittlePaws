@@ -9,16 +9,16 @@ import {
 } from "react-google-maps";
 
 import { useData, useUserState, signInWithG, signOutOfG, pushToFirebase } from "./utilities/firebase.js";
-import help from "../src/styles/svgs/help.svg";
+// import help from "../src/styles/svgs/help.svg";
 import account from "../src/styles/svgs/account.svg";
-import scan from "../src/styles/svgs/scan.svg";
-import paww from "../src/styles/svgs/paww.png";
+// import scan from "../src/styles/svgs/scan.svg";
+// import paww from "../src/styles/svgs/paww.png";
 import close from "../src/styles/svgs/close.svg";
 import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
 import paws from "../src/styles/svgs/paws.png";
 // const ldata = require('./data/stations.json');
-import topLogo from "../src/styles/svgs/SpotLogos.png";
-import mapStyles from "./styles/mapstyles.js";
+import topLogo from "../src/styles/svgs/SpotLogo.svg";
+// import mapStyles from "./styles/mapstyles.js";
 import {
   LocationName,
   AvailabilityTxt,
@@ -47,7 +47,7 @@ withGoogleMap requires -
 
 const SignInButton = () => (
   <div id="signinpage">
-    <img src={topLogo} id="logot" alt="logo" />
+    <img src={topLogo} id="logot" alt="logo"/>
     <button id="signin" className="btn"
       onClick={() => signInWithG()}>
       Sign In
@@ -61,7 +61,7 @@ const SignInButton = () => (
 );
 
 export const SignOutButton = () => (
-  <button id="signout" className="btn"
+  <button id="signin" className="btn"
     onClick={() => signOutOfG()}>
     Sign Out
   </button>
@@ -72,10 +72,7 @@ function amenityMapped(amenities) {
   return amList.map((amenity, key) => (
     <div id="eachA" key={key}>
       <img alt={""} src={account} className="ficon" />
-      <div>
         <AmenityName>{amenity}</AmenityName>
-      </div>
-
     </div>
   ))
 }
@@ -297,11 +294,12 @@ export default function App() {
         <div id="myModal" className="modal">
              
            
-            <img id="clo" alt="closebtn" src={close} onClick={() => { 
-            setSelectedStation(null)}} />
+
 
           <div className="modal-content">
-
+          <img id="clo" alt="closebtn" src={close} onClick={() => { 
+            setSelectedStation(null)}} />
+            
             <AvailabilityTxt>{selectedStation.avaliable ? "Available" : "Not Available"}</AvailabilityTxt>
             <LocationName>{selectedStation.name}</LocationName>
             <PriceTxt>$3.30 unlock, $0.3 per min</PriceTxt>
@@ -366,7 +364,7 @@ export default function App() {
                   setTimerstate(false);
                   stopTimer();
                   setComplete(true);
-                  alert("Complete");
+                  // alert("Complete");
                 } }>Complete</button>
 
             </div>
@@ -389,7 +387,7 @@ export default function App() {
                         // document.getElementById("timerpage").style.display = "block"
                   setTimerstate(false);
                   setComplete(false);
-                  alert("thank you");
+                  // alert("thank you");
                 } }> Finish Session </button>
 
             </div>
@@ -519,7 +517,7 @@ export default function App() {
 
           <div id="bottomnav">
             <button id="savebtn" className="btnLogin">
-                Scan to Unlock
+                Scan
             </button>
           </div>
 
