@@ -6,8 +6,8 @@
     left: 0;
     top: 0%;
     font-family: 'Comfortaa', cursive;
-    width: 450px;
     height: 100%;
+    width: 100vw;
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(228, 236, 234);
   }
@@ -16,13 +16,13 @@
 @media screen and (min-width: 600px){
   #ppage {
     display: none;
-    margin-left:35%;
+    margin-left: 36%;
     position: fixed;
     z-index: 1;
     left: 0;
     top: 0%;
     font-family: 'Comfortaa', cursive;
-    width: 450px;
+    width: 28vw;
     height: 100%;
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(228, 236, 234);

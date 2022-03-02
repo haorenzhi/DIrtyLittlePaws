@@ -273,7 +273,7 @@ export default function App() {
     <div id="mainlayout">
       {user ?
         <div style={{ width: "100%", height: "100%" }}>
-          <div id="topbanner" style = {{zIndex: 1}}>
+          <div id="topbanner">
             <img src={topLogo} alt="topLogo" id="logo"/>
             <img alt={""} className="botIcons" src={account}
               onClick={() => {
@@ -304,7 +304,7 @@ export default function App() {
 
               </div>
 
-              <center><button id="savebtn" className="btn"
+              <center><button id="savebtn" className="btnLogin"
                 onClick={() => {
                   switch (document.getElementById("accinfoC").getAttribute("loc")) {
                     case "petname":
@@ -368,9 +368,9 @@ export default function App() {
           </div>
 
           <div id="bottomnav">
-            <div className = "btnLogin">
-                Scan To Unlock
-            </div>
+            <button id="savebtn" className="btn">
+                Scan to Unlock
+            </button>
           </div>
 
 

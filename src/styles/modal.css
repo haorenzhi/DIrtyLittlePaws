@@ -1,69 +1,67 @@
+@media screen and (max-width: 600px) {
+  .modal {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 50%;
+    height: 50%;
+    border-radius: 10px 10px 0px 0px;
+    overflow: auto; /* Enable scroll if needed */
+  }
 
-@media screen and (max-width: 600px){
-    .modal {
-        display: block; 
-        position: fixed; 
-        z-index: 1; 
-        left: 0;
-        top: 50%;
-        margin-left: 35%;
-        width: 450px;
-        height: 50%;
-        border-radius: 10px 10px 0px 0px;
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgba(252, 252, 252, 0.74); 
-    }
-}
-
-@media screen and (min-width: 600px){
-    .modal {
-        display: block; 
-        position: fixed; 
-        z-index: 1; 
-        margin-left: 35%;
-        left: 0;
-        top: 50%;
-        margin-left: 35%;
-        width: 450px;
-        height: 50%;
-        border-radius: 10px 10px 0px 0px;
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgba(252, 252, 252, 0.74); 
-    }
-}
-
-  
-/* Modal Content */
-.modal-content {
+  /* Modal Content */
+  .modal-content {
     background-color: #ffffff;
     margin: auto;
-    width: 100%;
-    height: 85%;
+    width: 100vw;
+    height: 50vh;
     border-radius: 10px;
-
+  }
 }
 
-.modal p{
-    font-family: 'Comfortaa', cursive;
+@media screen and (min-width: 600px) {
+  .modal {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    margin-left: 36%;
+    left: 0;
+    top: 50%;
+    height: 50%;
+    border-radius: 10px 10px 0px 0px;
+    overflow: auto; /* Enable scroll if needed */
+  }
+
+  /* Modal Content */
+  .modal-content {
+    background-color: #ffffff;
+    margin: auto;
+    width: 28vw;
+    height: 50vh;
+    border-radius: 10px;
+  }
 }
 
-  
-#clo{
-    height: 10%;
+.modal p {
+  font-family: 'Comfortaa', cursive;
 }
 
-.ficon{
-    color: blueviolet;
-    margin-top: 15px;
-}
-#eachA{
-    display: flex;
+#clo {
+  height: 10%;
 }
 
-#scanTo{
-    height: 50px;
-    border-radius: 25px;
-    padding: 5px;
-    width: 45%;
+.ficon {
+  color: blueviolet;
+  margin-top: 15px;
+}
+#eachA {
+  display: flex;
+}
 
+#scanTo {
+  height: 50px;
+  border-radius: 25px;
+  padding: 5px;
+  width: 45%;
 }

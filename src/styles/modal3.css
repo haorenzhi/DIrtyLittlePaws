@@ -2,14 +2,21 @@
   #accinfo {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 3;
     left: 0;
     top: 0%;
     font-family: 'Comfortaa', cursive;
-    width: 450px;
-    height: 100%;
+    height: 100vh;
+    width: 100vw;
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(35, 53, 35, 0.637);
+  }
+
+  #accinfoC {
+    margin-top: 60%;
+    height: 35%;
+    width: 100vw;
+    border-radius: 22px;
+    background-color: rgb(255, 255, 255);
   }
 }
 
@@ -17,27 +24,28 @@
   #accinfo {
     display: none;
     position: fixed;
-    margin-left: 35%;
-    z-index: 1;
+    margin-left: 36%;
+    z-index: 3;
     left: 0;
     top: 0%;
     font-family: 'Comfortaa', cursive;
-    width: 450px;
-    height: 100%;
+    height: 100vh;
+    width: 28vw;
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(35, 53, 35, 0.637);
+  }
+
+  #accinfoC {
+    margin-top: 60%;
+    height: 35%;
+    width: 28vw;
+    border-radius: 22px;
+    background-color: rgb(255, 255, 255);
   }
 }
 
 
 
-#accinfoC {
-  margin-top: 60%;
-  width: 450px;
-  height: 35%;
-  border-radius: 22px;
-  background-color: rgb(255, 255, 255);
-}
+
 
 #accinfoC input {
   margin-bottom: 4px;
