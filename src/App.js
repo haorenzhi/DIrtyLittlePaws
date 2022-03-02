@@ -59,7 +59,7 @@ const SignInButton = () => (
 
 );
 
-const SignOutButton = () => (
+export const SignOutButton = () => (
   <button id="signout" className="btn"
     onClick={() => signOutOfG()}>
     Sign Out
@@ -138,7 +138,6 @@ export default function App() {
       <GoogleMap
         defaultZoom={13}
         defaultCenter={{ lat: 42.0565, lng: -87.6753 }}
-        defaultOptions={{ styles: mapStyles }}
       >
         {mdata.Locations.map(station => (
           <Marker
@@ -255,20 +254,21 @@ export default function App() {
     <div id="mainlayout">
       {user ?
         <div style={{ width: "100%", height: "100%" }}>
-          <div id="topbanner">
-            <div id="profile">
-              <img id="profilepic" alt="profile" src={user.photoURL} />
-              <p>{user.displayName}</p>
-            </div>
-            <img src={paww} alt="paw" id="logo" />
-            <SignOutButton />
+          <div id="topbanner" style = {{zIndex: 1}}>
+            <img src={topLogo} alt="topLogo" id="logo"/>
+            <img alt={""} className="botIcons" src={account}
+              onClick={() => {
+                document.getElementById("ppage").style.display = "block"
+              }}
+            />
           </div>
 
           <MapWrapped
             googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcQK-u06gf7heyS6eo0xE-hK__S5XriZs"
             loadingElement={<div style={{ height: `100%`, width: '100%' }} />}
-            containerElement={<div style={{ height: `75%`, width: '100%' }} />}
-            mapElement={<div style={{ height: `100%`, width: '100%' }} />}
+            containerElement={<div style={{ height: `80%`, width: '100%'}} />}
+            mapElement={<div style={{ height: `100%`, width: '100%', zIndex: 0 }} />}
+            
           />
 
           <div id="ppage">
@@ -349,13 +349,9 @@ export default function App() {
           </div>
 
           <div id="bottomnav">
-            <img alt={""} className="botIcons" src={account}
-              onClick={() => {
-                document.getElementById("ppage").style.display = "block"
-              }}
-            />
-            <img alt={""} className="botIcons" src={scan} />
-            <img alt={""} className="botIcons" src={help} />
+            <div className = "btnLogin">
+                Scan To Unlock
+            </div>
           </div>
 
 

@@ -1,54 +1,69 @@
-#accinfo{
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
+@media screen and (max-width: 600px) {
+  #accinfo {
+    display: none;
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0%;
-    margin-left: 35%;
     font-family: 'Comfortaa', cursive;
     width: 450px;
     height: 100%;
     overflow: auto; /* Enable scroll if needed */
     background-color: rgba(35, 53, 35, 0.637);
   }
+}
 
-  #accinfoC{
-    margin-top: 60%;
+@media screen and (min-width: 600px) {
+  #accinfo {
+    display: none;
+    position: fixed;
+    margin-left: 35%;
+    z-index: 1;
+    left: 0;
+    top: 0%;
+    font-family: 'Comfortaa', cursive;
     width: 450px;
-    height: 35%;
-    border-radius: 22px;
-    background-color: rgb(255, 255, 255);
-    
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(35, 53, 35, 0.637);
   }
-
-  #accinfoC input {
-    margin-bottom: 4px;
-  }
-  
-  #detailName{
-    padding-top: 20px;
-   
-  }
-  #accinfoC p, input{
-    margin-left: 15%;
-  }
-
-  #accinfoC input{
-    border-radius: 10px;
-    width: 50%;
-    height: 30px;
-  }
+}
 
 
-  #savebtn{
-      margin-top: 10%;
-      border-radius: 20px;
-      width: 50%;
 
-  }
-  #cancelbtn{
-    margin-top: 5%;
-    border-radius: 20px;
-    width: 50%;
+#accinfoC {
+  margin-top: 60%;
+  width: 450px;
+  height: 35%;
+  border-radius: 22px;
+  background-color: rgb(255, 255, 255);
+}
 
+#accinfoC input {
+  margin-bottom: 4px;
+}
+
+#detailName {
+  padding-top: 20px;
+}
+#accinfoC p,
+input {
+  margin-left: 15%;
+}
+
+#accinfoC input {
+  border-radius: 10px;
+  width: 50%;
+  height: 30px;
+}
+
+#savebtn {
+  margin-top: 10%;
+  border-radius: 20px;
+  width: 50%;
+}
+#cancelbtn {
+  margin-top: 5%;
+  border-radius: 20px;
+  width: 50%;
 }

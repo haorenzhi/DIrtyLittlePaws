@@ -1,16 +1,37 @@
-.modal {
-    display: block; 
-    position: fixed; 
-    z-index: 1; 
-    left: 0;
-    top: 50%;
-    margin-left: 35%;
-    width: 450px;
-    height: 50%;
-    border-radius: 10px 10px 0px 0px;
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(252, 252, 252, 0.74); 
+
+@media screen and (max-width: 600px){
+    .modal {
+        display: block; 
+        position: fixed; 
+        z-index: 1; 
+        left: 0;
+        top: 50%;
+        margin-left: 35%;
+        width: 450px;
+        height: 50%;
+        border-radius: 10px 10px 0px 0px;
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(252, 252, 252, 0.74); 
+    }
 }
+
+@media screen and (min-width: 600px){
+    .modal {
+        display: block; 
+        position: fixed; 
+        z-index: 1; 
+        margin-left: 35%;
+        left: 0;
+        top: 50%;
+        margin-left: 35%;
+        width: 450px;
+        height: 50%;
+        border-radius: 10px 10px 0px 0px;
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(252, 252, 252, 0.74); 
+    }
+}
+
   
 /* Modal Content */
 .modal-content {

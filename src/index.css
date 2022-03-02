@@ -36,20 +36,55 @@ code {
   color: #fff;
 }
 
+.btnLogin {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 6%;
+  background: rgb(81, 17, 165);
+  color: rgb(255, 255, 255);
+  border: none;
+  height: 40px;
+  width: 200px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: 'Comfortaa', cursive;
+}
 
-#mainlayout{
-  margin-left: 35%;
-  /* margin-left : 35% */
-  width: 450px;
-  height: 100vh;
-  background-color: rgb(255, 255, 255);
+.btnLogin:focus {
+  outline: none;
+}
+
+.btnLogin:hover{
+  color: #fff;
+}
+
+@media screen and (min-width: 600px){
+  #mainlayout{
+    margin-left: 35%;
+    width: 450px;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 600px){
+  #mainlayout{
+    width: 450px;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+  }
 }
 
 #topbanner{
-  height: 9%;
+  height: 10%;
   width: 100%;
-  background-image: linear-gradient(rgba(25, 7, 39), rgb(12, 20, 34, 0.6));
   display: flex;
+  justify-content: center;
 }
 
 #signout{
@@ -76,24 +111,21 @@ code {
   font-family: 'Comfortaa', cursive;
 }
 #logo{
-  width: 50px;
-  height: 50px;
-  margin: 10px;
-  margin-left: 20px;
+  height: 36px;
+  margin-top: 9%;
 }
 
 #bottomnav{
-  height: 16%;
-  background-image: linear-gradient(rgba(12, 20, 34, 0.6), rgb(25, 7, 39));
+  height: 10%;
   display: flex;
+  box-shadow: rgb(0 0 0 / 50%) 0px 0px 4px;
+  border-radius: 10px 10px 0px 0px;
+  justify-content: center;
 }
 
 .botIcons{
   color: rgb(255, 255, 255);
   width: 8%;
-  height: auto;
-  margin-left: 18%;
-  
 }
 
 #signin{

@@ -1,6 +1,7 @@
 
 import leftArrow from "../styles/svgs/close.svg";
 import rightArrow from "../styles/svgs/close.svg";
+import { SignOutButton } from "../App";
 
 function handleClick(box){
     document.getElementById("accinfo").style.display = "block";
@@ -140,6 +141,7 @@ const ProfilePage = user => {
                     <img alt={""} src={rightArrow} className="carats"/>
 
                 </div>
+                <SignOutButton />
             </div>
         </div>
     );
