@@ -445,7 +445,7 @@ export default function App() {
             
           />
 
-          <div id="ppage">
+          <div id="ppage" data-cy="course" >
 
             {ProfilePage({ "username": user.displayName, "useremail": user.email, "userphoto": user.photoURL, "userid": user.uid, "userinfo": checkUser(mdata.users, user) })}
 
@@ -523,7 +523,7 @@ export default function App() {
           </div>
 
           <div id="bottomnav">
-            <button id="savebtn" className="btnLogin">
+            <button id="savebtn" className="btnLogin" >
                 Scan
             </button>
           </div>
