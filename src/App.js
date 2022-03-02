@@ -430,7 +430,7 @@ export default function App() {
         <div style={{ width: "100%", height: "100%" }}>
           <div id="topbanner">
             <img src={topLogo} alt="topLogo" id="logo"/>
-            <img alt={""} className="botIcons" src={account}
+            <img alt={""} className="botIcons" src={account} data-cy="profile"
               onClick={() => {
                 document.getElementById("ppage").style.display = "block"
               }}

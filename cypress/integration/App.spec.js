@@ -7,8 +7,17 @@
       cy.visit ('/');
     });
   
-    it ('opens with Fall CS courses', () => {
+    it ('show name in profile page without clicking', () => {
       cy.visit ('/');
       cy.get('[data-cy=course]').should('contain', 'Ruiqi Pan');
     });
+
+    it('show email address in profile page after clicking', () => {
+        cy.visit ('/');
+        cy.get('[data-cy=profile]').click();
+        cy.get('[data-cy=course]').should('contain' ,'u.northwestern.edu');
+      });
+    
+
+    
   });
