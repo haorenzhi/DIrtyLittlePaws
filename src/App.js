@@ -204,6 +204,10 @@ export default function App() {
                 {selectedStation.amenities ?
                   amenityMapped(selectedStation.amenities) : ""}
               </AmenitiesLayout>
+              <div id="timer">
+                {TimerStarted? <p>{document.getElementById("timer").innerHTML = new Date().getTime()}</p> : <p> nothing</p>}
+              </div>
+              
 
               <center>
                 <button id="scanTo" className="btn" onClick={() => {
@@ -225,19 +229,34 @@ export default function App() {
 
                   }
                   else {
-                  
-                    var startTime = new Date().getTime();
-                    console.log(startTime);
-                    alert("Start Timer!")
-                    TimerStarted = true;
-                    
+
+                      if (!TimerStarted){
+                        var startTime = new Date().getTime();
+                        console.log("startTime"+startTime);
+                        alert("Start Timer!")
+                        TimerStarted = true;
+                        // return (<button> complete</button>);
+                        // setScanbutton("Finish");
+
+                        document.getElementById("scanTo").innerHTML = "Complete";
+                      }
+                      
+
+                      else{
+                        var stopTime = new Date().getTime();
+                        console.log("stopTime "+stopTime);
+                        TimerStarted = false;
+                        alert("Complete");
+                        document.getElementById("scanTo").innerHTML = "Scan to Unlock";
+                      }
 
                     
                     // console.log(typeof(document.getElementById("acPay").innerHTML))
                     // console.log(document.getElementById("acPay").innerHTML)
                     
                   }
-                }}>{TimerStarted? console.log("Complete"):console.log("Scan to unlock")}</button>
+                }}>Scan to Unlock 
+                </button>
               </center>
 
             </div>
