@@ -204,9 +204,9 @@ export default function App() {
                 {selectedStation.amenities ?
                   amenityMapped(selectedStation.amenities) : ""}
               </AmenitiesLayout>
-              <div id="timer">
+              {/* <div id="timer">
                 {TimerStarted? <p>{document.getElementById("timer").innerHTML = new Date().getTime()}</p> : <p> nothing</p>}
-              </div>
+              </div> */}
               
 
               <center>
