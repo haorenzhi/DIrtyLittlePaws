@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import {
   withGoogleMap,
@@ -144,110 +144,8 @@ export default function App() {
       navigator.geolocation.getCurrentPosition(success);
     }, []);
 
-    useEffect(
-      () => {
-        updateTimer(timerstate);
-      },
-      [timerstate]
-    );
-
-    // diplay all locations if timer not started
-    // display only selected location if timer started
-    const displayLocation = (timerstate, complete) => {
-      if (!timerstate && !complete) {
-        return (
-          <div>
-            {mdata.Locations.map(station =>
-              <Marker
-                key={station.id}
-                position={{
-                  lat: station.latitude,
-                  lng: station.longitude
-                }}
-                onClick={() => {
-                  setSelectedStation(station);
-                }}
-                icon={{
-                  url: paws,
-                  scaledSize: new window.google.maps.Size(25, 25)
-                }}
-              />
-            )}
-
-            {
-              <Marker
-                position={{
-                  lat: Number(currentPosition.lat),
-                  lng: Number(currentPosition.lng)
-                }}
-                icon={{
-                  url: CurrentLocationIcon,
-                  scaledSize: new window.google.maps.Size(25, 25)
-                }}
-              />
-            }
-
-            {selectedStation &&
-              <div>
-                <InfoWindow
-                  onCloseClick={() => {
-                    setSelectedStation(null);
-                  }}
-                  position={{
-                    lat: selectedStation.latitude,
-                    lng: selectedStation.longitude
-                  }}
-                >
-                  <div>
-                    <h2>
-                      {selectedStation.name}
-                    </h2>
-                  </div>
-                </InfoWindow>
-              </div>}
-          </div>
-        );
-      } else if (timerstate && !complete) {
-        return (
-          <div>
-            {
-              <Marker
-                key={selectedStation.id}
-                position={{
-                  lat: selectedStation.latitude,
-                  lng: selectedStation.longitude
-                }}
-                icon={{
-                  url: paws,
-                  scaledSize: new window.google.maps.Size(25, 25)
-                }}
-              />
-            }
-          </div>
-        );
-      } else if (!timerstate && complete) {
-        return (
-          <div>
-            {
-              <Marker
-                key={selectedStation.id}
-                position={{
-                  lat: selectedStation.latitude,
-                  lng: selectedStation.longitude
-                }}
-                icon={{
-                  url: paws,
-                  scaledSize: new window.google.maps.Size(25, 25)
-                }}
-              />
-            }
-          </div>
-        );
-      }
-    };
-
-    // update timer and the panel
-    const updateTimer = timerstate => {
+    
+      const updateTimer = () => {
       let myVar;
       function changeTimer() {
         if (!myVar) {
@@ -425,7 +323,114 @@ export default function App() {
           </div>
         );
       }
+    }
+
+
+    // useEffect(
+    //   () => {
+    //     updateTimer();
+        
+    //   },
+    //   [timerstate]
+    // );
+
+    // diplay all locations if timer not started
+    // display only selected location if timer started
+    const displayLocation = (timerstate, complete) => {
+      if (!timerstate && !complete) {
+        return (
+          <div>
+            {mdata.Locations.map(station =>
+              <Marker
+                key={station.id}
+                position={{
+                  lat: station.latitude,
+                  lng: station.longitude
+                }}
+                onClick={() => {
+                  setSelectedStation(station);
+                }}
+                icon={{
+                  url: paws,
+                  scaledSize: new window.google.maps.Size(25, 25)
+                }}
+              />
+            )}
+
+            {
+              <Marker
+                position={{
+                  lat: Number(currentPosition.lat),
+                  lng: Number(currentPosition.lng)
+                }}
+                icon={{
+                  url: CurrentLocationIcon,
+                  scaledSize: new window.google.maps.Size(25, 25)
+                }}
+              />
+            }
+
+            {selectedStation &&
+              <div>
+                <InfoWindow
+                  onCloseClick={() => {
+                    setSelectedStation(null);
+                  }}
+                  position={{
+                    lat: selectedStation.latitude,
+                    lng: selectedStation.longitude
+                  }}
+                >
+                  <div>
+                    <h2>
+                      {selectedStation.name}
+                    </h2>
+                  </div>
+                </InfoWindow>
+              </div>}
+          </div>
+        );
+      } else if (timerstate && !complete) {
+        return (
+          <div>
+            {
+              <Marker
+                key={selectedStation.id}
+                position={{
+                  lat: selectedStation.latitude,
+                  lng: selectedStation.longitude
+                }}
+                icon={{
+                  url: paws,
+                  scaledSize: new window.google.maps.Size(25, 25)
+                }}
+              />
+            }
+          </div>
+        );
+      } else if (!timerstate && complete) {
+        return (
+          <div>
+            {
+              <Marker
+                key={selectedStation.id}
+                position={{
+                  lat: selectedStation.latitude,
+                  lng: selectedStation.longitude
+                }}
+                icon={{
+                  url: paws,
+                  scaledSize: new window.google.maps.Size(25, 25)
+                }}
+              />
+            }
+          </div>
+        );
+      }
     };
+
+    // update timer and the panel
+
 
     return (
       <div id="withmap">
@@ -436,7 +441,7 @@ export default function App() {
           defaultCenter={{ lat: 42.0565, lng: -87.6753 }}
         >
           {displayLocation(timerstate, complete)}
-          {updateTimer(timerstate)}
+          {updateTimer()}
         </GoogleMap>
       </div>
     );
