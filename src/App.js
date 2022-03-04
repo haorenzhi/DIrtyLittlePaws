@@ -13,7 +13,9 @@ import {
   useUserState,
   signInWithG,
   signOutOfG,
-  pushToFirebase
+  pushToFirebase,
+  setData,
+  changeAvaliability
 } from "./utilities/firebase.js";
 // import help from "../src/styles/svgs/help.svg";
 import account from "../src/styles/svgs/account.svg";
@@ -131,6 +133,7 @@ export default function App() {
     const [complete, setComplete] = useState(false);
     const [allsec, setAllsec] = useState(0);
     var [totaltime, setTotaltime] = useState("");
+    //var [currentAvailiableStation, setCurrentAvaliableStation] = useState(true);
     var timerstart;
 
     const success = position => {
@@ -154,6 +157,7 @@ export default function App() {
       }
 
       function loopTimer() {
+        //console.log(currentAvailiableStation);
         const d = new Date();
         console.log("in loop timer");
         // document.getElementById("demo").innerHTML  = d}
@@ -220,6 +224,7 @@ export default function App() {
                   : ""}
               </AmenitiesLayout>
               <center>
+                
                 <button
                   id="scanTo"
                   className="btn"
@@ -247,12 +252,19 @@ export default function App() {
                   onChange="{(e) => document.getElementById("dateid").value = e.target.value}"/>
                   `;
                     } else {
+                      //setCurrentAvaliableStation(false);
                       timerstart = new Date().getTime();
                       console.log("startTime" + timerstart);
                       // alert("Start Timer!")
                       // TimerStarted = true;
+                    var StationID = selectedStation.id;
+                     
+                      
                       setTimerstate(true);
                       changeTimer();
+                      //changeAvaliability(StationID, false);
+                      //console.log("Push false to firebase");
+
                     }
                   }}
                 >
@@ -282,6 +294,7 @@ export default function App() {
                   // TimerStarted = false;
                   setTimerstate(false);
                   stopTimer();
+                  
                   setComplete(true);
                   // alert("Complete");
                 }}
@@ -312,8 +325,13 @@ export default function App() {
                 className="btn"
                 onClick={() => {
                   // document.getElementById("timerpage").style.display = "block"
+                  var StationID = selectedStation.id;
+                  console.log(selectedStation);
+            
                   setTimerstate(false);
                   setComplete(false);
+                 // setCurrentAvaliableStation(true);
+                  //changeAvaliability(StationID, true);
                   // alert("thank you");
                 }}
               >
@@ -434,7 +452,7 @@ export default function App() {
 
     return (
       <div id="withmap">
-        {/* {(!TimerStarted)?  */}
+        {/* {(!TimerStarted)?  */ console.log(selectedStation)}
 
         <GoogleMap
           defaultZoom={13}

@@ -60,6 +60,16 @@ export const useData = (path, transform) => {
     }
   };
 
+  export const changeAvaliability = async (StationID, avaliable) =>
+  {
+    try{
+      await setData("Locations/"+StationID+"/avaliable", avaliable);
+      }catch(error)
+      {
+       alert(error);
+      }
+  }
+
   export const useUserState = () => {
     const [user, setUser] = useState();
   
