@@ -111,9 +111,11 @@ function checkUser(mdata, user) {
   return info;
 }
 
+var x = {lat:48.8566, lng: 2.3522};
 export default function App() {
   const user = useUserState();
   const [mdata, loading, error] = useData("/");
+  const [curr, setCurr] = useState({lat:48.8566, lng: 2.3522});
 
   if (error)
     return (
@@ -123,14 +125,15 @@ export default function App() {
     );
   if (loading) return <h1>Loading the data...</h1>;
 
+
   function Map() {
     const [selectedStation, setSelectedStation] = useState(null);
-
     const [currentPosition, setCurrentPosition] = useState({});
     const [timerstate, setTimerstate] = useState(false);
     const [complete, setComplete] = useState(false);
     const [allsec, setAllsec] = useState(0);
     var [totaltime, setTotaltime] = useState("");
+    
     var timerstart;
 
     const success = position => {
@@ -357,6 +360,10 @@ export default function App() {
               />
             )}
 
+            <button  onClick={() => {setCurr({lat:x.lat, lng: x.lng})}}>Home</button>
+            <button  onClick={() => {setCurr({lat:currentPosition.lat, lng: currentPosition.lng})}}>Current</button>
+
+
             {
               <Marker
                 position={{
@@ -438,7 +445,7 @@ export default function App() {
 
         <GoogleMap
           defaultZoom={13}
-          defaultCenter={{ lat: 42.0565, lng: -87.6753 }}
+          defaultCenter={curr}
         >
           {displayLocation(timerstate, complete)}
           {updateTimer()}
@@ -464,6 +471,7 @@ export default function App() {
               />
             </div>
 
+         
             <MapWrapped
               googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcQK-u06gf7heyS6eo0xE-hK__S5XriZs"
               loadingElement={<div style={{ height: `100%`, width: "100%" }} />}
