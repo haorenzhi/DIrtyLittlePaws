@@ -131,7 +131,7 @@ export default function App() {
     const [currentPosition, setCurrentPosition] = useState({});
     const [timerstate, setTimerstate] = useState(false);
     const [complete, setComplete] = useState(false);
-    const [allsec, setAllsec] = useState(0);
+    const [allminute, setAllminute] = useState(0);
     var [totaltime, setTotaltime] = useState("");
     //var [currentAvailiableStation, setCurrentAvaliableStation] = useState(true);
     var timerstart;
@@ -166,7 +166,7 @@ export default function App() {
           var sec = diffAllSec % 60;
           var minute = Math.floor(diffAllSec / 60);
           var hour = Math.floor(diffAllSec / 3600);
-          setAllsec(diffAllSec);
+          setAllminute(Math.ceil(diffAllSec / 60));
 
           var str = hour
             .toString()
@@ -217,7 +217,9 @@ export default function App() {
               <LocationName>
                 {selectedStation.name}
               </LocationName>
-              <PriceTxt>$3.30 unlock, $0.3 per min</PriceTxt>
+              <PriceTxt>
+                $3.30 unlock, $0.3 per min
+              </PriceTxt>
               <AmenitiesLayout>
                 {selectedStation.amenities
                   ? amenityMapped(selectedStation.amenities)
@@ -283,6 +285,7 @@ export default function App() {
            }} /> */}
             <div className="modal-content">
               <p id="timertext" />
+              <p id="rate"> rate: $0.5/min</p>
 
               <button
                 id="timerclick"
@@ -311,12 +314,15 @@ export default function App() {
             <div className="modal-content">
               <div id="thankyou"> Thank you! </div>
               {/* {setComplete(false)} */}
-              {console.log(allsec)}
+              {console.log(allminute)}
               <div id="finishcost">
                 {" "}Total Time: {totaltime}{" "}
               </div>
               <div id="finishcost">
-                {" "}Total Cost: ${(allsec / 60).toFixed(2) * 0.5}{" "}
+                {" "}Total Cost: ${allminute * 0.5}{" "}
+              </div>
+              <div id="finishcost">
+                The cost will be charged to your account. 
               </div>
               {console.log("complete in thankyou", complete)}
 

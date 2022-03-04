@@ -8,7 +8,7 @@
     font-family: 'Comfortaa', cursive;
     height: 100%;
     width: 100vw;
-    overflow: auto; /* Enable scroll if needed */
+    overflow: scroll; /* Enable scroll if needed */
     background-color: rgb(228, 236, 234);
   }
 }

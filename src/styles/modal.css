@@ -3,21 +3,24 @@
     display: block;
     position: fixed;
     z-index: 1;
-    left: 0;
-    top: 45vh;
-    bottom: 10vh;
+    left: 0; 
+    overflow: auto; 
+    bottom: 0%; 
     height: 50%;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 10px 10px 0px 0px; 
   }
 
   /* Modal Content */
   .modal-content {
-    background-color: #ffffff;
-    margin: auto;
+    background-color: white;
+    /* margin: auto; */
     width: 100vw;
     height: 50vh;
-    border-radius: 10px;
-    align-items: center;
+    overflow: auto;
+    /* margin-bottom: 50vh; */
+    /* border-radius: 10px; */
+    
+    /* align-items: center; */
   }
 
 }
@@ -34,6 +37,7 @@
     bottom: 10vh;
     height: 50%;
     border-radius: 10px 10px 0px 0px;
+    overflow: auto;
   }
 
  
@@ -44,7 +48,7 @@
     width: 28vw;
     height: 50vh;
     border-radius: 10px;
-    
+    overflow: auto;
   }
 
 }
@@ -57,6 +61,17 @@
   color: #1f2326;
   line-height: 1px;
   padding-top: 40%;
+  z-index: 1;
+  text-align: center;
+}
+
+#rate{
+  font-style: normal;
+  /* font-weight: bold; */
+  font-size: 20px;
+  color: #1f2326;
+  line-height: 1px;
+  padding-top: 10%;
   z-index: 1;
   text-align: center;
 }
@@ -77,13 +92,15 @@
 
   font-style: normal;
   /* font-weight: bold; */
-  font-size: 25px;
+  font-size: 20px;
   color: #1f2326;
   line-height: 1px;
   padding-top: 15%;
   z-index: 1;
   text-align: center;
 }
+
+
 
 #completeclick{
   margin-top: 20%;
