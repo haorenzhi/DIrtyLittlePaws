@@ -14,7 +14,6 @@ import {
   signInWithG,
   signOutOfG,
   pushToFirebase,
-  setData,
   changeAvaliability
 } from "./utilities/firebase.js";
 // import help from "../src/styles/svgs/help.svg";
