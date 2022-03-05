@@ -289,7 +289,7 @@ export default function App() {
               <div>
                  <center><button id="notavailable"
                   className="btn">Not Availiable</button>
-                  <h1>Refresh page to check again</h1>
+                  <h1></h1>
                   </center>
                   
               </div>
