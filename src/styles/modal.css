@@ -115,7 +115,6 @@
 
 
 .modal p {
-  font-family: 'Comfortaa', cursive;
 }
 
 #clo {
@@ -127,10 +126,12 @@
   color: #662D91;
 }
 #eachA {
+
   display: flex;
 }
 #amenity {
   color: #ffffff;
+  
 }
 
 #scanTo {

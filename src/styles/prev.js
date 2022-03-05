@@ -139,7 +139,7 @@ export const AmenityName = styled.p`
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;
-  color: #5111A5;
+  color: #662E91;
   z-index: 1;
   margin-left: 10px;
 `;
