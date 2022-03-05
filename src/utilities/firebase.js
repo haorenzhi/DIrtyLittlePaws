@@ -38,7 +38,7 @@ export const useData = (path, transform) => {
         setLoading(false);
         setError(error);
       }, {
-        onlyOnce: true
+        onlyOnce: false
       });
     }, [path, transform]);
     

@@ -13,8 +13,7 @@ import {
   useUserState,
   signInWithG,
   signOutOfG,
-  pushToFirebase,
-  changeAvaliability
+  pushToFirebase
 } from "./utilities/firebase.js";
 // import help from "../src/styles/svgs/help.svg";
 import account from "../src/styles/svgs/account.svg";
@@ -272,7 +271,7 @@ export default function App() {
                       // alert("Start Timer!")
                       // TimerStarted = true;
                       var StationID = selectedStation.id;
-                      changeAvaliability(StationID, false);
+                      //changeAvaliability(StationID, false);
                       
                       setTimerstate(true);
                       changeTimer();
@@ -362,7 +361,7 @@ export default function App() {
                   setTimerstate(false);
                   setComplete(false);
                  // setCurrentAvaliableStation(true);
-                  changeAvaliability(StationID, true);
+                  //changeAvaliability(StationID, true);
                   // alert("thank you");
                 }}
               >
