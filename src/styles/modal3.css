@@ -53,6 +53,15 @@
 
 #detailName {
   padding-top: 20px;
+  font-family: Karla;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+
+color: #1F2326;
 }
 #accinfoC p,
 input {
@@ -69,7 +78,8 @@ input {
   margin-top: 6%;
   border-radius: 25px;
   width: 45%;
-  height: 50px
+  height: 50px;
+  background-color: #662D91;
 }
 #cancelbtn {
   margin-top: 5%;
@@ -77,5 +87,5 @@ input {
   width: 50%;
 }
 .btn{
-  background-color: rgb(102, 45, 145);
+  background-color: #662D91;
 }

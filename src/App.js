@@ -24,7 +24,7 @@ import close from "../src/styles/svgs/close.svg";
 import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
 import GoToLocation from "../src/styles/svgs/GoToLocation.png";
 import GoToHome from "../src/styles/svgs/home.png";
-import CheckMarkIcon from "../src/styles/svgs/checkmarkIcon.png"
+import CheckMark from "../src/styles/svgs/check.svg"
 import paws from "../src/styles/svgs/paws.png";
 import Usedpaws from "../src/styles/svgs/ActivePaws.png";
 // const ldata = require('./data/stations.json');
@@ -75,7 +75,7 @@ function amenityMapped(amenities) {
   let amList = amenities.split(",");
   return amList.map((amenity, key) =>
     <div id="eachA" key={key}>
-      <img alt={""} src={CheckMarkIcon} width="12%" height="12%"className="ficon" />
+      <img alt={CheckMark} src={CheckMark} className="ficon" />
       <AmenityName>
         {amenity}
       </AmenityName>
@@ -288,7 +288,7 @@ export default function App() {
               </center>
               :
               <div>
-                 <center><button id="scanTo"
+                 <center><button id="notavailable"
                   className="btn">Not Availiable</button>
                   <h1>Refresh page to check again</h1>
                   </center>
@@ -554,8 +554,8 @@ export default function App() {
 
                 <center>
                   <button
-                    id="savebtn"
-                    className="btnLogin"
+                    id="cancelbtn"
+                    className="btn"
                     onClick={() => {
                       switch (document
                         .getElementById("accinfoC")
