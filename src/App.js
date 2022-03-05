@@ -270,7 +270,7 @@ export default function App() {
                       console.log("startTime" + timerstart);
                       // alert("Start Timer!")
                       // TimerStarted = true;
-                      var StationID = selectedStation.id;
+                      //var StationID = selectedStation.id;
                       //changeAvaliability(StationID, false);
                       
                       setTimerstate(true);
@@ -355,7 +355,7 @@ export default function App() {
                 className="btn"
                 onClick={() => {
                   // document.getElementById("timerpage").style.display = "block"
-                  var StationID = selectedStation.id;
+                  //var StationID = selectedStation.id;
                   //console.log(selectedStation);
             
                   setTimerstate(false);
