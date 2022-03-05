@@ -23,7 +23,11 @@ import account from "../src/styles/svgs/account.svg";
 // import paww from "../src/styles/svgs/paww.png";
 import close from "../src/styles/svgs/close.svg";
 import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
+import GoToLocation from "../src/styles/svgs/GoToLocation.png";
+import GoToHome from "../src/styles/svgs/home.png";
+import CheckMarkIcon from "../src/styles/svgs/checkmarkIcon.png"
 import paws from "../src/styles/svgs/paws.png";
+import Usedpaws from "../src/styles/svgs/ActivePaws.png";
 // const ldata = require('./data/stations.json');
 import topLogo from "../src/styles/svgs/SpotLogo.svg";
 // import mapStyles from "./styles/mapstyles.js";
@@ -72,7 +76,7 @@ function amenityMapped(amenities) {
   let amList = amenities.split(",");
   return amList.map((amenity, key) =>
     <div id="eachA" key={key}>
-      <img alt={""} src={account} className="ficon" />
+      <img alt={""} src={CheckMarkIcon} width="12%" height="12%"className="ficon" />
       <AmenityName>
         {amenity}
       </AmenityName>
@@ -113,11 +117,13 @@ function checkUser(mdata, user) {
   return info;
 }
 
-var x = {lat:48.8566, lng: 2.3522};
+var x = {lat:41.921634, lng: -87.659558};
+
+
 export default function App() {
   const user = useUserState();
   const [mdata, loading, error] = useData("/");
-  const [curr, setCurr] = useState({lat:48.8566, lng: 2.3522});
+  const [curr, setCurr] = useState(x);
 
   if (error)
     return (
@@ -146,11 +152,12 @@ export default function App() {
       };
       setCurrentPosition(currentPosition);
     };
-    useEffect(() => {
-      navigator.geolocation.getCurrentPosition(success);
+    
+    useEffect(() =>  {
+       navigator.geolocation.getCurrentPosition(success);
     }, []);
 
-    
+      
       const updateTimer = () => {
       let myVar;
       function changeTimer() {
@@ -228,9 +235,11 @@ export default function App() {
                   ? amenityMapped(selectedStation.amenities)
                   : ""}
               </AmenitiesLayout>
+
+              {selectedStation.avaliable?
               <center>
                 
-                <button
+               <button
                   id="scanTo"
                   className="btn"
                   onClick={() => {
@@ -258,12 +267,13 @@ export default function App() {
                   `;
                     } else {
                       //setCurrentAvaliableStation(false);
+                      
                       timerstart = new Date().getTime();
                       console.log("startTime" + timerstart);
                       // alert("Start Timer!")
                       // TimerStarted = true;
-                    var StationID = selectedStation.id;
-                     
+                      var StationID = selectedStation.id;
+                      changeAvaliability(StationID, false);
                       
                       setTimerstate(true);
                       changeTimer();
@@ -275,7 +285,20 @@ export default function App() {
                 >
                   Scan to Unlock
                 </button>
+                
               </center>
+              :
+              <div>
+                 <center><button id="scanTo"
+                  className="btn">Not Availiable</button>
+                  <h1>Refresh page to check again</h1>
+                  </center>
+                  
+              </div>
+                 
+              }
+
+
             </div>
           </div>
         );
@@ -335,12 +358,12 @@ export default function App() {
                 onClick={() => {
                   // document.getElementById("timerpage").style.display = "block"
                   var StationID = selectedStation.id;
-                  console.log(selectedStation);
+                  //console.log(selectedStation);
             
                   setTimerstate(false);
                   setComplete(false);
                  // setCurrentAvaliableStation(true);
-                  //changeAvaliability(StationID, true);
+                  changeAvaliability(StationID, true);
                   // alert("thank you");
                 }}
               >
@@ -365,10 +388,13 @@ export default function App() {
     // display only selected location if timer started
     const displayLocation = (timerstate, complete) => {
       if (!timerstate && !complete) {
+      
         return (
           <div>
+            
             {mdata.Locations.map(station =>
               <Marker
+              
                 key={station.id}
                 position={{
                   lat: station.latitude,
@@ -377,15 +403,15 @@ export default function App() {
                 onClick={() => {
                   setSelectedStation(station);
                 }}
+                
                 icon={{
-                  url: paws,
+                  url:  station.avaliable? paws: Usedpaws,
                   scaledSize: new window.google.maps.Size(25, 25)
                 }}
               />
             )}
 
-            <button  onClick={() => {setCurr({lat:x.lat, lng: x.lng})}}>Home</button>
-            <button  onClick={() => {setCurr({lat:currentPosition.lat, lng: currentPosition.lng})}}>Current</button>
+            
 
 
             {
@@ -465,15 +491,19 @@ export default function App() {
 
     return (
       <div id="withmap">
-        {/* {(!TimerStarted)?  */ console.log(selectedStation)}
+        {/* {(!TimerStarted)?  */ console.log(currentPosition)}
 
         <GoogleMap
           defaultZoom={13}
           defaultCenter={curr}
         >
+          <img alt="currHome" src={GoToHome} width="10%" onClick={() => {setCurr({lat:x.lat, lng: x.lng})}}></img>
+            <img alt="currLoc" src={GoToLocation} width="10%" onClick={() => {setCurr({lat:currentPosition.lat, lng: currentPosition.lng})}}></img>
           {displayLocation(timerstate, complete)}
           {updateTimer()}
         </GoogleMap>
+
+
       </div>
     );
   }
