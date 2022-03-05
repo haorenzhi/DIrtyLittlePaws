@@ -227,7 +227,7 @@ export default function App() {
                 {selectedStation.name}
               </LocationName>
               <PriceTxt>
-                $3.30 unlock, $0.3 per min
+                $0.50 per minute
               </PriceTxt>
               <AmenitiesLayout>
                 {selectedStation.amenities
