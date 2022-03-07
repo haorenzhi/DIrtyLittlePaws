@@ -21,9 +21,9 @@ import account from "../src/styles/svgs/account.svg";
 // import paww from "../src/styles/svgs/paww.png";
 import close from "../src/styles/svgs/close.svg";
 import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
-import GoToLocation from "../src/styles/svgs/GoToLocation.png";
-import GoToHome from "../src/styles/svgs/home.png";
-import CheckMark from "../src/styles/svgs/check.svg";
+import GoToLocation from "../src/styles/svgs/currlocation.svg";
+import GoToHome from "../src/styles/svgs/home.svg";
+import CheckMark from "../src/styles/svgs/check.svg"
 import paws from "../src/styles/svgs/paws.png";
 import Usedpaws from "../src/styles/svgs/ActivePaws.png";
 // const ldata = require('./data/stations.json');
@@ -37,7 +37,14 @@ import {
   AmenityName
 } from "./styles/prev.js";
 
-import { TopBannerDiv, AccountDiv, TopLogoDiv } from "./styles/styles.js";
+import {
+  TopBannerDiv,
+  AccountDiv,
+  TopLogoDiv,
+  MapDiv,
+  MapButtons,
+  BottomNav
+} from "./styles/styles.js";
 
 import ProfilePage from "./components/profile.js";
 
@@ -473,45 +480,36 @@ export default function App() {
       <div id="withmap">
         {/* {(!TimerStarted)?  */ console.log(currentPosition)}
 
-        <GoogleMap defaultZoom={13} defaultCenter={curr}>
-          <img
-            alt="currHome"
-            src={GoToHome}
-            width="10%"
-            onClick={() => {
-              setCurr({ lat: x.lat, lng: x.lng });
-            }}
-          />
-          <img
-            alt="currLoc"
-            src={GoToLocation}
-            width="10%"
-            onClick={() => {
-              setCurr({ lat: currentPosition.lat, lng: currentPosition.lng });
-            }}
-          />
+        <GoogleMap
+          defaultZoom={13}
+          defaultCenter={curr}
+        >
+          
           {displayLocation(timerstate, complete)}
           {updateTimer()}
         </GoogleMap>
+      
+
       </div>
     );
   }
 
   const MapWrapped = withScriptjs(withGoogleMap(Map));
+  
   return (
     <div id="mainlayout">
       {user
         ? <div style={{ width: "100%", height: "100%" }}>
             <TopBannerDiv>
-              <AccountDiv>
-                <img
-                  alt={""}
-                  height="24px"
-                  src={account}
-                  onClick={() => {
-                    document.getElementById("ppage").style.display = "block";
-                  }}
-                />
+            <AccountDiv>
+              <img
+                alt={""}
+                height="35%"
+                src={account}
+                onClick={() => {
+                  document.getElementById("ppage").style.display = "block";
+                }}
+              />
               </AccountDiv>
 
               <TopLogoDiv>
@@ -525,16 +523,22 @@ export default function App() {
               </TopLogoDiv>
             </TopBannerDiv>
 
+         <MapDiv>
             <MapWrapped
               googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcQK-u06gf7heyS6eo0xE-hK__S5XriZs"
               loadingElement={<div style={{ height: `100%`, width: "100%" }} />}
               containerElement={
-                <div style={{ height: `80%`, width: "100%" }} />
+                <div style={{ height: `100%`, width: "100%" }} />
               }
               mapElement={
                 <div style={{ height: `100%`, width: "100%", zIndex: 0 }} />
               }
             />
+            <MapButtons>
+            <img alt="currHome" src={GoToHome} onClick={() => {setCurr({lat:x.lat, lng: x.lng})}}></img>
+            <img alt="currLoc" src={GoToLocation}></img>
+            </MapButtons>
+            </MapDiv>
 
             <div id="ppage" data-cy="course">
               {ProfilePage({
@@ -664,7 +668,7 @@ export default function App() {
 
             <div id="bottomnav">
               <button id="savebtn" className="btnLogin">
-                Scan
+                Unlock
               </button>
             </div>
           </div>
