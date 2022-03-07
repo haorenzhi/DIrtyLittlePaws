@@ -97,22 +97,17 @@ const ProfilePage = user => {
             </div>
             <div id="accdetails">
 
-                <div className="accinfo" >
+                <div className="accinfo">
                     <div className="eachDetail">
                         <p>Name</p>
                         <p id="acName">{user.username}</p>
                     </div>
-                    
-                    <img alt={""} src={rightArrow} className="carats"/>
                 </div>
                 <div className="accinfo" >
                     <div className="eachDetail">
                         <p>Email</p>
                         <p id="acEmail">{user.useremail}</p>
                     </div>
-                    
-                    <img alt={""} src={rightArrow} className="carats"/>
-
                 </div>
                 <div className="accinfo" onClick={ () => handleClick(3)}>
                     <div className="eachDetail">

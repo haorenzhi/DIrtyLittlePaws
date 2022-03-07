@@ -17,8 +17,6 @@ import {
 } from "./utilities/firebase.js";
 // import help from "../src/styles/svgs/help.svg";
 import account from "../src/styles/svgs/account.svg";
-// import scan from "../src/styles/svgs/scan.svg";
-// import paww from "../src/styles/svgs/paww.png";
 import close from "../src/styles/svgs/close.svg";
 import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
 import GoToLocation from "../src/styles/svgs/currlocation.svg";
@@ -42,8 +40,7 @@ import {
   AccountDiv,
   TopLogoDiv,
   MapDiv,
-  MapButtons,
-  BottomNav
+  MapButtons
 } from "./styles/styles.js";
 
 import ProfilePage from "./components/profile.js";
@@ -289,11 +286,9 @@ export default function App() {
                     </button>
                   </div>
                 : <div id = "bottomScan">
-                    <div>
-                      <button className="btn">
-                        Not Availiable
+                      <button id = "notavailable" className="btnLogin" onClick = {() => alert("Location Not Available!")}>
+                        Not Available
                       </button>
-                    </div>
                   </div>}
             </div>
           </div>
@@ -667,7 +662,7 @@ export default function App() {
             </div>
 
             <div id="bottomnav">
-              <button id="savebtn" className="btnLogin">
+              <button id="savebtn" className="btnLogin" onClick={() => alert("Please Select a Valid Location!")}>
                 Unlock
               </button>
             </div>

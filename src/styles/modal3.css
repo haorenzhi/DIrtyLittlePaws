@@ -81,6 +81,15 @@ input {
   height: 50px;
   background-color: #662D91;
 }
+
+#notavailable {
+  margin-top: 2vh;
+  border-radius: 25px;
+  width: 45%;
+  height: 50px;
+  background-color: #a1a1a1;
+}
+
 #cancelbtn {
   margin-top: 5%;
   border-radius: 20px;

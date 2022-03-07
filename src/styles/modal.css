@@ -107,10 +107,6 @@
   text-align: center;
 }
 
-
-.modal p {
-}
-
 #clo {
   height: 10%;
 }
@@ -134,23 +130,4 @@
   padding: 5px;
   width: 45%;
   background-color: #662D91;
-}
-
-#notavailable{
-  height: 50px;
-  border-radius: 25px;
-  padding: 5px;
-  width: 45%;
-  background-color: #C0C0C0;
-
-  border-radius: 50px;
-  font-family: Karla;
-  font-style: normal;
-  font-weight: bold;
-  line-height: 28px;
-/* identical to box height */
-
-  text-align: center;
-
-  color: #FFFFFF;
 }

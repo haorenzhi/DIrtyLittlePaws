@@ -44,7 +44,7 @@ export const MapButtons = styled.div`
     align-items: center;
     justify-content: center;
     grid-area: mapbuttons;
-    z-index: 5;
+    z-index: 0;
     bottom: 12%;
     position: fixed;
 `
