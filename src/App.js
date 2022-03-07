@@ -37,6 +37,12 @@ import {
   AmenityName
 } from "./styles/prev.js";
 
+import {
+  TopBannerDiv,
+  AccountDiv,
+  TopLogoDiv
+} from "./styles/styles.js";
+
 import ProfilePage from "./components/profile.js";
 
 /* HELP COMMENT
@@ -58,7 +64,7 @@ const SignInButton = () =>
   <div id="signinpage">
     <img src={topLogo} id="logot" alt="logo" />
     <button id="signin" className="btn" onClick={() => signInWithG()}>
-      Sign In
+      <b>Sign In</b>
     </button>
     <button id="signup" className="btn" onClick={() => signInWithG()}>
       New user? Sign Up with Google
@@ -510,17 +516,22 @@ export default function App() {
     <div id="mainlayout">
       {user
         ? <div style={{ width: "100%", height: "100%" }}>
-            <div id="topbanner">
-              <img src={topLogo} alt="topLogo" id="logo"  data-cy="profile"/> 
+            <TopBannerDiv>
+            <AccountDiv>
               <img
                 alt={""}
-                className="botIcons"
+                height="24px"
                 src={account}
                 onClick={() => {
                   document.getElementById("ppage").style.display = "block";
                 }}
               />
-            </div>
+              </AccountDiv>
+            
+              <TopLogoDiv>
+                <img src={topLogo} alt="topLogo" id="logo" height="36px" data-cy="profile"/> 
+              </TopLogoDiv>
+              </TopBannerDiv>
 
          
             <MapWrapped

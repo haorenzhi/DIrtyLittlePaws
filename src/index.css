@@ -14,7 +14,7 @@ code {
 
 .btn {
   display: inline-block;
-  background: rgb(81, 17, 165);
+  background: #662D91;
   color: rgb(255, 255, 255);
   border: none;
   padding: 5px;
@@ -24,7 +24,7 @@ code {
   cursor: pointer;
   text-decoration: none;
   font-size: 15px;
-  font-family: 'Comfortaa', cursive;
+  font-family: Karla;
 }
 
 
@@ -39,7 +39,7 @@ code {
 
 .btnLogin {
   display: inline-block;
-  background: #5111A5;
+  background: #662D91;
   color: rgb(255, 255, 255);
   border: none;
   padding: 5px;
@@ -133,19 +133,19 @@ code {
 
 #signup{
   margin-left: 20%;
-  border-radius: 30px;
-  height: 50px;
+  border-radius: 20px;
+  height: 30px;
   width: 60%;
   text-decoration: none;
   background: none;
-  color:#5111A5;
+  color:#662D91;
 }
 
 #logot{
   margin-left: 30%;
   margin-top: 65%;
   margin-bottom: 12%;
-  width: 200px;
+  width: 170px;
   height: 10%;
 }
 
