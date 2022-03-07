@@ -6,21 +6,15 @@
     left: 0; 
     overflow: auto; 
     bottom: 0%; 
-    height: 50%;
+    height: 60vh;
     border-radius: 10px 10px 0px 0px; 
   }
 
   /* Modal Content */
   .modal-content {
     background-color: white;
-    /* margin: auto; */
     width: 100vw;
-    height: 50vh;
-    overflow: auto;
-    /* margin-bottom: 50vh; */
-    /* border-radius: 10px; */
-    
-    /* align-items: center; */
+    height: 60vh;
   }
 
 }
@@ -33,9 +27,9 @@
     z-index: 1;
     margin-left: 36%;
     left: 0;
-    top: 45vh;
+    top: 40vh;
     bottom: 10vh;
-    height: 50%;
+    height: 60vh;
     border-radius: 10px 10px 0px 0px;
     overflow: auto;
   }
@@ -46,7 +40,7 @@
     background-color: #ffffff;
     margin: auto;
     width: 28vw;
-    height: 50vh;
+    height: 60vh;
     border-radius: 10px;
     overflow: auto;
   }

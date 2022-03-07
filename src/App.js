@@ -23,7 +23,7 @@ import close from "../src/styles/svgs/close.svg";
 import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
 import GoToLocation from "../src/styles/svgs/GoToLocation.png";
 import GoToHome from "../src/styles/svgs/home.png";
-import CheckMark from "../src/styles/svgs/check.svg"
+import CheckMark from "../src/styles/svgs/check.svg";
 import paws from "../src/styles/svgs/paws.png";
 import Usedpaws from "../src/styles/svgs/ActivePaws.png";
 // const ldata = require('./data/stations.json');
@@ -37,11 +37,7 @@ import {
   AmenityName
 } from "./styles/prev.js";
 
-import {
-  TopBannerDiv,
-  AccountDiv,
-  TopLogoDiv
-} from "./styles/styles.js";
+import { TopBannerDiv, AccountDiv, TopLogoDiv } from "./styles/styles.js";
 
 import ProfilePage from "./components/profile.js";
 
@@ -121,8 +117,7 @@ function checkUser(mdata, user) {
   return info;
 }
 
-var x = {lat:41.921634, lng: -87.659558};
-
+var x = { lat: 41.921634, lng: -87.659558 };
 
 export default function App() {
   const user = useUserState();
@@ -137,7 +132,6 @@ export default function App() {
     );
   if (loading) return <h1>Loading the data...</h1>;
 
-
   function Map() {
     const [selectedStation, setSelectedStation] = useState(null);
     const [currentPosition, setCurrentPosition] = useState({});
@@ -146,7 +140,7 @@ export default function App() {
     const [allminute, setAllminute] = useState(0);
     var [totaltime, setTotaltime] = useState("");
     //var [currentAvailiableStation, setCurrentAvaliableStation] = useState(true);
-    
+
     var timerstart;
 
     const success = position => {
@@ -156,13 +150,12 @@ export default function App() {
       };
       setCurrentPosition(currentPosition);
     };
-    
-    useEffect(() =>  {
-       navigator.geolocation.getCurrentPosition(success);
+
+    useEffect(() => {
+      navigator.geolocation.getCurrentPosition(success);
     }, []);
 
-      
-      const updateTimer = () => {
+    const updateTimer = () => {
       let myVar;
       function changeTimer() {
         if (!myVar) {
@@ -231,35 +224,34 @@ export default function App() {
               <LocationName>
                 {selectedStation.name}
               </LocationName>
-              <PriceTxt>
-                $0.50 per minute
-              </PriceTxt>
+              <PriceTxt>$0.50 per minute</PriceTxt>
               <AmenitiesLayout>
                 {selectedStation.amenities
                   ? amenityMapped(selectedStation.amenities)
                   : ""}
               </AmenitiesLayout>
 
-              {selectedStation.avaliable?
-              <center>
-                
-               <button
-                  id="scanTo"
-                  className="btn"
-                  onClick={() => {
-                    if (document.getElementById("acPay").innerHTML === " ") {
-                      document.getElementById("accinfo").style.display =
-                        "block";
-                      document
-                        .getElementById("accinfoC")
-                        .setAttribute("loc", "payment");
-                      document
-                        .getElementById("savebtn")
-                        .setAttribute("data-shortened", "payment");
-                      // console.log(document.getElementById("acPay").innerHTML)
-                      document.getElementById(
-                        "customInput"
-                      ).innerHTML = `                
+              {selectedStation.avaliable
+                ? <div id="bottomScan">
+                    <button
+                      id="scanTo"
+                      className="btn"
+                      onClick={() => {
+                        if (
+                          document.getElementById("acPay").innerHTML === " "
+                        ) {
+                          document.getElementById("accinfo").style.display =
+                            "block";
+                          document
+                            .getElementById("accinfoC")
+                            .setAttribute("loc", "payment");
+                          document
+                            .getElementById("savebtn")
+                            .setAttribute("data-shortened", "payment");
+                          // console.log(document.getElementById("acPay").innerHTML)
+                          document.getElementById(
+                            "customInput"
+                          ).innerHTML = `                
                   <input type="number" placeholder="Credit Card Number" id="cardinput" 
                   onChange="{(e) => document.getElementById("cardinput").value = e.target.value}"/>
       
@@ -269,39 +261,33 @@ export default function App() {
                   <input type="date" placeholder="date" id="dateid" 
                   onChange="{(e) => document.getElementById("dateid").value = e.target.value}"/>
                   `;
-                    } else {
-                      //setCurrentAvaliableStation(false);
-                      
-                      timerstart = new Date().getTime();
-                      console.log("startTime" + timerstart);
-                      // alert("Start Timer!")
-                      // TimerStarted = true;
-                      //var StationID = selectedStation.id;
-                      //changeAvaliability(StationID, false);
-                      
-                      setTimerstate(true);
-                      changeTimer();
-                      //changeAvaliability(StationID, false);
-                      //console.log("Push false to firebase");
+                        } else {
+                          //setCurrentAvaliableStation(false);
 
-                    }
-                  }}
-                >
-                  Scan to Unlock
-                </button>
-                
-              </center>
-              :
-              <div>
-                 <center><button id="notavailable"
-                  className="btn">Not Availiable</button>
-                  </center>
-                  
-              </div>
-                 
-              }
+                          timerstart = new Date().getTime();
+                          console.log("startTime" + timerstart);
+                          // alert("Start Timer!")
+                          // TimerStarted = true;
+                          //var StationID = selectedStation.id;
+                          //changeAvaliability(StationID, false);
 
-
+                          setTimerstate(true);
+                          changeTimer();
+                          //changeAvaliability(StationID, false);
+                          //console.log("Push false to firebase");
+                        }
+                      }}
+                    >
+                      Scan to Unlock
+                    </button>
+                  </div>
+                : <div id = "bottomScan">
+                    <div>
+                      <button className="btn">
+                        Not Availiable
+                      </button>
+                    </div>
+                  </div>}
             </div>
           </div>
         );
@@ -326,7 +312,7 @@ export default function App() {
                   // TimerStarted = false;
                   setTimerstate(false);
                   stopTimer();
-                  
+
                   setComplete(true);
                   // alert("Complete");
                 }}
@@ -351,7 +337,7 @@ export default function App() {
                 {" "}Total Cost: ${allminute * 0.5}{" "}
               </div>
               <div id="finishcost">
-                The cost will be charged to your account. 
+                The cost will be charged to your account.
               </div>
               {console.log("complete in thankyou", complete)}
 
@@ -362,10 +348,10 @@ export default function App() {
                   // document.getElementById("timerpage").style.display = "block"
                   //var StationID = selectedStation.id;
                   //console.log(selectedStation);
-            
+
                   setTimerstate(false);
                   setComplete(false);
-                 // setCurrentAvaliableStation(true);
+                  // setCurrentAvaliableStation(true);
                   //changeAvaliability(StationID, true);
                   // alert("thank you");
                 }}
@@ -376,13 +362,12 @@ export default function App() {
           </div>
         );
       }
-    }
-
+    };
 
     // useEffect(
     //   () => {
     //     updateTimer();
-        
+
     //   },
     //   [timerstate]
     // );
@@ -391,13 +376,10 @@ export default function App() {
     // display only selected location if timer started
     const displayLocation = (timerstate, complete) => {
       if (!timerstate && !complete) {
-      
         return (
           <div>
-            
             {mdata.Locations.map(station =>
               <Marker
-              
                 key={station.id}
                 position={{
                   lat: station.latitude,
@@ -406,16 +388,12 @@ export default function App() {
                 onClick={() => {
                   setSelectedStation(station);
                 }}
-                
                 icon={{
-                  url:  station.avaliable? paws: Usedpaws,
+                  url: station.avaliable ? paws : Usedpaws,
                   scaledSize: new window.google.maps.Size(25, 25)
                 }}
               />
             )}
-
-            
-
 
             {
               <Marker
@@ -491,22 +469,30 @@ export default function App() {
 
     // update timer and the panel
 
-
     return (
       <div id="withmap">
         {/* {(!TimerStarted)?  */ console.log(currentPosition)}
 
-        <GoogleMap
-          defaultZoom={13}
-          defaultCenter={curr}
-        >
-          <img alt="currHome" src={GoToHome} width="10%" onClick={() => {setCurr({lat:x.lat, lng: x.lng})}}></img>
-            <img alt="currLoc" src={GoToLocation} width="10%" onClick={() => {setCurr({lat:currentPosition.lat, lng: currentPosition.lng})}}></img>
+        <GoogleMap defaultZoom={13} defaultCenter={curr}>
+          <img
+            alt="currHome"
+            src={GoToHome}
+            width="10%"
+            onClick={() => {
+              setCurr({ lat: x.lat, lng: x.lng });
+            }}
+          />
+          <img
+            alt="currLoc"
+            src={GoToLocation}
+            width="10%"
+            onClick={() => {
+              setCurr({ lat: currentPosition.lat, lng: currentPosition.lng });
+            }}
+          />
           {displayLocation(timerstate, complete)}
           {updateTimer()}
         </GoogleMap>
-
-
       </div>
     );
   }
@@ -517,23 +503,28 @@ export default function App() {
       {user
         ? <div style={{ width: "100%", height: "100%" }}>
             <TopBannerDiv>
-            <AccountDiv>
-              <img
-                alt={""}
-                height="24px"
-                src={account}
-                onClick={() => {
-                  document.getElementById("ppage").style.display = "block";
-                }}
-              />
+              <AccountDiv>
+                <img
+                  alt={""}
+                  height="24px"
+                  src={account}
+                  onClick={() => {
+                    document.getElementById("ppage").style.display = "block";
+                  }}
+                />
               </AccountDiv>
-            
-              <TopLogoDiv>
-                <img src={topLogo} alt="topLogo" id="logo" height="36px" data-cy="profile"/> 
-              </TopLogoDiv>
-              </TopBannerDiv>
 
-         
+              <TopLogoDiv>
+                <img
+                  src={topLogo}
+                  alt="topLogo"
+                  id="logo"
+                  height="36px"
+                  data-cy="profile"
+                />
+              </TopLogoDiv>
+            </TopBannerDiv>
+
             <MapWrapped
               googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcQK-u06gf7heyS6eo0xE-hK__S5XriZs"
               loadingElement={<div style={{ height: `100%`, width: "100%" }} />}

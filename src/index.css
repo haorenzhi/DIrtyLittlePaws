@@ -62,9 +62,18 @@ code {
   #mainlayout{
     height: 100vh;
     width: 28vw;
-    margin-left: 36%;
+    margin-left: 36vw;
     background-color: rgb(255, 255, 255);
     justify-content: center;
+  }
+
+  #bottomScan{
+    position: absolute;
+    width: 28vw;
+    bottom: 2vh;
+    justify-content: center;
+    display: flex;
+    
   }
 }
 
@@ -73,6 +82,15 @@ code {
     height: 100vh;
     background-color: rgb(255, 255, 255);
     justify-content: center;
+  }
+
+  #bottomScan{
+    position: absolute;
+    bottom: 2vh;
+    width: 100vw;
+    justify-content: center;
+    display: flex;
+    
   }
 }
 
