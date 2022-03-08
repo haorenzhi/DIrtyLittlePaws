@@ -130,6 +130,12 @@ export default function App() {
   const user = useUserState();
   const [mdata, loading, error] = useData("/");
   const [curr, setCurr] = useState(x);
+  // var passcode= "";
+  // var [code, setCode] = useState("");
+  // useEffect(() => {
+  //   // Update the document title using the browser API
+  //   setCode(passcode)
+  // },[passcode]);
 
   if (error)
     return (
@@ -146,6 +152,10 @@ export default function App() {
     const [complete, setComplete] = useState(false);
     const [allminute, setAllminute] = useState(0);
     var [totaltime, setTotaltime] = useState("");
+    var [code, setCode] = useState(false);
+    var [scanclick, setScanclick] = useState(false);
+    
+    
     //var [currentAvailiableStation, setCurrentAvaliableStation] = useState(true);
 
     var timerstart;
@@ -203,7 +213,8 @@ export default function App() {
       }
 
       // if timer not true: haven't started counting
-      if (selectedStation && !timerstate && !complete) {
+
+      if (selectedStation && !timerstate && !complete && !scanclick)  {
 
         return (
           <div className="modal">
@@ -263,11 +274,15 @@ export default function App() {
                   <input type="date" placeholder="date" id="dateid" 
                   onChange="{(e) => document.getElementById("dateid").value = e.target.value}"/>
                   `;
-                        } else {
+                        
+                        } 
+                        else {
+                          setScanclick(true);
 
-                          timerstart = new Date().getTime();
-                          setTimerstate(true);
-                          changeTimer();
+                        //   timerstart = new Date().getTime();
+                        //   setTimerstate(true);
+                        //   changeTimer();
+                          
                         }
                       }}
                     >
@@ -286,7 +301,44 @@ export default function App() {
             </div>
           </div>
         );
-      } else if (selectedStation && timerstate && !complete) {
+      } 
+      else if (scanclick && selectedStation && !timerstate && !complete){
+        console.log("input code page");
+        return (
+          <div className="modal">
+            <div className="modal-content">
+                <img
+                id="clo"
+                alt="closebtn"
+                src={close}
+                onClick={() => {
+                  setSelectedStation(null);
+                }}
+                />
+                <UnlockTxt>
+                  Enter Station Number
+                </UnlockTxt>
+                
+                <div id="inputdigit">
+                  <input type="number" placeholder="five digit number">
+                  </input>
+                
+                </div>
+
+                <button id="startsession" className="btn" onClick={()=> {
+                          timerstart = new Date().getTime();
+                          setTimerstate(true);
+                          changeTimer();
+                          }}> Start Session</button>
+                
+                <div id="scrollableContent">
+                </div>
+              </div>
+            </div>
+        )
+      }
+
+      else if (selectedStation && timerstate && !complete) {
         // if timer started and not complete
         return (
           <div className="modal">
@@ -316,6 +368,8 @@ export default function App() {
                     var hour = Math.floor(diffAllSec / 3600);
                     hour = ("00" + hour).slice(-2);
                     duration = hour.toString().concat(":", minute.toString(), ":", sec.toString());
+                    console.log("hour",hour)
+                    console.log("duration",duration)
                     setTimerstate(false);
                     stopTimer();
                     setComplete(true);
@@ -332,13 +386,26 @@ export default function App() {
         return (
           <div className="modal">
             <div className="modal-content">
+
+            {/* <img
+                id="clo"
+                alt="closebtn"
+                src={close}
+                onClick={() => {
+                  setTimerstate(false);
+                  setComplete(false);
+                  setScanclick(false);
+                  setSelectedStation(null);
+                }}
+              /> */}
               
               <div id="thankyou"> Thank you for using Spot! </div>
               <UnlockTxt>Unlocked Time</UnlockTxt>
-              <p id = "timertext2">{duration}</p>
+              <p id = "timertext2">{ duration}</p>
               <div id="finishcost">
                 {" "}Total Cost: ${allminute * 0.5}{" "}
               </div>
+
               <div id = "bottomScan">
               <button
                 id="savebtn"
@@ -346,8 +413,15 @@ export default function App() {
                 onClick={() => {
                   setTimerstate(false);
                   setComplete(false);
+                  setScanclick(false);
                 }}
               > Complete </button>
+              
+              
+
+
+
+
             </div>
               </div>
               
@@ -645,8 +719,9 @@ export default function App() {
                           }
 
                           break;
+
                         default:
-                          console.log("defaut");
+                          console.log("default");
                       }
                     }}
                   >

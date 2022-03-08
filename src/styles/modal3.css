@@ -41,11 +41,8 @@
     border-radius: 22px;
     background-color: rgb(255, 255, 255);
   }
+
 }
-
-
-
-
 
 #accinfoC input {
   margin-bottom: 4px;
@@ -54,14 +51,14 @@
 #detailName {
   padding-top: 20px;
   font-family: Karla;
-font-style: normal;
-font-weight: normal;
-font-size: 16px;
-line-height: 19px;
-/* identical to box height */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
 
 
-color: #1F2326;
+  color: #1F2326;
 }
 #accinfoC p,
 input {

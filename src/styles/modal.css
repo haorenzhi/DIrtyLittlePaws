@@ -73,7 +73,7 @@
     font-weight: bold;
     font-size: 50px;
     color: #1f2326;
-    line-height: 1px;
+    /* line-height: 1px; */
     z-index: 1;
     text-align: center;
   }
@@ -106,7 +106,7 @@
     font-weight: bold;
     font-size: 50px;
     color: #1f2326;
-    line-height: 1px;
+    /* line-height: 1px; */
     z-index: 1;
     text-align: center;
   }
@@ -166,6 +166,27 @@
   background-color: #662D91;
 }
 
+#startsession{
+  text-align: center;
+  border-radius: 50px;
+  padding: 5px;
+  width: 45%;
+  height: 6vh;
+  background-color: #662D91;
+  align-items:bottom;
+  margin-left: 25vw;
+
+}
+
+#inputdigit input{
+  border-radius: 50px;
+  padding: 5px;
+  text-align: center;
+  align-self:bottom;
+  margin-left: 19vw;
+  height:6vh;
+  width:25vh;
+}
 .ficon {
   color: #662D91;
 }

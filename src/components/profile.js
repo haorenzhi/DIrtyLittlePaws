@@ -41,6 +41,13 @@ function handleClick(box){
             document.getElementById("accinfoC").setAttribute("loc", shortened);
 
             break;
+        case 6:
+            label = "Code";
+            shortened = "code";
+            document.getElementById("customInput").innerHTML = customInput(box);
+            document.getElementById("accinfoC").setAttribute("loc", shortened);
+
+            break;
         default:
             console.log("Default for Account details");
     }
