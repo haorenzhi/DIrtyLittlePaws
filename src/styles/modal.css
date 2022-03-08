@@ -4,9 +4,8 @@
     position: fixed;
     z-index: 1;
     left: 0; 
-    overflow: auto; 
     bottom: 0%; 
-    height: 60vh;
+    height: 45vh;
     border-radius: 10px 10px 0px 0px; 
   }
 
@@ -14,10 +13,15 @@
   .modal-content {
     background-color: white;
     width: 100vw;
-    height: 60vh;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
+    height: 45vh;
+    border-radius: 10px 10px 0px 0px;
+  }
+
+
+  #clo{
+    width: 100vw;
+    height: 4vh;
+    top: 2vh;
   }
 
 }
@@ -29,41 +33,97 @@
     position: fixed;
     z-index: 1;
     margin-left: 36%;
+    top: 55vh;
     left: 0;
-    top: 40vh;
-    bottom: 10vh;
-    height: 60vh;
+    height: 45vh;
     border-radius: 10px 10px 0px 0px;
-    overflow: auto;
   }
-
  
   /* Modal Content */ 
   .modal-content {
     background-color: #ffffff;
     margin: auto;
     width: 28vw;
-    height: 60vh;
+    height: 45vh;
     border-radius: 10px;
-    overflow: auto;
+    border-radius: 10px 10px 0px 0px;
+  }
+
+  #clo{
+    width: 28vw;
+    height: 4vh;
+    top: 2vh;
   }
 
 }
 
-#timertext{
+@media screen and (min-height: 700px){
+  #timertext{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    color: #1f2326;
+    line-height: 1px;
+    z-index: 1;
+    text-align: center;
+  }
 
-  font-style: normal;
-  font-weight: bold;
-  font-size: 50px;
-  color: #1f2326;
-  line-height: 1px;
-  /* padding-top: 40%; */
-  padding-top: 5%;
-  z-index: 1;
-  text-align: center;
+  #timertext2{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    color: #1f2326;
+    line-height: 1px;
+    z-index: 1;
+    text-align: center;
+  }
+
+  #finishcost{
+    font-family: Karla;
+    font-style: normal;
+    font-size: 20px;
+    color: #1f2326;
+    padding-top: 2%;
+    z-index: 1;
+    text-align: center;
+  }
+}
+
+@media screen and (max-height: 700px){
+  #timertext{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 35px;
+    color: #1f2326;
+    line-height: 1px;
+    padding-top: 2%;
+    z-index: 1;
+    text-align: center;
+  }
+
+  #timertext2{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    color: #1f2326;
+    line-height: 1px;
+    z-index: 1;
+    text-align: center;
+  }
+
+  #finishcost{
+    font-family: Karla;
+    font-style: normal;
+    font-size: 15px;
+    color: #1f2326;
+    padding-top: 2%;
+    z-index: 1;
+    text-align: center;
+  }
 }
 
 #rate{
+  font-family: Karla;
   font-style: normal;
   /* font-weight: bold; */
   font-size: 20px;
@@ -77,27 +137,13 @@
 #thankyou{
 
   font-style: normal;
-  font-weight: bold;
-  font-size: 50px;
-  color: #1f2326;
-  line-height: 1px;
-  padding-top: 30%;
-  z-index: 1;
-  text-align: center;
-}
-
-#finishcost{
-
-  font-style: normal;
-  /* font-weight: bold; */
+  font-family: Karla;
   font-size: 20px;
-  color: #1f2326;
-  line-height: 1px;
-  padding-top: 15%;
+  color: #4d4d4d;
+  padding-top: 5vh;
   z-index: 1;
   text-align: center;
 }
-
 
 
 #completeclick{
@@ -112,19 +158,13 @@
 }
 
 #timerclick{
-  margin-left: 28%;
   text-align: center;
-  height: 50px;
   border-radius: 50px;
   padding: 5px;
   width: 45%;
+  height: 6vh;
   background-color: #662D91;
 }
-
-#clo {
-  height: 10%;
-}
-
 
 .ficon {
   color: #662D91;
@@ -139,8 +179,8 @@
 }
 
 #scanTo {
-  height: 50px;
-  border-radius: 50px;
+  height: 6vh;
+  border-radius: 3vh;
   padding: 5px;
   width: 45%;
   background-color: #662D91;

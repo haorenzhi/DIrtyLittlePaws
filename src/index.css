@@ -17,8 +17,6 @@ code {
   background: #662D91;
   color: rgb(255, 255, 255);
   border: none;
-  padding: 5px;
-  margin: 5px;
   height: 40px;
   border-radius: 5px;
   cursor: pointer;
@@ -42,8 +40,6 @@ code {
   background: #662D91;
   color: rgb(255, 255, 255);
   border: none;
-  padding: 5px;
-  margin: 5px;
   cursor: pointer;
   text-decoration: none;
   font-family: Karla;
@@ -94,6 +90,17 @@ code {
     display: flex;
     
   }
+}
+
+#scrollableContent{
+  height: 30vh;
+  overflow-y: scroll;
+  white-space: nowrap;
+}
+
+#locationInfo{
+  padding-top: 1.5vh;
+  height: 10vh;
 }
 
 #topbanner{

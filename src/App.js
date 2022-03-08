@@ -21,7 +21,7 @@ import close from "../src/styles/svgs/close.svg";
 import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
 import GoToLocation from "../src/styles/svgs/currlocation.svg";
 import GoToHome from "../src/styles/svgs/home.svg";
-import CheckMark from "../src/styles/svgs/check.svg"
+import CheckMark from "../src/styles/svgs/check.svg";
 import paws from "../src/styles/svgs/paws.png";
 import Usedpaws from "../src/styles/svgs/ActivePaws.png";
 // const ldata = require('./data/stations.json');
@@ -31,6 +31,7 @@ import {
   LocationName,
   AvailabilityTxt,
   PriceTxt,
+  UnlockTxt,
   AmenitiesLayout,
   AmenityName
 } from "./styles/prev.js";
@@ -44,6 +45,7 @@ import {
 } from "./styles/styles.js";
 
 import ProfilePage from "./components/profile.js";
+import { setLogLevel } from "firebase/app";
 
 /* HELP COMMENT
 withGoogleMap initializes the map component while withScriptjs loads the Google Map JavaScript API v3.
@@ -89,12 +91,8 @@ function amenityMapped(amenities) {
 }
 
 function checkPaymentInfo(val, cvv, date) {
-  console.log(val);
-  console.log(cvv);
-  console.log(date);
   if (val && cvv && date) {
     if (val.toString().length === 16 && cvv.toString().length === 3) {
-      console.log("all valid");
       return 1;
     }
 
@@ -105,8 +103,6 @@ function checkPaymentInfo(val, cvv, date) {
 
 function checkUser(mdata, user) {
   if (mdata[user.uid]) {
-    // console.log("user exists in users");
-    // console.log("pet is " + mdata[user.uid].info.petname);
     return mdata[user.uid].info;
   }
   var info = {
@@ -125,13 +121,10 @@ var x = { lat: 41.921634, lng: -87.659558 };
 
 var CurrentLocation = { lat: 41.921634, lng: -87.659558 };
 
-
-function ReturnCurrentLocation(lat, lng)
-{
+function ReturnCurrentLocation(lat, lng) {
   CurrentLocation.lat = lat;
-  CurrentLocation.lng = lng; 
+  CurrentLocation.lng = lng;
 }
-
 
 export default function App() {
   const user = useUserState();
@@ -149,13 +142,15 @@ export default function App() {
   function Map() {
     const [selectedStation, setSelectedStation] = useState(null);
     const [currentPosition, setCurrentPosition] = useState({});
-    const [timerstate, setTimerstate] = useState(false);
+    var [timerstate, setTimerstate] = useState(false);
     const [complete, setComplete] = useState(false);
     const [allminute, setAllminute] = useState(0);
     var [totaltime, setTotaltime] = useState("");
     //var [currentAvailiableStation, setCurrentAvaliableStation] = useState(true);
 
     var timerstart;
+    var timerend;
+    var duration;
 
     const success = position => {
       const currentPosition = {
@@ -166,7 +161,6 @@ export default function App() {
     };
 
     ReturnCurrentLocation(currentPosition.lat, currentPosition.lng);
-
 
     useEffect(() => {
       navigator.geolocation.getCurrentPosition(success);
@@ -181,29 +175,24 @@ export default function App() {
       }
 
       function loopTimer() {
-        //console.log(currentAvailiableStation);
         const d = new Date();
-        console.log("in loop timer");
-        // document.getElementById("demo").innerHTML  = d}
         if (document.getElementById("timertext")) {
           var diffAllSec = Math.floor((d.getTime() - timerstart) / 1000);
           var sec = diffAllSec % 60;
+          sec = ("00" + sec).slice(-2);
           var minute = Math.floor(diffAllSec / 60);
+          minute = ("00" + minute).slice(-2);
           var hour = Math.floor(diffAllSec / 3600);
+          hour = ("00" + hour).slice(-2);
           setAllminute(Math.ceil(diffAllSec / 60));
-
           var str = hour
             .toString()
             .concat(":", minute.toString(), ":", sec.toString());
           setTotaltime(str);
-          // console.log(document.getElementById("demo"));
           document.getElementById("timertext").innerHTML = str;
         } else {
-          console.log("timer stopped in loop Timer");
           clearInterval(myVar);
           myVar = null;
-          // setComplete(true);
-          // console.log("complete in loop timer",complete);
           setTimerstate(false);
         }
       }
@@ -215,16 +204,9 @@ export default function App() {
 
       // if timer not true: haven't started counting
       if (selectedStation && !timerstate && !complete) {
-        console.log(
-          "timerstate when selected station / timer false / complete false: ",
-          timerstate
-        );
-        console.log(
-          "complete when selected station / timer false / complete false: ",
-          complete
-        );
+
         return (
-          <div id="myModal" className="modal">
+          <div className="modal">
             <div className="modal-content">
               <img
                 id="clo"
@@ -235,18 +217,22 @@ export default function App() {
                 }}
               />
 
-              <AvailabilityTxt>
-                {selectedStation.avaliable ? "Available" : "Not Available"}
-              </AvailabilityTxt>
-              <LocationName>
-                {selectedStation.name}
-              </LocationName>
-              <PriceTxt>$0.50 per minute</PriceTxt>
-              <AmenitiesLayout>
-                {selectedStation.amenities
-                  ? amenityMapped(selectedStation.amenities)
-                  : ""}
-              </AmenitiesLayout>
+              <div id="scrollableContent">
+                <AvailabilityTxt>
+                  {selectedStation.avaliable
+                    ? "• Available"
+                    : "• Not Available"}
+                </AvailabilityTxt>
+                <LocationName>
+                  {selectedStation.name}
+                </LocationName>
+                <PriceTxt>$0.50 per minute</PriceTxt>
+                <AmenitiesLayout>
+                  {selectedStation.amenities
+                    ? amenityMapped(selectedStation.amenities)
+                    : ""}
+                </AmenitiesLayout>
+              </div>
 
               {selectedStation.avaliable
                 ? <div id="bottomScan">
@@ -265,7 +251,6 @@ export default function App() {
                           document
                             .getElementById("savebtn")
                             .setAttribute("data-shortened", "payment");
-                          // console.log(document.getElementById("acPay").innerHTML)
                           document.getElementById(
                             "customInput"
                           ).innerHTML = `                
@@ -279,29 +264,24 @@ export default function App() {
                   onChange="{(e) => document.getElementById("dateid").value = e.target.value}"/>
                   `;
                         } else {
-                          //setCurrentAvaliableStation(false);
 
                           timerstart = new Date().getTime();
-                          console.log("startTime" + timerstart);
-                          // alert("Start Timer!")
-                          // TimerStarted = true;
-                          //var StationID = selectedStation.id;
-                          //changeAvaliability(StationID, false);
-
                           setTimerstate(true);
                           changeTimer();
-                          //changeAvaliability(StationID, false);
-                          //console.log("Push false to firebase");
                         }
                       }}
                     >
                       Scan to Unlock
                     </button>
                   </div>
-                : <div id = "bottomScan">
-                      <button id = "notavailable" className="btnLogin" onClick = {() => alert("Location Not Available!")}>
-                        Not Available
-                      </button>
+                : <div id="bottomScan">
+                    <button
+                      id="notavailable"
+                      className="btnLogin"
+                      onClick={() => alert("Location Not Available!")}
+                    >
+                      Not Available
+                    </button>
                   </div>}
             </div>
           </div>
@@ -309,97 +289,77 @@ export default function App() {
       } else if (selectedStation && timerstate && !complete) {
         // if timer started and not complete
         return (
-          <div id="myModal" className="modal">
-            {/* <img id="clo" alt="closebtn" src={close} onClick={() => {
-             setSelectedStation(null);
-           }} /> */}
+          <div className="modal">
             <div className="modal-content">
-              <p id="rate"> Elapsed Time</p>
+              <div id="locationInfo">
+                <LocationName>
+                  {selectedStation.name}
+                </LocationName>
+                <PriceTxt>$0.50 per minute</PriceTxt>
+              </div>
+              <UnlockTxt>Unlocked Time</UnlockTxt>
               <p id="timertext" />
-              <p id="rate"> rate: $0.5/min</p>
-
-              <button
-                id="timerclick"
-                className="btn"
-                onClick={() => {
-                  // document.getElementById("timerpage").style.display = "block"
-                  var stopTime = new Date().getTime();
-                  console.log("stopTime " + stopTime);
-                  // TimerStarted = false;
-                  setTimerstate(false);
-                  stopTimer();
-
-                  setComplete(true);
-                  // alert("Complete");
-                }}
-              >
-                Finish Session
-              </button>
+              <div id="finishcost">
+                {" "}Total Cost: ${allminute * 0.5}{" "}
+              </div>
+              <center id="bottomScan">
+                <button
+                  id="timerclick"
+                  className="btn"
+                  onClick={() => {
+                    timerend = new Date().getTime();
+                    var diffAllSec = Math.floor((timerend - timerstart) / 1000);
+                    var sec = diffAllSec % 60;
+                    sec = ("00" + sec).slice(-2);
+                    var minute = Math.floor(diffAllSec / 60);
+                    minute = ("00" + minute).slice(-2);
+                    var hour = Math.floor(diffAllSec / 3600);
+                    hour = ("00" + hour).slice(-2);
+                    duration = hour.toString().concat(":", minute.toString(), ":", sec.toString());
+                    setTimerstate(false);
+                    stopTimer();
+                    setComplete(true);
+                  }}
+                >
+                  Finish Session
+                </button>
+              </center>
             </div>
           </div>
         );
       } else if (selectedStation && complete) {
         // if complete
         return (
-          <div id="myModal" className="modal">
+          <div className="modal">
             <div className="modal-content">
-            <img
-                id="clo"
-                alt="closebtn"
-                src={close}
-                onClick={() => {
-                  setTimerstate(false);
-                  setComplete(false);
-                }}
-              />
-              <div id="thankyou"> Thank you! </div>
-              {/* {setComplete(false)} */}
-              {console.log(allminute)}
-              <div id="finishcost">
-                {" "}Total Time: {totaltime}{" "}
-              </div>
+              
+              <div id="thankyou"> Thank you for using Spot! </div>
+              <UnlockTxt>Unlocked Time</UnlockTxt>
+              <p id = "timertext2">{duration}</p>
               <div id="finishcost">
                 {" "}Total Cost: ${allminute * 0.5}{" "}
               </div>
-              <div id="finishcost">
-                The cost will be charged to your account.
-              </div>
-              {console.log("complete in thankyou", complete)}
-
-              {/* <button
-                id="completeclick"
-                className="btn"
+              <div id = "bottomScan">
+              <button
+                id="savebtn"
+                className="btnLogin"
                 onClick={() => {
-                  // document.getElementById("timerpage").style.display = "block"
-                  //var StationID = selectedStation.id;
-                  //console.log(selectedStation);
-
                   setTimerstate(false);
                   setComplete(false);
-                  // setCurrentAvaliableStation(true);
-                  //changeAvaliability(StationID, true);
-                  // alert("thank you");
                 }}
-              >
-                {" "}Finish Session{" "}
-              </button> */}
+              > Complete </button>
             </div>
+              </div>
+              
           </div>
         );
       }
     };
 
-    // useEffect(
-    //   () => {
-    //     updateTimer();
-
-    //   },
-    //   [timerstate]
-    // );
-
     // diplay all locations if timer not started
     // display only selected location if timer started
     const displayLocation = (timerstate, complete) => {
+
       if (!timerstate && !complete) {
         return (
           <div>
@@ -496,40 +456,32 @@ export default function App() {
 
     return (
       <div id="withmap">
-        {/* {(!TimerStarted)?  */ console.log(currentPosition)}
 
-        <GoogleMap
-          defaultZoom={13}
-          defaultCenter={curr}
-        >
-          
+        <GoogleMap defaultZoom={13} defaultCenter={curr}>
           {displayLocation(timerstate, complete)}
           {updateTimer()}
         </GoogleMap>
-      
-
       </div>
     );
   }
 
   const MapWrapped = withScriptjs(withGoogleMap(Map));
-  
+
   return (
     <div id="mainlayout">
       {user
         ? <div style={{ width: "100%", height: "100%" }}>
             <TopBannerDiv>
-            <AccountDiv>
-              <img
-                alt={""}
-                height="35%"
-                src={account}
-                onClick={() => {
-                  document.getElementById("ppage").style.display = "block";
-                }}
-              />
+              <AccountDiv>
+                <img
+                  alt={""}
+                  height="35%"
+                  src={account}
+                  onClick={() => {
+                    document.getElementById("ppage").style.display = "block";
+                  }}
+                />
               </AccountDiv>
-
               <TopLogoDiv>
                 <img
                   src={topLogo}
@@ -541,21 +493,38 @@ export default function App() {
               </TopLogoDiv>
             </TopBannerDiv>
 
-         <MapDiv>
-            <MapWrapped
-              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcQK-u06gf7heyS6eo0xE-hK__S5XriZs"
-              loadingElement={<div style={{ height: `100%`, width: "100%" }} />}
-              containerElement={
-                <div style={{ height: `100%`, width: "100%" }} />
-              }
-              mapElement={
-                <div style={{ height: `100%`, width: "100%", zIndex: 0 }} />
-              }
-            />
-            <MapButtons>
-            <img alt="currHome" src={GoToHome} onClick={() => {setCurr({lat:x.lat, lng: x.lng})}}></img>
-            <img alt="currLoc" src={GoToLocation} onClick={() => {setCurr({lat:CurrentLocation.lat, lng: CurrentLocation.lng})}}></img>
-            </MapButtons>
+            <MapDiv>
+              <MapWrapped
+                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcQK-u06gf7heyS6eo0xE-hK__S5XriZs"
+                loadingElement={
+                  <div style={{ height: `100%`, width: "100%" }} />
+                }
+                containerElement={
+                  <div style={{ height: `100%`, width: "100%" }} />
+                }
+                mapElement={
+                  <div style={{ height: `100%`, width: "100%", zIndex: 0 }} />
+                }
+              />
+              <MapButtons>
+                <img
+                  alt="currHome"
+                  src={GoToHome}
+                  onClick={() => {
+                    setCurr({ lat: x.lat, lng: x.lng });
+                  }}
+                />
+                <img
+                  alt="currLoc"
+                  src={GoToLocation}
+                  onClick={() => {
+                    setCurr({
+                      lat: CurrentLocation.lat,
+                      lng: CurrentLocation.lng
+                    });
+                  }}
+                />
+              </MapButtons>
             </MapDiv>
 
             <div id="ppage" data-cy="course">
@@ -584,10 +553,6 @@ export default function App() {
                         .getAttribute("loc")) {
                         case "petname":
                           if (document.getElementById("petinput").value) {
-                            console.log(
-                              "Pet Is: " +
-                                document.getElementById("petinput").value
-                            );
 
                             pushToFirebase(
                               document
@@ -611,7 +576,6 @@ export default function App() {
                               "Home Is: " +
                                 document.getElementById("homeinput").value
                             );
-                           
 
                             pushToFirebase(
                               document
@@ -638,7 +602,6 @@ export default function App() {
                               user.uid,
                               document.getElementById("homeinput4").value
                             );
-      
 
                             document.getElementById("accinfo").style.display =
                               "none";
@@ -705,7 +668,11 @@ export default function App() {
             </div>
 
             <div id="bottomnav">
-              <button id="savebtn" className="btnLogin" onClick={() => alert("Please Select a Valid Location!")}>
+              <button
+                id="savebtn"
+                className="btnLogin"
+                onClick={() => alert("Please Select a Valid Location!")}
+              >
                 Unlock
               </button>
             </div>

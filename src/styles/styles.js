@@ -3,8 +3,10 @@ import styled from 'styled-components';
 export const TopBannerDiv = styled.div`
     display: grid;
     width: 100%;
-    height: 10%;
+    height: 10vh;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-bottom: 2px solid;
+    border-color: #C3C3C7;
     grid-template-columns: 33% 33% 33%;
     grid-template-areas:
         'acc logo ';

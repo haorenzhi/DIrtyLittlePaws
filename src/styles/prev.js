@@ -99,10 +99,7 @@ export const AvailabilityTxt = styled.p`
   font-weight: bold;
   font-size: 16px;
   line-height: 1px;
-  // color: #5c3ef5;
-  // color: #5111A5;
   color: #662D91;
-  padding-top: 37px;
   margin-bottom: 5px;
 `;
 
@@ -120,10 +117,20 @@ export const LocationName = styled.p`
 export const PriceTxt = styled.p`
   margin-left: 48px;
   padding-top: 5px;
+  font-family: Karla;
   font-style: normal;
-  font-weight: bold;
   font-size: 16px;
   line-height: 1px;
+  color: #7c7c7c;
+`;
+
+export const UnlockTxt = styled.p`
+  padding-top: 25px;
+  font-family: Karla;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1px;
+  text-align: center;
   color: #7c7c7c;
 `;
 
@@ -131,15 +138,14 @@ export const AmenitiesLayout = styled.div`
   align-items: left;
   justify-content: left;
   margin-left: 48px;
-  padding-top: 10px;
 `;
 
 export const AmenityName = styled.p`
   font-family: Karla;
-  ont-style: normal;
+  font-style: normal;
   font-weight: 500;
   font-size: 16px;
-  line-height: 19px;
+  line-height: 1vh;
   color: #662D91;
   z-index: 1;
   margin-left: 10px;
@@ -172,7 +178,7 @@ export const TopBanner = styled.div`
   justify-content: center;
   display: flex;
   width: 428px;
-  height: 80px;
+  height: 10vh;
   background: #ffffff;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 `;
