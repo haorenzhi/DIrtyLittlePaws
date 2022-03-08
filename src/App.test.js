@@ -22,7 +22,7 @@ test('renders learn react link', async () => {
   useData.mockReturnValue([mdata, false, null]);
   useUserState.mockReturnValue(muser);
   render(<App />);
-  const linkElement = await screen.findByText(/Scan/i);
+  const linkElement = await screen.findByText("Unlock");
   expect(linkElement).toBeInTheDocument();
 });
 
