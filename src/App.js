@@ -314,6 +314,7 @@ export default function App() {
              setSelectedStation(null);
            }} /> */}
             <div className="modal-content">
+              <p id="rate"> Elapsed Time</p>
               <p id="timertext" />
               <p id="rate"> rate: $0.5/min</p>
 
@@ -332,7 +333,7 @@ export default function App() {
                   // alert("Complete");
                 }}
               >
-                Complete
+                Finish Session
               </button>
             </div>
           </div>
@@ -342,6 +343,15 @@ export default function App() {
         return (
           <div id="myModal" className="modal">
             <div className="modal-content">
+            <img
+                id="clo"
+                alt="closebtn"
+                src={close}
+                onClick={() => {
+                  setTimerstate(false);
+                  setComplete(false);
+                }}
+              />
               <div id="thankyou"> Thank you! </div>
               {/* {setComplete(false)} */}
               {console.log(allminute)}
@@ -356,7 +366,7 @@ export default function App() {
               </div>
               {console.log("complete in thankyou", complete)}
 
-              <button
+              {/* <button
                 id="completeclick"
                 className="btn"
                 onClick={() => {
@@ -372,7 +382,7 @@ export default function App() {
                 }}
               >
                 {" "}Finish Session{" "}
-              </button>
+              </button> */}
             </div>
           </div>
         );

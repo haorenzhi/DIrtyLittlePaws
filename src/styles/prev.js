@@ -100,7 +100,8 @@ export const AvailabilityTxt = styled.p`
   font-size: 16px;
   line-height: 1px;
   // color: #5c3ef5;
-  color: #5111A5;
+  // color: #5111A5;
+  color: #662D91;
   padding-top: 37px;
   margin-bottom: 5px;
 `;
@@ -139,7 +140,7 @@ export const AmenityName = styled.p`
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;
-  color: #662E91;
+  color: #662D91;
   z-index: 1;
   margin-left: 10px;
 `;

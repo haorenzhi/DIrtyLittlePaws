@@ -15,6 +15,9 @@
     background-color: white;
     width: 100vw;
     height: 60vh;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
   }
 
 }
@@ -54,7 +57,8 @@
   font-size: 50px;
   color: #1f2326;
   line-height: 1px;
-  padding-top: 40%;
+  /* padding-top: 40%; */
+  padding-top: 5%;
   z-index: 1;
   text-align: center;
 }
@@ -100,11 +104,21 @@
   margin-top: 20%;
   margin-left: 35%;
   text-align: center;
+  height: 50px;
+  border-radius: 50px;
+  padding: 5px;
+  width: 45%;
+  background-color: #662D91;
 }
 
 #timerclick{
-  margin-left: 40%;
+  margin-left: 28%;
   text-align: center;
+  height: 50px;
+  border-radius: 50px;
+  padding: 5px;
+  width: 45%;
+  background-color: #662D91;
 }
 
 #clo {
