@@ -74,7 +74,6 @@ export const useData = (path, transform) => {
 
   export const useUserState = () => {
     const [user, setUser] = useState();
-  
     useEffect(() => {
       onIdTokenChanged(getAuth(firebase), setUser);
     }, []); 
