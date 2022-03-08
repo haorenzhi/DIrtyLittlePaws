@@ -271,7 +271,7 @@ export default function App() {
                   <input type="number" placeholder="CVV" id="cvvid" 
                   onChange="{(e) => document.getElementById("cvvid").value = e.target.value}"/>
       
-                  <input type="date" placeholder="date" id="dateid" 
+                  <input type="month" placeholder="date" id="dateid" 
                   onChange="{(e) => document.getElementById("dateid").value = e.target.value}"/>
                   `;
                         
@@ -286,7 +286,7 @@ export default function App() {
                         }
                       }}
                     >
-                      Scan to Unlock
+                      Enter Code to Unlock
                     </button>
                   </div>
                 : <div id="bottomScan">
@@ -313,6 +313,7 @@ export default function App() {
                 src={close}
                 onClick={() => {
                   setSelectedStation(null);
+                  setScanclick(false);
                 }}
                 />
                 <UnlockTxt>
@@ -320,12 +321,11 @@ export default function App() {
                 </UnlockTxt>
                 
                 <div id="inputdigit">
-                  <input type="number" placeholder="five digit number">
+                  <input  type="number" placeholder="five digit number">
                   </input>
-                
-                </div>
+                  </div>
 
-                <button id="startsession" className="btn" onClick={()=> {
+                <button id="startclick" onClick={()=> {
                           timerstart = new Date().getTime();
                           setTimerstate(true);
                           changeTimer();
@@ -434,7 +434,7 @@ export default function App() {
     // display only selected location if timer started
     const displayLocation = (timerstate, complete) => {
 
-      if (!timerstate && !complete) {
+      if (!timerstate && !complete && !scanclick) {
         return (
           <div>
             {mdata.Locations.map(station =>
@@ -487,7 +487,30 @@ export default function App() {
               </div>}
           </div>
         );
-      } else if (timerstate && !complete) {
+      }
+      else if (!timerstate && !complete && scanclick) {
+        return (
+          <div>
+            {
+              <Marker
+                key={selectedStation.id}
+                position={{
+                  lat: selectedStation.latitude,
+                  lng: selectedStation.longitude
+                }}
+                icon={{
+                  url: paws,
+                  scaledSize: new window.google.maps.Size(25, 25)
+                }}
+              />
+
+            }
+
+          </div>
+        );
+
+      }
+      else if (timerstate && !complete) {
         return (
           <div>
             {
