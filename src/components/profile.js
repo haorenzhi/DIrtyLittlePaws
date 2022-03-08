@@ -58,8 +58,21 @@ function customInput(box){
             onChange="{(e) => document.getElementById("petinput").value = e.target.value}"/>`);
          
         case 4:
-            return (`<input type="text" placeholder="Home Address" id="homeinput" 
-            onChange="{(e) => document.getElementById("homeinput").value = e.target.value}"/>`);
+            return (`
+            
+            <input type="text" placeholder="Home Address" id="homeinput" 
+            onChange="{(e) => document.getElementById("homeinput").value = e.target.value}"/>
+            
+            <input type="text" placeholder="State" id="homeinput2" 
+            onChange="{(e) => document.getElementById("homeinput2").value = e.target.value}"/>
+
+            <input type="text" placeholder="City" id="homeinput3" 
+            onChange="{(e) => document.getElementById("homeinput3").value = e.target.value}"/>
+
+            <input type="text" placeholder="Zip" id="homeinput4" 
+            onChange="{(e) => document.getElementById("homeinput4").value = e.target.value}"/>
+            
+            `);
         
         case 5:
             return (`                
@@ -69,7 +82,7 @@ function customInput(box){
             <input type="number" placeholder="CVV" id="cvvid" 
             onChange="{(e) => document.getElementById("cvvid").value = e.target.value}"/>
 
-            <input type="date" placeholder="date" id="dateid" 
+            <input type="month" placeholder="date" id="dateid" 
             onChange="{(e) => document.getElementById("dateid").value = e.target.value}"/>
             `);
         default:
@@ -92,7 +105,7 @@ const ProfilePage = user => {
                 <p>Account details</p>
             </div>
             <div id="accphoto">
-                <p id = "detailName">Profile Photo</p>
+                <p id = "">Profile Photo</p>
                 <img src={user.userphoto} alt="userphoto"></img>
             </div>
             <div id="accdetails">
@@ -121,7 +134,7 @@ const ProfilePage = user => {
                 <div className="accinfo" onClick={ () => handleClick(4)}>
                     <div className="eachDetail"> 
                         <p>Home Address</p>
-                        <p id="acHome">{user.userinfo.address}</p>
+                        <p id="acHome">{user.userinfo.address}. {user.userinfo.city} {user.userinfo.state}, {user.userinfo.zipcode}</p>
                     </div>
 
                     <img alt={""} src={rightArrow} className="carats"/>
