@@ -123,6 +123,16 @@ function checkUser(mdata, user) {
 
 var x = { lat: 41.921634, lng: -87.659558 };
 
+var CurrentLocation = { lat: 41.921634, lng: -87.659558 };
+
+
+function ReturnCurrentLocation(lat, lng)
+{
+  CurrentLocation.lat = lat;
+  CurrentLocation.lng = lng; 
+}
+
+
 export default function App() {
   const user = useUserState();
   const [mdata, loading, error] = useData("/");
@@ -154,6 +164,9 @@ export default function App() {
       };
       setCurrentPosition(currentPosition);
     };
+
+    ReturnCurrentLocation(currentPosition.lat, currentPosition.lng);
+
 
     useEffect(() => {
       navigator.geolocation.getCurrentPosition(success);
@@ -531,7 +544,7 @@ export default function App() {
             />
             <MapButtons>
             <img alt="currHome" src={GoToHome} onClick={() => {setCurr({lat:x.lat, lng: x.lng})}}></img>
-            <img alt="currLoc" src={GoToLocation}></img>
+            <img alt="currLoc" src={GoToLocation} onClick={() => {setCurr({lat:CurrentLocation.lat, lng: CurrentLocation.lng})}}></img>
             </MapButtons>
             </MapDiv>
 
