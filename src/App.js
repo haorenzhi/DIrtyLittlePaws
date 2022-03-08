@@ -611,6 +611,7 @@ export default function App() {
                               "Home Is: " +
                                 document.getElementById("homeinput").value
                             );
+                           
 
                             pushToFirebase(
                               document
@@ -619,6 +620,25 @@ export default function App() {
                               user.uid,
                               document.getElementById("homeinput").value
                             );
+
+                            pushToFirebase(
+                              "state",
+                              user.uid,
+                              document.getElementById("homeinput2").value
+                            );
+
+                            pushToFirebase(
+                              "city",
+                              user.uid,
+                              document.getElementById("homeinput3").value
+                            );
+
+                            pushToFirebase(
+                              "zipcode",
+                              user.uid,
+                              document.getElementById("homeinput4").value
+                            );
+      
 
                             document.getElementById("accinfo").style.display =
                               "none";

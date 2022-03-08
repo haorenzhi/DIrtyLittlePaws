@@ -2,6 +2,8 @@
 import leftArrow from "../styles/svgs/back.svg";
 import rightArrow from "../styles/svgs/close.svg";
 import { SignOutButton } from "../App";
+// import {useUserState} from "../utilities/firebase.js";
+
 
 function handleClick(box){
     document.getElementById("accinfo").style.display = "block";
@@ -49,7 +51,11 @@ function handleClick(box){
     
 }
 
+var curUser = null
+
 function customInput(box){
+
+
     switch(box){
         case 3:
             return (`<input type="text" 
@@ -58,8 +64,21 @@ function customInput(box){
             onChange="{(e) => document.getElementById("petinput").value = e.target.value}"/>`);
          
         case 4:
-            return (`<input type="text" placeholder="Home Address" id="homeinput" 
-            onChange="{(e) => document.getElementById("homeinput").value = e.target.value}"/>`);
+            return (`
+            
+            <input type="text" value="${curUser.userinfo.address}" placeholder="Home Address" id="homeinput" 
+            onChange="{(e) => document.getElementById("homeinput").value = e.target.value}"/>
+
+            <input type="text" value="`+curUser.userinfo.city+`" placeholder="City" id="homeinput3" 
+            onChange="{(e) => document.getElementById("homeinput3").value = e.target.value}"/>
+                        
+            <input type="text" value="`+curUser.userinfo.state+`" placeholder="State" id="homeinput2" 
+            onChange="{(e) => document.getElementById("homeinput2").value = e.target.value}"/>
+
+            <input type="text" value="`+curUser.userinfo.zipcode+`" placeholder="Zip code" id="homeinput4" 
+            onChange="{(e) => document.getElementById("homeinput4").value = e.target.value}"/>
+            
+            `);
         
         case 5:
             return (`                
@@ -69,7 +88,7 @@ function customInput(box){
             <input type="number" placeholder="CVV" id="cvvid" 
             onChange="{(e) => document.getElementById("cvvid").value = e.target.value}"/>
 
-            <input type="date" placeholder="date" id="dateid" 
+            <input type="month" placeholder="date" id="dateid" 
             onChange="{(e) => document.getElementById("dateid").value = e.target.value}"/>
             `);
         default:
@@ -77,12 +96,12 @@ function customInput(box){
     }
 }
 
-const ProfilePage = user => {
+const ProfilePage = (user) => {
 
     // console.log("Profile page clicked");
     // console.log("user is " + user.username);
     // console.log("user info from profile " + user.userinfo.name);
-
+    curUser = user
    
     return (
         <div>
@@ -92,7 +111,7 @@ const ProfilePage = user => {
                 <p>Account details</p>
             </div>
             <div id="accphoto">
-                <p id = "detailName">Profile Photo</p>
+                <p id = "">Profile Photo</p>
                 <img src={user.userphoto} alt="userphoto"></img>
             </div>
             <div id="accdetails">
@@ -121,7 +140,7 @@ const ProfilePage = user => {
                 <div className="accinfo" onClick={ () => handleClick(4)}>
                     <div className="eachDetail"> 
                         <p>Home Address</p>
-                        <p id="acHome">{user.userinfo.address}</p>
+                        <p id="acHome">{user.userinfo.address}. {user.userinfo.city} {user.userinfo.state}, {user.userinfo.zipcode}</p>
                     </div>
 
                     <img alt={""} src={rightArrow} className="carats"/>
