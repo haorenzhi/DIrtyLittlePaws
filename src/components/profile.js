@@ -2,6 +2,8 @@
 import leftArrow from "../styles/svgs/back.svg";
 import rightArrow from "../styles/svgs/close.svg";
 import { SignOutButton } from "../App";
+// import {useUserState} from "../utilities/firebase.js";
+
 
 function handleClick(box){
     document.getElementById("accinfo").style.display = "block";
@@ -49,7 +51,11 @@ function handleClick(box){
     
 }
 
+var curUser = null
+
 function customInput(box){
+
+
     switch(box){
         case 3:
             return (`<input type="text" 
@@ -60,16 +66,16 @@ function customInput(box){
         case 4:
             return (`
             
-            <input type="text" placeholder="Home Address" id="homeinput" 
+            <input type="text" value="${curUser.userinfo.address}" placeholder="Home Address" id="homeinput" 
             onChange="{(e) => document.getElementById("homeinput").value = e.target.value}"/>
-            
-            <input type="text" placeholder="State" id="homeinput2" 
+
+            <input type="text" value="`+curUser.userinfo.city+`" placeholder="City" id="homeinput3" 
+            onChange="{(e) => document.getElementById("homeinput3").value = e.target.value}"/>
+                        
+            <input type="text" value="`+curUser.userinfo.state+`" placeholder="State" id="homeinput2" 
             onChange="{(e) => document.getElementById("homeinput2").value = e.target.value}"/>
 
-            <input type="text" placeholder="City" id="homeinput3" 
-            onChange="{(e) => document.getElementById("homeinput3").value = e.target.value}"/>
-
-            <input type="text" placeholder="Zip" id="homeinput4" 
+            <input type="text" value="`+curUser.userinfo.zipcode+`" placeholder="Zip code" id="homeinput4" 
             onChange="{(e) => document.getElementById("homeinput4").value = e.target.value}"/>
             
             `);
@@ -90,12 +96,12 @@ function customInput(box){
     }
 }
 
-const ProfilePage = user => {
+const ProfilePage = (user) => {
 
     // console.log("Profile page clicked");
     // console.log("user is " + user.username);
     // console.log("user info from profile " + user.userinfo.name);
-
+    curUser = user
    
     return (
         <div>
