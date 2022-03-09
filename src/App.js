@@ -162,6 +162,8 @@ export default function App() {
     var timerend;
     var duration;
 
+    console.log(totaltime);
+
     const success = async position => {
       const currentPosition = {
         lat: position.coords.latitude,

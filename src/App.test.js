@@ -32,7 +32,7 @@ it('shows Sign Out if logged in', async () => {
   useData.mockReturnValue([mdata, false, null]);
   useUserState.mockReturnValue(muser);
   render(<App />);
-  const button = screen.queryByText(/Sign Out/i);
+  const button = await screen.queryByText("Log Out");
   expect(button).toBeInTheDocument();
 });
 
