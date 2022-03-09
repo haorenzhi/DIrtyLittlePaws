@@ -8,7 +8,7 @@
     font-family: Karla;
     height: 100%;
     width: 100vw;
-    overflow: scroll; /* Enable scroll if needed */
+    overflow: auto; /* Enable scroll if needed */
     background-color: #F8F8F8;
   }
 }
@@ -16,7 +16,7 @@
 @media screen and (min-width: 600px){
   #ppage {
     display: none;
-    margin-left: 36%;
+    margin-left: 36vw;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -39,6 +39,11 @@
   font-weight: bold;
   font-size: 20px;
   line-height: 28px;
+}
+
+#signinbtn {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
 }
 
 .back {

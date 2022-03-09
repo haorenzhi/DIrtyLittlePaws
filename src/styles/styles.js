@@ -17,6 +17,7 @@ export const AccountDiv = styled.div`
     align-items: center;
     justify-content: center;
     grid-area: acc;
+    margin-top: 10px;
 `
 
 export const TopLogoDiv = styled.div`

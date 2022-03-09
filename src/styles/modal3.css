@@ -12,10 +12,10 @@
   }
 
   #accinfoC {
-    margin-top: 60%;
-    height: 44%;
+    border-top: 1px solid #C3C3C7;
+    height: 90vh;
+    margin-top: 10vh;
     width: 100vw;
-    border-radius: 22px;
     background-color: rgb(255, 255, 255);
   }
 }
@@ -35,41 +35,43 @@
   }
 
   #accinfoC {
-    margin-top: 60%;
-    height: 35%;
+    border-top: 1px solid #C3C3C7;
+    height: 90vh;
+    margin-top: 10vh;
     width: 28vw;
-    border-radius: 22px;
     background-color: rgb(255, 255, 255);
   }
 
 }
 
-#accinfoC input {
-  margin-bottom: 4px;
-}
 
 #detailName {
-  padding-top: 20px;
+  padding-left: 14%;
+  margin-top: 3vh;
   font-family: Karla;
-  font-style: normal;
   font-weight: normal;
-  font-size: 16px;
-  line-height: 19px;
-  /* identical to box height */
-
-
-  color: #1F2326;
-}
-#accinfoC p,
-input {
-  margin-left: 25%;
+  line-height: 1px;
+  font-size: 14px;
+  color: #666666;
 }
 
 #accinfoC input {
-  border-radius: 10px;
-  width: 50%;
-  height: 30px;
+  border: 1px solid #C3C3C7;
+  border-radius: 2vh;
+  font-size: 18px;
+  margin-left: 14%;
+  width: 70%;
+  height: 5vh;
   font-weight: bold;
+  font-family: Karla;
+  text-align: center;
+}
+
+#accinfoC input::placeholder{
+  justify-content: center;
+  font-size: 14px;
+  letter-spacing: 0rem;
+  font-weight: normal;
 }
 
 #savebtn {

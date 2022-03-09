@@ -33,7 +33,7 @@
     display: block;
     position: fixed;
     z-index: 1;
-    margin-left: 36%;
+    margin-left: 36vw;
     top: 55vh;
     left: 0;
     height: 45vh;
@@ -74,7 +74,7 @@
     font-weight: bold;
     font-size: 50px;
     color: #1f2326;
-    /* line-height: 1px; */
+    line-height: 1px;
     z-index: 1;
     text-align: center;
   }
@@ -107,7 +107,6 @@
     font-weight: bold;
     font-size: 50px;
     color: #1f2326;
-    /* line-height: 1px; */
     z-index: 1;
     text-align: center;
   }
@@ -187,15 +186,24 @@
   margin-top:2%;
 } 
 
-/* #inputdigit p,input { */
-  /* margin-left: 15%; */
-  /* border-radius: 50px; */
-  /* padding: 5px; */
-  /* text-align: center; */
-  /* margin-left: 19vw; */
-  /* height:6vh; */
-  /* width:25vh;  */
-/* }  */
+#inputdigit{
+  margin: 2vh;
+  border: 1px solid #C7C7C3;
+  border-radius: 2vh;
+  font-family: Karla;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 1rem;
+  padding-left: 10px;
+  text-align: center;
+  height:6vh;
+  width:25vh;
+}
+
+#inputdigit::placeholder {
+  font-size: 14px;
+  letter-spacing: 0rem;
+}
 
 
 .ficon {

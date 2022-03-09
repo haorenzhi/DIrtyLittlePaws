@@ -68,13 +68,13 @@ function customInput(box){
             
             <input type="text" value="${curUser.userinfo.address}" placeholder="Home Address" id="homeinput" 
             onChange="{(e) => document.getElementById("homeinput").value = e.target.value}"/>
-
+            <p id = "detailName"> City </p>
             <input type="text" value="`+curUser.userinfo.city+`" placeholder="City" id="homeinput3" 
             onChange="{(e) => document.getElementById("homeinput3").value = e.target.value}"/>
-                        
+            <p id = "detailName"> State </p>          
             <input type="text" value="`+curUser.userinfo.state+`" placeholder="State" id="homeinput2" 
             onChange="{(e) => document.getElementById("homeinput2").value = e.target.value}"/>
-
+            <p id = "detailName"> Zip Code </p>
             <input type="text" value="`+curUser.userinfo.zipcode+`" placeholder="Zip code" id="homeinput4" 
             onChange="{(e) => document.getElementById("homeinput4").value = e.target.value}"/>
             
@@ -84,10 +84,10 @@ function customInput(box){
             return (`                
             <input type="number" placeholder="Credit Card Number" id="cardinput" 
             onChange="{(e) => document.getElementById("cardinput").value = e.target.value}"/>
-
+            <p id = "detailName"> CVV </p>
             <input type="number" placeholder="CVV" id="cvvid" 
             onChange="{(e) => document.getElementById("cvvid").value = e.target.value}"/>
-
+            <p id = "detailName"> Date </p>
             <input type="month" placeholder="date" id="dateid" 
             onChange="{(e) => document.getElementById("dateid").value = e.target.value}"/>
             `);
@@ -140,7 +140,7 @@ const ProfilePage = (user) => {
                 <div className="accinfo" onClick={ () => handleClick(4)}>
                     <div className="eachDetail"> 
                         <p>Home Address</p>
-                        <p id="acHome">{user.userinfo.address}. {user.userinfo.city} {user.userinfo.state}, {user.userinfo.zipcode}</p>
+                        <p id="acHome">{user.userinfo.address} {user.userinfo.city} {user.userinfo.state}, {user.userinfo.zipcode}</p>
                     </div>
 
                     <img alt={""} src={rightArrow} className="carats"/>
