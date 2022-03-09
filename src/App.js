@@ -45,7 +45,7 @@ import {
 } from "./styles/styles.js";
 
 import ProfilePage from "./components/profile.js";
-import { setLogLevel } from "firebase/app";
+//import { setLogLevel } from "firebase/app";
 
 /* HELP COMMENT
 withGoogleMap initializes the map component while withScriptjs loads the Google Map JavaScript API v3.
@@ -151,8 +151,8 @@ export default function App() {
     var [timerstate, setTimerstate] = useState(false);
     const [complete, setComplete] = useState(false);
     const [allminute, setAllminute] = useState(0);
-    var [totaltime, setTotaltime] = useState("");
-    var [code, setCode] = useState(false);
+    //var [totaltime, setTotaltime] = useState("");
+   // var [code, setCode] = useState(false);
     var [scanclick, setScanclick] = useState(false);
     
     
