@@ -16,7 +16,7 @@
 @media screen and (min-width: 600px){
   #ppage {
     display: none;
-    margin-left: 36%;
+    margin-left: 36vw;
     position: fixed;
     z-index: 1;
     left: 0;
