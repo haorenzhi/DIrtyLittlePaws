@@ -162,12 +162,13 @@ export default function App() {
     var timerend;
     var duration;
 
-    const success = position => {
+    const success = async(position) => {
       const currentPosition = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
-      setCurrentPosition(currentPosition);
+      await setCurrentPosition(currentPosition);
+
     };
 
     ReturnCurrentLocation(currentPosition.lat, currentPosition.lng);
