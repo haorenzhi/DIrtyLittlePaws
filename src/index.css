@@ -126,12 +126,13 @@ code {
 #profile{
   display: flex;
   margin: 10px;
+  font-family: Karla;
 }
 #profile p{
   margin-left: 5px;
   font-weight: 800;
   color: rgb(204, 206, 207);
-  font-family: 'Comfortaa', cursive;
+  font-family: Karla;
 }
 #logo{
   height: 36px;

@@ -74,9 +74,9 @@ const SignInButton = () =>
   </div>;
 
 export const SignOutButton = () =>
-  <button id="signin" className="btn" onClick={() => signOutOfG()}>
-    Sign Out
-  </button>;
+  <div><br/><br/><br/><button id="signin" className="btn" onClick={() => signOutOfG()}>
+    Log Out
+  </button></div>;
 
 function amenityMapped(amenities) {
   let amList = amenities.split(",");
@@ -286,7 +286,7 @@ export default function App() {
                         }
                       }}
                     >
-                      Enter Code to Unlock
+                      Unlock Station
                     </button>
                   </div>
                 : <div id="bottomScan">
@@ -449,7 +449,7 @@ export default function App() {
                 }}
                 icon={{
                   url: station.avaliable ? paws : Usedpaws,
-                  scaledSize: new window.google.maps.Size(25, 25)
+                  scaledSize: new window.google.maps.Size(40, 40)
                 }}
               />
             )}

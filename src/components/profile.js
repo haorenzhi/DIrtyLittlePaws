@@ -110,7 +110,7 @@ const ProfilePage = (user) => {
                     onClick={()=> document.getElementById("ppage").style.display = "none"}/>
                 <p>Account details</p>
             </div>
-            <div id="accphoto">
+            <div id="accphoto" className="accinfo">
                 <p id = "">Profile Photo</p>
                 <img src={user.userphoto} alt="userphoto"></img>
             </div>
@@ -119,7 +119,7 @@ const ProfilePage = (user) => {
                 <div className="accinfo">
                     <div className="eachDetail">
                         <p>Name</p>
-                        <p id="acName">{user.username}</p>
+                        <p id="acName" font-weight="bold">{user.username}</p>
                     </div>
                 </div>
                 <div className="accinfo" >
@@ -155,7 +155,8 @@ const ProfilePage = (user) => {
                     <img alt={""} src={rightArrow} className="carats"/>
 
                 </div>
-                <SignOutButton />
+                <div><SignOutButton /></div>
+
             </div>
         </div>
     );

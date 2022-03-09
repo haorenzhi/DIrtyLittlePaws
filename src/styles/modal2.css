@@ -5,7 +5,7 @@
     z-index: 1;
     left: 0;
     top: 0%;
-    font-family: 'Comfortaa', cursive;
+    font-family: Karla;
     height: 100%;
     width: 100vw;
     overflow: scroll; /* Enable scroll if needed */
@@ -21,7 +21,7 @@
     z-index: 1;
     left: 0;
     top: 0%;
-    font-family: 'Comfortaa', cursive;
+    font-family: Karla;
     width: 28vw;
     height: 100%;
     overflow: auto; /* Enable scroll if needed */
@@ -83,6 +83,24 @@
   height: 8vh;
   background-color: white;
   border: 0.5px rgb(231, 224, 224) solid;
+  padding: 15px 0px 15px 25px;
+  display: flex;
+  flex-direction: column;
+  /* margin-right: 0px; */
+}
+
+.accinfoinput {
+  font-family: Karla;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 10px;
+
+  color: #1F2326;
+
+  height: 8vh;
+  background-color: white;
+  border: 0.5px rgb(231, 224, 224) solid;
   padding: 5px 10px 20px 20px;
   display: flex;
   /* margin-right: 0px; */
@@ -91,5 +109,5 @@
 .carats {
   position: absolute;
   right: 10%;
-  margin-top: 30px;
+  margin-top: 20px;
 }
