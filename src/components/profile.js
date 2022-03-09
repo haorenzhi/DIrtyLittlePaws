@@ -140,7 +140,7 @@ const ProfilePage = (user) => {
                 <div className="accinfo" onClick={ () => handleClick(4)}>
                     <div className="eachDetail"> 
                         <p>Home Address</p>
-                        <p id="acHome">{user.userinfo.address} {user.userinfo.city} {user.userinfo.state}, {user.userinfo.zipcode}</p>
+                        {!user.userinfo.address? <p id="acHome"></p> : <p id="acHome">{user.userinfo.address}. {user.userinfo.city} {user.userinfo.state}, {user.userinfo.zipcode}</p>}
                     </div>
 
                     <img alt={""} src={rightArrow} className="carats"/>
