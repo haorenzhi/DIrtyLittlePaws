@@ -120,7 +120,7 @@ const ProfilePage = (user) => {
                 <div className="accinfo">
                     <div className="eachDetail">
                         <p>Name</p>
-                        <p id="acName" font-weight="bold">{user.username}</p>
+                        <p id="acName" fontWeight="bold">{user.username}</p>
                     </div>
                 </div>
                 <div className="accinfo" >

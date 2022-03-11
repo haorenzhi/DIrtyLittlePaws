@@ -113,6 +113,7 @@ function checkUser(mdata, user) {
     name: user.displayName,
     payment: "",
     petname: "",
+    Homelatlng:{lat: x.lat, lng: x.lng}
   };
   pushToFirebase("/", user.uid, info);
   return info;
@@ -133,9 +134,17 @@ export default function App() {
   const [curr, setCurr] = useState(x);
   const [click, setclick] = useState(false);
 
+  //Read from firebase
+   
+  // setCurr({ lat: mdata[user.uid].info.lat, lng: x.lng });
 
+  // console.log(mdata[user.uid].Homelatlng)
+  
   if (error) return <h1>{error}</h1>;
   if (loading) return <h1>Loading the data...</h1>;
+
+  console.log(mdata["users"][user.uid]["info"]["Homelatlng"])
+  
 
   function Map() {
     const [selectedStation, setSelectedStation] = useState(null);
@@ -429,7 +438,7 @@ export default function App() {
                 }}
                 icon={{
                   url: CurrentLocationIcon,
-                  scaledSize: new window.google.maps.Size(25, 25),
+                  scaledSize: new window.google.maps.Size(40, 40),
                 }}
               />
             }
@@ -566,6 +575,7 @@ export default function App() {
                 alt="currHome"
                 src={GoToHome}
                 onClick={() => {
+                  x = mdata["users"][user.uid]["info"]["Homelatlng"]
                   setCurr({ lat: x.lat, lng: x.lng });
                 }}
               />
@@ -666,8 +676,22 @@ export default function App() {
                             document.getElementById("homeinput4").value
                           );
 
+                     
                           document.getElementById("accinfo").style.display =
                             "none";
+
+                        
+                            const url = "https://maps.googleapis.com/maps/api/geocode/json?address="+document.getElementById("homeinput").value+"%20%20"+document.getElementById("homeinput3").value+"%20"+document.getElementById("homeinput2").value+"%20&key=AIzaSyC0DQ7ymkbd9IozyJFce1qp6x4ljaYj8ns";
+                            fetch(url)
+                              .then((response) => response.json())
+                              .then((json) => {x = json.results[0].geometry.location;
+                                                pushToFirebase(
+                                                  "Homelatlng",
+                                                  user.uid,
+                                                  x
+                                                );})
+                              .catch((error) => console.log(error));
+                            console.log(x);
                         } else {
                           alert("invalid info");
                         }
