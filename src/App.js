@@ -25,9 +25,8 @@ import GoToHome from "../src/styles/svgs/home.svg";
 import CheckMark from "../src/styles/svgs/check.svg";
 import paws from "../src/styles/svgs/paws.png";
 import Usedpaws from "../src/styles/svgs/ActivePaws.png";
-// const ldata = require('./data/stations.json');
 import topLogo from "../src/styles/svgs/SpotLogo.svg";
-// import mapStyles from "./styles/mapstyles.js";
+
 import {
   LocationName,
   AvailabilityTxt,
@@ -46,7 +45,6 @@ import {
 } from "./styles/styles.js";
 
 import ProfilePage from "./components/profile.js";
-//import { setLogLevel } from "firebase/app";
 
 /* HELP COMMENT
 withGoogleMap initializes the map component while withScriptjs loads the Google Map JavaScript API v3.
@@ -133,12 +131,9 @@ export default function App() {
   const user = useUserState();
   const [mdata, loading, error] = useData("/");
   const [curr, setCurr] = useState(x);
-  // var passcode= "";
-  // var [code, setCode] = useState("");
-  // useEffect(() => {
-  //   // Update the document title using the browser API
-  //   setCode(passcode)
-  // },[passcode]);
+  const [click, setclick] = useState(false);
+  // const [password, setPassword] = useState(0);
+
 
    
 
@@ -158,7 +153,6 @@ export default function App() {
     var [totaltime, setTotaltime] = useState("");
     var [scanclick, setScanclick] = useState(false);
 
-    //var [currentAvailiableStation, setCurrentAvaliableStation] = useState(true);
 
     var timerstart;
     var timerend;
@@ -263,16 +257,16 @@ export default function App() {
                           .setAttribute("data-shortened", "payment");
                         document.getElementById(
                           "customInput"
-                        ).innerHTML = `                
-                  <input type="number" placeholder="Credit Card Number" id="cardinput" 
-                  onChange="{(e) => document.getElementById("cardinput").value = e.target.value}"/>
-      
-                  <input type="number" placeholder="CVV" id="cvvid" 
-                  onChange="{(e) => document.getElementById("cvvid").value = e.target.value}"/>
-      
-                  <input type="month" placeholder="date" id="dateid" 
-                  onChange="{(e) => document.getElementById("dateid").value = e.target.value}"/>
-                  `;
+                        ).innerHTML = `
+                          <p id = "detailName"> Credit Card Number </p>                
+                          <input type="number" placeholder="Credit Card Number" id="cardinput" 
+                          onChange="{(e) => document.getElementById("cardinput").value = e.target.value}"/>
+                          <p id = "detailName"> CVV </p>
+                          <input type="number" placeholder="CVV" id="cvvid" 
+                          onChange="{(e) => document.getElementById("cvvid").value = e.target.value}"/>
+                          <p id = "detailName"> Date </p>
+                          <input type="month" placeholder="date" id="dateid" 
+                          onChange="{(e) => document.getElementById("dateid").value = e.target.value}"/>`;
                       } else {
                         setScanclick(true);
 
@@ -299,7 +293,7 @@ export default function App() {
             </div>
           </div>
         );
-      } else if (scanclick && selectedStation && !timerstate && !complete) {
+      } else if ((scanclick && selectedStation && !timerstate && !complete) || click) {
         console.log("input code page");
         return (
           <div className="modal">
@@ -311,6 +305,7 @@ export default function App() {
                 onClick={() => {
                   setSelectedStation(null);
                   setScanclick(false);
+                  setclick(false)
                 }}
               />
               <UnlockTxt>Enter Station Number</UnlockTxt>
@@ -320,16 +315,18 @@ export default function App() {
                   id="inputdigit"
                   type="number"
                   placeholder="5 letter PIN"
+                  // onChange = {(e) => setPassword(e.target.value)}
                 />
               </center>
               <div id="bottomScan">
                 <button
                   id="savebtn"
                   className="btn"
-                  onClick={() => {
+                  onClick={() => { 
                     timerstart = new Date().getTime();
                     setTimerstate(true);
                     changeTimer();
+                    setclick(false)
                   }}
                 >
                   {" "}
@@ -784,7 +781,33 @@ export default function App() {
             <button
               id="savebtn"
               className="btnLogin"
-              onClick={() => alert("Please Select a Valid Location!")}
+              onClick={() => 
+                {if (document.getElementById("acPay").innerHTML === " ") {
+                  document.getElementById("accinfo").style.display =
+                    "block";
+                  document
+                    .getElementById("accinfoC")
+                    .setAttribute("loc", "payment");
+                  document
+                    .getElementById("savebtn")
+                    .setAttribute("data-shortened", "payment");
+                  document.getElementById(
+                    "customInput"
+                  ).innerHTML = `   
+                    <p id = "detailName"> Credit Card Number </p>             
+                    <input type="number" placeholder="Credit Card Number" id="cardinput" 
+                    onChange="{(e) => document.getElementById("cardinput").value = e.target.value}"/>
+                    <p id = "detailName"> CVV </p>
+                    <input type="number" placeholder="CVV" id="cvvid" 
+                    onChange="{(e) => document.getElementById("cvvid").value = e.target.value}"/>
+                    <p id = "detailName"> Date </p>
+                    <input type="month" placeholder="date" id="dateid" 
+                     onChange="{(e) => document.getElementById("dateid").value = e.target.value}"/>`;
+                } else {
+                  setclick(true)
+                }
+              }
+            }
             >
               Unlock
             </button>
