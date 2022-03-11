@@ -59,9 +59,10 @@ function customInput(box){
     switch(box){
         case 3:
             return (`<input type="text" 
-            placeholder="Pet Name" 
-            id="petinput" 
-            onChange="{(e) => document.getElementById("petinput").value = e.target.value}"/>`);
+            placeholder="Pet Name"
+            value="${curUser.userinfo.petname}" 
+             id="petinput" 
+            onChange="{(e) => document.getElementById("petinput").value = "e.target.value}""/>`);
          
         case 4:
             return (`
@@ -82,13 +83,13 @@ function customInput(box){
         
         case 5:
             return (`                
-            <input type="number" placeholder="Credit Card Number" id="cardinput" 
+            <input type="number" value="${curUser.userinfo.payment}" placeholder="Credit Card Number" id="cardinput" 
             onChange="{(e) => document.getElementById("cardinput").value = e.target.value}"/>
             <p id = "detailName"> CVV </p>
-            <input type="number" placeholder="CVV" id="cvvid" 
+            <input type="number" value="${curUser.userinfo.cvv}" placeholder="CVV" id="cvvid" 
             onChange="{(e) => document.getElementById("cvvid").value = e.target.value}"/>
             <p id = "detailName"> Date </p>
-            <input type="month" placeholder="date" id="dateid" 
+            <input type="month" value="${curUser.userinfo.expDate}" placeholder="date" id="dateid" 
             onChange="{(e) => document.getElementById("dateid").value = e.target.value}"/>
             `);
         default:

