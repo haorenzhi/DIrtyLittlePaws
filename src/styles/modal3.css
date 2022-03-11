@@ -23,7 +23,7 @@
   #accinfo {
     display: none;
     position: fixed;
-    margin-left: 36%;
+    margin-left: 36vw;
     z-index: 3;
     left: 0;
     top: 0%;
