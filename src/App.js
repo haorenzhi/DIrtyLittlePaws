@@ -132,7 +132,6 @@ export default function App() {
   const [mdata, loading, error] = useData("/");
   const [curr, setCurr] = useState(x);
   const [click, setclick] = useState(false);
-  // const [password, setPassword] = useState(0);
 
 
   if (error) return <h1>{error}</h1>;
@@ -309,7 +308,6 @@ export default function App() {
                   id="inputdigit"
                   type="number"
                   placeholder="5 letter PIN"
-                  // onChange = {(e) => setPassword(e.target.value)}
                 />
               </center>
               <div id="bottomScan">
@@ -336,7 +334,7 @@ export default function App() {
           <div className="modal">
             <div className="modal-content">
               <div id="locationInfo">
-                <LocationName>{selectedStation.name}</LocationName>
+                <LocationName>{selectedStation ? selectedStation.name : "Lincoln Park"}</LocationName>
                 <PriceTxt>$0.50 per minute</PriceTxt>
               </div>
               <UnlockTxt>Unlocked Time</UnlockTxt>
@@ -394,19 +392,6 @@ export default function App() {
               <p id="timertext2">{duration}</p>
               <div id="finishcost"> Total Cost: ${allminute * 0.5} </div>
 
-              {/* <div id="bottomScan">
-                <button
-                  id="savebtn"
-                  className="btnLogin"
-                  onClick={() => {
-                    setTimerstate(false);
-                    setComplete(false);
-                    setScanclick(false);
-                  }}
-                >
-                  {" "}Complete{" "}
-                </button>
-              </div> */}
             </div>
           </div>
         );
