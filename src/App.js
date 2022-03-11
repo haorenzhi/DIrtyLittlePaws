@@ -389,7 +389,7 @@ export default function App() {
         return (
           <div className="modal">
             <div className="modal-content">
-              {/* <img
+              <img
                 id="clo"
                 alt="closebtn"
                 src={close}
@@ -399,7 +399,7 @@ export default function App() {
                   setScanclick(false);
                   setSelectedStation(null);
                 }}
-              /> */}
+              />
                 <div id="thankyou"> Thank you for using Spot! </div>
                 <UnlockTxt>Unlocked Time</UnlockTxt>
                 <p id="timertext2">
@@ -409,7 +409,7 @@ export default function App() {
                   {" "}Total Cost: ${allminute * 0.5}{" "}
                 </div>
 
-              <div id="bottomScan">
+              {/* <div id="bottomScan">
                 <button
                   id="savebtn"
                   className="btnLogin"
@@ -421,7 +421,7 @@ export default function App() {
                 >
                   {" "}Complete{" "}
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         );
