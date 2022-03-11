@@ -6,7 +6,7 @@ import {
   withScriptjs,
   GoogleMap,
   Marker,
-  InfoWindow
+  InfoWindow,
 } from "react-google-maps";
 
 import {
@@ -14,7 +14,7 @@ import {
   useUserState,
   signInWithG,
   signOutOfG,
-  pushToFirebase
+  pushToFirebase,
 } from "./utilities/firebase.js";
 // import help from "../src/styles/svgs/help.svg";
 import account from "../src/styles/svgs/account.svg";
@@ -34,7 +34,7 @@ import {
   PriceTxt,
   UnlockTxt,
   AmenitiesLayout,
-  AmenityName
+  AmenityName,
 } from "./styles/prev.js";
 
 import {
@@ -42,7 +42,7 @@ import {
   AccountDiv,
   TopLogoDiv,
   MapDiv,
-  MapButtons
+  MapButtons,
 } from "./styles/styles.js";
 
 import ProfilePage from "./components/profile.js";
@@ -63,7 +63,7 @@ withGoogleMap requires -
 */
 // var TimerStarted = false;
 
-const SignInButton = () =>
+const SignInButton = () => (
   <div id="signinpage">
     <img src={topLogo} id="logot" alt="logo" />
     <button id="signin" className="btn" onClick={() => signInWithG()}>
@@ -72,25 +72,25 @@ const SignInButton = () =>
     <button id="signup" className="btn" onClick={() => signInWithG()}>
       New user? Sign Up with Google
     </button>
-  </div>;
+  </div>
+);
 
-export const SignOutButton = () =>
+export const SignOutButton = () => (
   <div id="signinbtn">
     <button id="signin" className="btn" onClick={() => signOutOfG()}>
       Log Out
     </button>
-  </div>;
+  </div>
+);
 
 function amenityMapped(amenities) {
   let amList = amenities.split(",");
-  return amList.map((amenity, key) =>
+  return amList.map((amenity, key) => (
     <div id="eachA" key={key}>
       <img alt={CheckMark} src={CheckMark} className="ficon" />
-      <AmenityName>
-        {amenity}
-      </AmenityName>
+      <AmenityName>{amenity}</AmenityName>
     </div>
-  );
+  ));
 }
 
 function checkPaymentInfo(val, cvv, date) {
@@ -114,7 +114,7 @@ function checkUser(mdata, user) {
     img: user.photoURL,
     name: user.displayName,
     payment: "",
-    petname: ""
+    petname: "",
   };
   pushToFirebase("/", user.uid, info);
   return info;
@@ -140,12 +140,7 @@ export default function App() {
   //   setCode(passcode)
   // },[passcode]);
 
-  if (error)
-    return (
-      <h1>
-        {error}
-      </h1>
-    );
+  if (error) return <h1>{error}</h1>;
   if (loading) return <h1>Loading the data...</h1>;
 
   function Map() {
@@ -165,10 +160,10 @@ export default function App() {
 
     console.log(totaltime);
 
-    const success = async position => {
+    const success = async (position) => {
       const currentPosition = {
         lat: position.coords.latitude,
-        lng: position.coords.longitude
+        lng: position.coords.longitude,
       };
       await setCurrentPosition(currentPosition);
     };
@@ -236,9 +231,7 @@ export default function App() {
                     ? "• Available"
                     : "• Not Available"}
                 </AvailabilityTxt>
-                <LocationName>
-                  {selectedStation.name}
-                </LocationName>
+                <LocationName>{selectedStation.name}</LocationName>
                 <PriceTxt>$0.50 per minute</PriceTxt>
                 <AmenitiesLayout>
                   {selectedStation.amenities
@@ -247,26 +240,24 @@ export default function App() {
                 </AmenitiesLayout>
               </div>
 
-              {selectedStation.avaliable
-                ? <div id="bottomScan">
-                    <button
-                      id="scanTo"
-                      className="btn"
-                      onClick={() => {
-                        if (
-                          document.getElementById("acPay").innerHTML === " "
-                        ) {
-                          document.getElementById("accinfo").style.display =
-                            "block";
-                          document
-                            .getElementById("accinfoC")
-                            .setAttribute("loc", "payment");
-                          document
-                            .getElementById("savebtn")
-                            .setAttribute("data-shortened", "payment");
-                          document.getElementById(
-                            "customInput"
-                          ).innerHTML = `                
+              {selectedStation.avaliable ? (
+                <div id="bottomScan">
+                  <button
+                    id="scanTo"
+                    className="btn"
+                    onClick={() => {
+                      if (document.getElementById("acPay").innerHTML === " ") {
+                        document.getElementById("accinfo").style.display =
+                          "block";
+                        document
+                          .getElementById("accinfoC")
+                          .setAttribute("loc", "payment");
+                        document
+                          .getElementById("savebtn")
+                          .setAttribute("data-shortened", "payment");
+                        document.getElementById(
+                          "customInput"
+                        ).innerHTML = `                
                   <input type="number" placeholder="Credit Card Number" id="cardinput" 
                   onChange="{(e) => document.getElementById("cardinput").value = e.target.value}"/>
       
@@ -276,27 +267,29 @@ export default function App() {
                   <input type="month" placeholder="date" id="dateid" 
                   onChange="{(e) => document.getElementById("dateid").value = e.target.value}"/>
                   `;
-                        } else {
-                          setScanclick(true);
+                      } else {
+                        setScanclick(true);
 
-                          //   timerstart = new Date().getTime();
-                          //   setTimerstate(true);
-                          //   changeTimer();
-                        }
-                      }}
-                    >
-                      Unlock Station
-                    </button>
-                  </div>
-                : <div id="bottomScan">
-                    <button
-                      id="notavailable"
-                      className="btnLogin"
-                      onClick={() => alert("Location Not Available!")}
-                    >
-                      Not Available
-                    </button>
-                  </div>}
+                        //   timerstart = new Date().getTime();
+                        //   setTimerstate(true);
+                        //   changeTimer();
+                      }
+                    }}
+                  >
+                    Unlock Station
+                  </button>
+                </div>
+              ) : (
+                <div id="bottomScan">
+                  <button
+                    id="notavailable"
+                    className="btnLogin"
+                    onClick={() => alert("Location Not Available!")}
+                  >
+                    Not Available
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         );
@@ -333,7 +326,8 @@ export default function App() {
                     changeTimer();
                   }}
                 >
-                  {" "}Start Session
+                  {" "}
+                  Start Session
                 </button>
               </div>
             </div>
@@ -345,16 +339,12 @@ export default function App() {
           <div className="modal">
             <div className="modal-content">
               <div id="locationInfo">
-                <LocationName>
-                  {selectedStation.name}
-                </LocationName>
+                <LocationName>{selectedStation.name}</LocationName>
                 <PriceTxt>$0.50 per minute</PriceTxt>
               </div>
               <UnlockTxt>Unlocked Time</UnlockTxt>
               <p id="timertext" />
-              <div id="finishcost">
-                {" "}Total Cost: ${allminute * 0.5}{" "}
-              </div>
+              <div id="finishcost"> Total Cost: ${allminute * 0.5} </div>
               <center id="bottomScan">
                 <button
                   id="timerclick"
@@ -389,25 +379,23 @@ export default function App() {
         return (
           <div className="modal">
             <div className="modal-content">
-              <img
-                id="clo"
-                alt="closebtn"
-                src={close}
-                onClick={() => {
-                  setTimerstate(false);
-                  setComplete(false);
-                  setScanclick(false);
-                  setSelectedStation(null);
-                }}
-              />
+              <div>
+                <img
+                  id="clo"
+                  alt="closebtn"
+                  src={close}
+                  onClick={() => {
+                    setTimerstate(false);
+                    setComplete(false);
+                    setScanclick(false);
+                    setSelectedStation(null);
+                  }}
+                />
                 <div id="thankyou"> Thank you for using Spot! </div>
-                <UnlockTxt>Unlocked Time</UnlockTxt>
-                <p id="timertext2">
-                  {duration}
-                </p>
-                <div id="finishcost">
-                  {" "}Total Cost: ${allminute * 0.5}{" "}
-                </div>
+              </div>
+              <UnlockTxt>Unlocked Time</UnlockTxt>
+              <p id="timertext2">{duration}</p>
+              <div id="finishcost"> Total Cost: ${allminute * 0.5} </div>
 
               {/* <div id="bottomScan">
                 <button
@@ -434,37 +422,37 @@ export default function App() {
       if (!timerstate && !complete && !scanclick) {
         return (
           <div>
-            {mdata.Locations.map(station =>
+            {mdata.Locations.map((station) => (
               <Marker
                 key={station.id}
                 position={{
                   lat: station.latitude,
-                  lng: station.longitude
+                  lng: station.longitude,
                 }}
                 onClick={() => {
                   setSelectedStation(station);
                 }}
                 icon={{
                   url: station.avaliable ? paws : Usedpaws,
-                  scaledSize: new window.google.maps.Size(40, 40)
+                  scaledSize: new window.google.maps.Size(40, 40),
                 }}
               />
-            )}
+            ))}
 
             {
               <Marker
                 position={{
                   lat: Number(currentPosition.lat),
-                  lng: Number(currentPosition.lng)
+                  lng: Number(currentPosition.lng),
                 }}
                 icon={{
                   url: CurrentLocationIcon,
-                  scaledSize: new window.google.maps.Size(25, 25)
+                  scaledSize: new window.google.maps.Size(25, 25),
                 }}
               />
             }
 
-            {selectedStation &&
+            {selectedStation && (
               <div>
                 <InfoWindow
                   onCloseClick={() => {
@@ -472,16 +460,15 @@ export default function App() {
                   }}
                   position={{
                     lat: selectedStation.latitude,
-                    lng: selectedStation.longitude
+                    lng: selectedStation.longitude,
                   }}
                 >
                   <div>
-                    <h2>
-                      {selectedStation.name}
-                    </h2>
+                    <h2>{selectedStation.name}</h2>
                   </div>
                 </InfoWindow>
-              </div>}
+              </div>
+            )}
           </div>
         );
       } else if (!timerstate && !complete && scanclick) {
@@ -492,11 +479,11 @@ export default function App() {
                 key={selectedStation.id}
                 position={{
                   lat: selectedStation.latitude,
-                  lng: selectedStation.longitude
+                  lng: selectedStation.longitude,
                 }}
                 icon={{
                   url: paws,
-                  scaledSize: new window.google.maps.Size(25, 25)
+                  scaledSize: new window.google.maps.Size(25, 25),
                 }}
               />
             }
@@ -510,11 +497,11 @@ export default function App() {
                 key={selectedStation.id}
                 position={{
                   lat: selectedStation.latitude,
-                  lng: selectedStation.longitude
+                  lng: selectedStation.longitude,
                 }}
                 icon={{
                   url: paws,
-                  scaledSize: new window.google.maps.Size(25, 25)
+                  scaledSize: new window.google.maps.Size(25, 25),
                 }}
               />
             }
@@ -528,11 +515,11 @@ export default function App() {
                 key={selectedStation.id}
                 position={{
                   lat: selectedStation.latitude,
-                  lng: selectedStation.longitude
+                  lng: selectedStation.longitude,
                 }}
                 icon={{
                   url: paws,
-                  scaledSize: new window.google.maps.Size(25, 25)
+                  scaledSize: new window.google.maps.Size(25, 25),
                 }}
               />
             }
@@ -557,229 +544,235 @@ export default function App() {
 
   return (
     <div id="mainlayout">
-      {user
-        ? <div style={{ width: "100%", height: "100%" }}>
-            <TopBannerDiv>
-              <AccountDiv>
+      {user ? (
+        <div style={{ width: "100%", height: "100%" }}>
+          <TopBannerDiv>
+            <AccountDiv>
+              <img
+                alt={""}
+                height="35%"
+                src={account}
+                onClick={() => {
+                  document.getElementById("ppage").style.display = "block";
+                }}
+              />
+            </AccountDiv>
+            <TopLogoDiv>
+              <img
+                src={topLogo}
+                alt="topLogo"
+                id="logo"
+                height="36px"
+                data-cy="profile"
+              />
+            </TopLogoDiv>
+          </TopBannerDiv>
+
+          <MapDiv>
+            <MapWrapped
+              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcQK-u06gf7heyS6eo0xE-hK__S5XriZs"
+              loadingElement={<div style={{ height: `100%`, width: "100%" }} />}
+              containerElement={
+                <div style={{ height: `100%`, width: "100%" }} />
+              }
+              mapElement={
+                <div style={{ height: `100%`, width: "100%", zIndex: 0 }} />
+              }
+            />
+            <MapButtons>
+              <img
+                alt="currHome"
+                src={GoToHome}
+                onClick={() => {
+                  setCurr({ lat: x.lat, lng: x.lng });
+                }}
+              />
+              <img
+                alt="currLoc"
+                src={GoToLocation}
+                onClick={() => {
+                  setCurr({
+                    lat: CurrentLocation.lat,
+                    lng: CurrentLocation.lng,
+                  });
+                }}
+              />
+            </MapButtons>
+          </MapDiv>
+
+          <div id="ppage" data-cy="course">
+            {ProfilePage({
+              username: user.displayName,
+              useremail: user.email,
+              userphoto: user.photoURL,
+              userid: user.uid,
+              userinfo: checkUser(mdata.users, user),
+            })}
+          </div>
+
+          <div id="accinfo">
+            <div id="accinfoC">
+              <div id="accheader">
                 <img
                   alt={""}
-                  height="35%"
-                  src={account}
+                  src={leftArrow}
+                  className="back"
+                  onClick={() =>
+                    (document.getElementById("accinfo").style.display = "none")
+                  }
+                />
+                <p>Account details</p>
+              </div>
+              <p id="detailName" />
+              <div id="customInput" />
+              <center>
+                <button
+                  id="cancelbtn"
+                  className="btn"
                   onClick={() => {
-                    document.getElementById("ppage").style.display = "block";
-                  }}
-                />
-              </AccountDiv>
-              <TopLogoDiv>
-                <img
-                  src={topLogo}
-                  alt="topLogo"
-                  id="logo"
-                  height="36px"
-                  data-cy="profile"
-                />
-              </TopLogoDiv>
-            </TopBannerDiv>
+                    switch (
+                      document.getElementById("accinfoC").getAttribute("loc")
+                    ) {
+                      case "petname":
+                        if (document.getElementById("petinput").value) {
+                          pushToFirebase(
+                            document
+                              .getElementById("savebtn")
+                              .getAttribute("data-shortened"),
+                            user.uid,
+                            document.getElementById("petinput").value
+                          );
 
-            <MapDiv>
-              <MapWrapped
-                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcQK-u06gf7heyS6eo0xE-hK__S5XriZs"
-                loadingElement={
-                  <div style={{ height: `100%`, width: "100%" }} />
-                }
-                containerElement={
-                  <div style={{ height: `100%`, width: "100%" }} />
-                }
-                mapElement={
-                  <div style={{ height: `100%`, width: "100%", zIndex: 0 }} />
-                }
-              />
-              <MapButtons>
-                <img
-                  alt="currHome"
-                  src={GoToHome}
-                  onClick={() => {
-                    setCurr({ lat: x.lat, lng: x.lng });
-                  }}
-                />
-                <img
-                  alt="currLoc"
-                  src={GoToLocation}
-                  onClick={() => {
-                    setCurr({
-                      lat: CurrentLocation.lat,
-                      lng: CurrentLocation.lng
-                    });
-                  }}
-                />
-              </MapButtons>
-            </MapDiv>
+                          document.getElementById("accinfo").style.display =
+                            "none";
+                        } else {
+                          alert("invalid info");
+                        }
 
-            <div id="ppage" data-cy="course">
-              {ProfilePage({
-                username: user.displayName,
-                useremail: user.email,
-                userphoto: user.photoURL,
-                userid: user.uid,
-                userinfo: checkUser(mdata.users, user)
-              })}
-            </div>
+                        break;
 
-            <div id="accinfo">
-              <div id="accinfoC">
-                <div id="accheader">
-                  <img alt={""} src={leftArrow} className="back" 
-                    onClick={()=> document.getElementById("accinfo").style.display = "none"}/>
-                  <p>Account details</p>
-                </div>
-                <p id="detailName" />
-                <div id="customInput" />
-                <center>
-                  <button
-                    id="cancelbtn"
-                    className="btn"
-                    onClick={() => {
-                      switch (document
-                        .getElementById("accinfoC")
-                        .getAttribute("loc")) {
-                        case "petname":
-                          if (document.getElementById("petinput").value) {
-                            pushToFirebase(
-                              document
-                                .getElementById("savebtn")
-                                .getAttribute("data-shortened"),
-                              user.uid,
-                              document.getElementById("petinput").value
-                            );
-
-                            document.getElementById("accinfo").style.display =
-                              "none";
-                          } else {
-                            alert("invalid info");
-                          }
-
-                          break;
-
-                        case "address":
-                          if (document.getElementById("homeinput").value) {
-                            console.log(
-                              "Home Is: " +
-                                document.getElementById("homeinput").value
-                            );
-
-                            pushToFirebase(
-                              document
-                                .getElementById("savebtn")
-                                .getAttribute("data-shortened"),
-                              user.uid,
+                      case "address":
+                        if (document.getElementById("homeinput").value) {
+                          console.log(
+                            "Home Is: " +
                               document.getElementById("homeinput").value
-                            );
+                          );
 
-                            pushToFirebase(
-                              "state",
-                              user.uid,
-                              document.getElementById("homeinput2").value
-                            );
+                          pushToFirebase(
+                            document
+                              .getElementById("savebtn")
+                              .getAttribute("data-shortened"),
+                            user.uid,
+                            document.getElementById("homeinput").value
+                          );
 
-                            pushToFirebase(
-                              "city",
-                              user.uid,
-                              document.getElementById("homeinput3").value
-                            );
+                          pushToFirebase(
+                            "state",
+                            user.uid,
+                            document.getElementById("homeinput2").value
+                          );
 
-                            pushToFirebase(
-                              "zipcode",
-                              user.uid,
-                              document.getElementById("homeinput4").value
-                            );
+                          pushToFirebase(
+                            "city",
+                            user.uid,
+                            document.getElementById("homeinput3").value
+                          );
 
-                            document.getElementById("accinfo").style.display =
-                              "none";
-                          } else {
-                            alert("invalid info");
-                          }
+                          pushToFirebase(
+                            "zipcode",
+                            user.uid,
+                            document.getElementById("homeinput4").value
+                          );
 
-                          break;
-                        case "payment":
-                          let val = checkPaymentInfo(
-                            document.getElementById("cardinput").value,
-                            document.getElementById("cvvid").value,
+                          document.getElementById("accinfo").style.display =
+                            "none";
+                        } else {
+                          alert("invalid info");
+                        }
+
+                        break;
+                      case "payment":
+                        let val = checkPaymentInfo(
+                          document.getElementById("cardinput").value,
+                          document.getElementById("cvvid").value,
+                          document.getElementById("dateid").value
+                        );
+
+                        if (val === 1) {
+                          console.log(
+                            "INPUT IS: " +
+                              document.getElementById("cardinput").value
+                          );
+                          console.log(
+                            "SHORTENED: " +
+                              document
+                                .getElementById("savebtn")
+                                .getAttribute("data-shortened")
+                          );
+                          console.log("USER ID: " + user.uid);
+
+                          pushToFirebase(
+                            document
+                              .getElementById("savebtn")
+                              .getAttribute("data-shortened"),
+                            user.uid,
+                            document.getElementById("cardinput").value
+                          );
+
+                          pushToFirebase(
+                            "cvv",
+                            user.uid,
+                            document.getElementById("cvvid").value
+                          );
+                          pushToFirebase(
+                            "expDate",
+                            user.uid,
                             document.getElementById("dateid").value
                           );
 
-                          if (val === 1) {
-                            console.log(
-                              "INPUT IS: " +
-                                document.getElementById("cardinput").value
-                            );
-                            console.log(
-                              "SHORTENED: " +
-                                document
-                                  .getElementById("savebtn")
-                                  .getAttribute("data-shortened")
-                            );
-                            console.log("USER ID: " + user.uid);
+                          document.getElementById("accinfo").style.display =
+                            "none";
+                        } else {
+                          alert("invalid info");
+                        }
 
-                            pushToFirebase(
-                              document
-                                .getElementById("savebtn")
-                                .getAttribute("data-shortened"),
-                              user.uid,
-                              document.getElementById("cardinput").value
-                            );
+                        break;
 
-                            pushToFirebase(
-                              "cvv",
-                              user.uid,
-                              document.getElementById("cvvid").value
-                            );
-                            pushToFirebase(
-                              "expDate",
-                              user.uid,
-                              document.getElementById("dateid").value
-                            );
-
-                            document.getElementById("accinfo").style.display =
-                              "none";
-                          } else {
-                            alert("invalid info");
-                          }
-
-                          break;
-
-                        default:
-                          console.log("default");
-                      }
-                    }}
-                  >
-                    Save
-                  </button>{" "}
-                </center>
-                <center>
-                  <button
-                    className="btn"
-                    id="cancelbtn"
-                    onClick={() =>
-                      (document.getElementById("accinfo").style.display =
-                        "none")}
-                  >
-                    Cancel
-                  </button>
-                </center>
-              </div>
-            </div>
-
-            <div id="bottomnav">
-              <button
-                id="savebtn"
-                className="btnLogin"
-                onClick={() => alert("Please Select a Valid Location!")}
-              >
-                Unlock
-              </button>
+                      default:
+                        console.log("default");
+                    }
+                  }}
+                >
+                  Save
+                </button>{" "}
+              </center>
+              <center>
+                <button
+                  className="btn"
+                  id="cancelbtn"
+                  onClick={() =>
+                    (document.getElementById("accinfo").style.display = "none")
+                  }
+                >
+                  Cancel
+                </button>
+              </center>
             </div>
           </div>
-        : <SignInButton />}
+
+          <div id="bottomnav">
+            <button
+              id="savebtn"
+              className="btnLogin"
+              onClick={() => alert("Please Select a Valid Location!")}
+            >
+              Unlock
+            </button>
+          </div>
+        </div>
+      ) : (
+        <SignInButton />
+      )}
     </div>
   );
 }
