@@ -134,16 +134,10 @@ export default function App() {
   const [curr, setCurr] = useState(x);
   const [click, setclick] = useState(false);
 
-  //Read from firebase
-   
-  // setCurr({ lat: mdata[user.uid].info.lat, lng: x.lng });
-
-  // console.log(mdata[user.uid].Homelatlng)
   
   if (error) return <h1>{error}</h1>;
   if (loading) return <h1>Loading the data...</h1>;
 
-  console.log(mdata["users"][user.uid]["info"]["Homelatlng"])
   
 
   function Map() {
