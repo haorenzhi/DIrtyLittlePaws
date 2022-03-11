@@ -140,8 +140,14 @@ export default function App() {
   //   setCode(passcode)
   // },[passcode]);
 
+   
+
+
   if (error) return <h1>{error}</h1>;
   if (loading) return <h1>Loading the data...</h1>;
+
+
+  
 
   function Map() {
     const [selectedStation, setSelectedStation] = useState(null);
@@ -684,8 +690,22 @@ export default function App() {
                             document.getElementById("homeinput4").value
                           );
 
+                     
                           document.getElementById("accinfo").style.display =
                             "none";
+
+                        
+                            const url = "https://maps.googleapis.com/maps/api/geocode/json?address="+document.getElementById("homeinput").value+"%20%20"+document.getElementById("homeinput3").value+"%20"+document.getElementById("homeinput2").value+"%20&key=AIzaSyC0DQ7ymkbd9IozyJFce1qp6x4ljaYj8ns";
+                            fetch(url)
+                              .then((response) => response.json())
+                              .then((json) => {x = json.results[0].geometry.location;
+                                                pushToFirebase(
+                                                  "Homelatlng",
+                                                  user.uid,
+                                                  x
+                                                );})
+                              .catch((error) => console.log(error));
+                            console.log(x);
                         } else {
                           alert("invalid info");
                         }
