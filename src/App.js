@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import leftArrow from "../src/styles/svgs/back.svg";
 
 import {
   withGoogleMap,
@@ -626,6 +627,11 @@ export default function App() {
 
             <div id="accinfo">
               <div id="accinfoC">
+                <div id="accheader">
+                  <img alt={""} src={leftArrow} className="back" 
+                    onClick={()=> document.getElementById("accinfo").style.display = "none"}/>
+                  <p>Account details</p>
+                </div>
                 <p id="detailName" />
                 <div id="customInput" />
                 <center>
