@@ -113,6 +113,7 @@ function checkUser(mdata, user) {
     name: user.displayName,
     payment: "",
     petname: "",
+    Homelatlng:{lat: x.lat, lng: x.lng}
   };
   pushToFirebase("/", user.uid, info);
   return info;
@@ -134,14 +135,16 @@ export default function App() {
   const [click, setclick] = useState(false);
   // const [password, setPassword] = useState(0);
 
-
+  //Read from firebase
    
+  // setCurr({ lat: mdata[user.uid].info.lat, lng: x.lng });
 
-
+  // console.log(mdata[user.uid].Homelatlng)
+  
   if (error) return <h1>{error}</h1>;
   if (loading) return <h1>Loading the data...</h1>;
 
-
+  console.log(mdata["users"][user.uid]["info"]["Homelatlng"])
   
 
   function Map() {
@@ -450,7 +453,7 @@ export default function App() {
                 }}
                 icon={{
                   url: CurrentLocationIcon,
-                  scaledSize: new window.google.maps.Size(25, 25),
+                  scaledSize: new window.google.maps.Size(40, 40),
                 }}
               />
             }
@@ -587,6 +590,7 @@ export default function App() {
                 alt="currHome"
                 src={GoToHome}
                 onClick={() => {
+                  x = mdata["users"][user.uid]["info"]["Homelatlng"]
                   setCurr({ lat: x.lat, lng: x.lng });
                 }}
               />
