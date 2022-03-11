@@ -134,9 +134,14 @@ code {
   color: rgb(204, 206, 207);
   font-family: Karla;
 }
+
 #logo{
   height: 36px;
   margin-top: 9%;
+}
+
+#hamburger{
+  height: 24px;
 }
 
 #bottomnav{

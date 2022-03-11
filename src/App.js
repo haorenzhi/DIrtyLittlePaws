@@ -17,7 +17,7 @@ import {
   pushToFirebase,
 } from "./utilities/firebase.js";
 // import help from "../src/styles/svgs/help.svg";
-import account from "../src/styles/svgs/account.svg";
+import hamburger from "../src/styles/svgs/hamburger.svg";
 import close from "../src/styles/svgs/close.svg";
 import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
 import GoToLocation from "../src/styles/svgs/currlocation.svg";
@@ -324,14 +324,18 @@ export default function App() {
                   id="savebtn"
                   className="btn"
                   onClick={() => { 
-                    timerstart = new Date().getTime();
-                    setTimerstate(true);
-                    changeTimer();
-                    setclick(false)
+                    if (!click){
+                      timerstart = new Date().getTime();
+                      setTimerstate(true);
+                      changeTimer();
+                    } else {
+                      alert("Please go to the nearest station!")
+                    }
+                    
                   }}
                 >
                   {" "}
-                  Start Session
+                  {!click ? "Start Session" : "Station not available"}
                 </button>
               </div>
             </div>
@@ -343,7 +347,7 @@ export default function App() {
           <div className="modal">
             <div className="modal-content">
               <div id="locationInfo">
-                <LocationName>{selectedStation ? selectedStation.name : "Lincoln Park"}</LocationName>
+                <LocationName>{selectedStation.name}</LocationName>
                 <PriceTxt>$0.50 per minute</PriceTxt>
               </div>
               <UnlockTxt>Unlocked Time</UnlockTxt>
@@ -542,7 +546,8 @@ export default function App() {
               <img
                 alt={""}
                 height="35%"
-                src={account}
+                src={hamburger}
+                id = "hamburger"
                 onClick={() => {
                   document.getElementById("ppage").style.display = "block";
                 }}
